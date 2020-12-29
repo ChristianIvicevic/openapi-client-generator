@@ -158,10 +158,10 @@ describe('Handlebars Generator Requests', () => {
     });
   });
 
-  describe('Operations with a response $ref', () => {
+  describe('Operations with a response content schema $ref', () => {
     it('compiles a GET operation', async () => {
       // GIVEN an OpenAPI schema that contains a single GET endpoint with a
-      // response $ref
+      // response content schema $ref
       const document = createTestDocumentWithPaths({
         '/api/sample': {
           get: {
@@ -206,7 +206,7 @@ describe('Handlebars Generator Requests', () => {
 
     it('compiles a POST operation', async () => {
       // GIVEN an OpenAPI schema that contains a single POST endpoint with a
-      // response $ref
+      // response content schema $ref
       const document = createTestDocumentWithPaths({
         '/api/sample': {
           post: {
@@ -251,7 +251,7 @@ describe('Handlebars Generator Requests', () => {
 
     it('compiles a PUT operation', async () => {
       // GIVEN an OpenAPI schema that contains a single PUT endpoint with a
-      // response $ref
+      // response content schema $ref
       const document = createTestDocumentWithPaths({
         '/api/sample': {
           put: {
@@ -296,7 +296,7 @@ describe('Handlebars Generator Requests', () => {
 
     it('compiles a DELETE operation', async () => {
       // GIVEN an OpenAPI schema that contains a single DELETE endpoint with a
-      // response $ref
+      // response content schema $ref
       const document = createTestDocumentWithPaths({
         '/api/sample': {
           delete: {
