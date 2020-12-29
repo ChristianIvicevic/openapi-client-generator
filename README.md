@@ -73,7 +73,7 @@ The initial versions prior to the release of `v2` of the client generator only s
 No types for schemas are generated (yet) and thus we rely on them being available beforehand.
 Before this feature gets fully implemented into the CLI we are using the output of `restful-react` (in combination with its `--skipReact` command line argument).
 The generated types are referenced by our generated requests file for the time being using the `--types` command line argument which is a relative path to the generated types in relation to the generated output file.
-We highly suggest you do the same should you decide to use `openapi-client-generator` before its `v1` release.
+We highly suggest you do the same should you decide to use `openapi-client-generator` before its `v2` release.
 
 ## API usage
 
