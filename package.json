@@ -26,7 +26,8 @@
     "build:module": "ttsc -p tsconfig.module.json",
     "build:templates": "handlebars ./src/generators/handlebars/requests.hbs -f ./src/generators/handlebars/requests.precompiled.js -c \"handlebars\"",
     "watch:build": "ttsc -p tsconfig.json -w",
-    "watch:templates": "nodemon -e hbs --exec yarn build:templates --watch ./src/**/*.hbs"
+    "watch:templates": "nodemon -e hbs --exec yarn build:templates --watch ./src/**/*.hbs",
+    "commit": "cz"
   },
   "dependencies": {
     "handlebars": "4.7.6",
@@ -50,6 +51,8 @@
     "@typescript-eslint/eslint-plugin": "4.11.1",
     "@typescript-eslint/parser": "4.11.1",
     "@zerollup/ts-transform-paths": "1.7.18",
+    "commitizen": "4.2.2",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "7.16.0",
     "eslint-config-airbnb-typescript": "12.0.0",
     "eslint-config-prettier": "7.1.0",
@@ -86,5 +89,10 @@
     "rest",
     "typescript",
     "generator"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
