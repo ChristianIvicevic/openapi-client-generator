@@ -5,7 +5,6 @@
 ![Tests](https://github.com/ChristianIvicevic/openapi-client-generator/workflows/Tests/badge.svg)
 [![codecov](https://codecov.io/gh/ChristianIvicevic/openapi-client-generator/branch/main/graph/badge.svg?token=JB66SCDW2Q)](https://codecov.io/gh/ChristianIvicevic/openapi-client-generator)
 [![npm (scoped)](https://img.shields.io/npm/v/@ivicevic/openapi-client-generator)](https://www.npmjs.com/package/@ivicevic/openapi-client-generator)
-![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@ivicevic/openapi-client-generator?label=size)
 
 Consuming a REST API can be needlessly complicated at times, especially when having to manually maintain client code, paths etc.
 In one of our projects at work we relied on [`restful-react`](https://github.com/contiamo/restful-react) to generate React components and hooks based on an OpenAPI schema which was really nice.
