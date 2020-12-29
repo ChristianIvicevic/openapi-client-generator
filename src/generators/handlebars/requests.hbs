@@ -1,0 +1,59 @@
+/* eslint-disable */
+/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+
+import axios, { AxiosRequestConfig } from 'axios';
+{{#if schemaTypes}}
+import {
+{{#each schemaTypes}}
+  {{this}},
+{{/each}}
+} from '{{typesPath}}';
+{{/if}}
+
+{{#if operations}}
+{{#each operations}}
+/**
+{{#if summary}}
+ * {{wrap-jsdoc summary}}
+{{/if}}
+{{#if parameters}}
+ * @param parameters Parameters associated with this request
+{{/if}}
+{{#if (has-request-body requestBodyType)}}
+ * @param requestBody The payload to send with this request
+{{/if}}
+ * @param config Overrides of the axios configuration for this request
+ */
+export const {{operationId}} = async (
+{{#if parameters}}
+parameters: {
+{{#each parameters}}
+/**
+ * {{wrap-jsdoc description}}
+ */
+{{name}}: {{resolve-type typeInfo}};
+{{/each}}
+},
+{{/if}}
+{{#if (has-request-body requestBodyType)}}
+requestBody: {{resolve-types requestBodyType}},
+{{/if}}
+config?: AxiosRequestConfig) =>
+axios.{{method}}<{{resolve-types responseType}}>(
+`{{format-parameters path}}`,
+{{~get-request-body-arg method requestBodyType~}}
+{{#if (has-query-parameters parameters)}}
+{ ...config, params: {
+{{#each parameters}}
+{{#if (is-query-parameter this)}}
+{{name}}: parameters.{{name}},
+{{/if}}
+{{/each}}
+} }
+{{else}}
+config
+{{/if}}
+);
+
+{{/each}}
+{{/if}}

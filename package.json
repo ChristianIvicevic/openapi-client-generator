@@ -1,0 +1,90 @@
+{
+  "name": "@ivicevic/openapi-client-generator",
+  "version": "0.1.0",
+  "description": "OpenAPI Client Generator allows automatic generation of Typescript API client libraries given an OpenAPI V3 Spec",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChristianIvicevic/openapi-client-generator"
+  },
+  "homepage": "https://github.com/ChristianIvicevic/openapi-client-generator",
+  "bugs": "https://github.com/ChristianIvicevic/openapi-client-generator/issues",
+  "license": "MIT",
+  "author": "Christian Ivicevic <mail@christian-ivicevic.com>",
+  "main": "dist/main/index.js",
+  "typings": "dist/main/index.d.ts",
+  "module": "dist/module/index.js",
+  "bin": "./bin/openapi-client-generator.js",
+  "scripts": {
+    "test": "jest --watchAll",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/**/*.ts",
+    "build": "yarn build:templates && yarn build:main && yarn build:module",
+    "build:main": "ttsc -p tsconfig.json",
+    "build:module": "ttsc -p tsconfig.module.json",
+    "build:templates": "handlebars ./src/generators/handlebars/requests.hbs -f ./src/generators/handlebars/requests.precompiled.js -c \"handlebars\"",
+    "watch:build": "ttsc -p tsconfig.json -w",
+    "watch:templates": "nodemon -e hbs --exec yarn build:templates --watch ./src/**/*.hbs"
+  },
+  "dependencies": {
+    "handlebars": "4.7.6",
+    "openapi-types": "7.0.1",
+    "prettier": "2.2.1",
+    "ramda": "0.27.1",
+    "type-fest": "0.20.2",
+    "winston": "3.3.3",
+    "winston-console-format": "1.0.8",
+    "word-wrap": "1.2.3",
+    "yaml": "1.10.0",
+    "yargs": "16.2.0"
+  },
+  "devDependencies": {
+    "@jest/types": "26.6.2",
+    "@types/jest": "26.0.19",
+    "@types/node": "14.14.16",
+    "@types/prettier": "2.1.6",
+    "@types/ramda": "0.27.34",
+    "@types/yargs": "15.0.12",
+    "@typescript-eslint/eslint-plugin": "4.11.1",
+    "@typescript-eslint/parser": "4.11.1",
+    "@zerollup/ts-transform-paths": "1.7.18",
+    "eslint": "7.16.0",
+    "eslint-config-airbnb-typescript": "12.0.0",
+    "eslint-config-prettier": "7.1.0",
+    "eslint-import-resolver-typescript": "2.3.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-prettier": "3.3.0",
+    "jest": "26.6.3",
+    "nodemon": "2.0.6",
+    "ts-jest": "26.4.4",
+    "ts-node": "9.1.1",
+    "tslib": "2.0.3",
+    "ttypescript": "1.5.12",
+    "typescript": "4.1.3"
+  },
+  "peerDependencies": {
+    "axios": "*"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "files": [
+    "bin",
+    "dist/main",
+    "dist/module",
+    "!**/*.test.*",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "openapi",
+    "openapi3",
+    "swagger",
+    "rest",
+    "typescript",
+    "generator"
+  ]
+}

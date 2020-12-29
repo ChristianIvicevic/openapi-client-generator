@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "removeComments": false,
+    "rootDir": ".",
+    "target": "es6"
+  },
+  "extends": "./tsconfig",
+  "include": ["./jest.config.ts"]
+}

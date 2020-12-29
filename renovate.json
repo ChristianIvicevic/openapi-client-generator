@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":disableRateLimiting",
+    ":label(renovate)",
+    ":assignee(ChristianIvicevic)",
+    ":githubComToken(kvWV3kgotqBUT7qFvTjMyh1wQkGvty2iWmhy08AkA13Cq5BJ11QF16pf5gacuFzQsqFWEb0Zoz5zUTLaVR7vTaoFrlxeuvqWsOSsj13GMuU8aHi9wCxrHrc6hqxS7dSKe49KaJKJHXHm9QBQilX7GPhtwu6oENEjasYcRYF3MMclHZDeWNShvR1Wr92kvZk/7fhRvwNG5dy8d91tMKNeFo+6gCGJ6bEMapmULN146eLuejp4kFiT7rOIN7QqUfZ6broMK9jHIY4nHRNBhdePw4/Sse62Tb2abj6OBFZe8Y/dx1ATQowBw4iwEi2jWcvKAPiEOQVJIdZR79D2ncWfUQ==)",
+    ":rebaseStalePrs"
+  ],
+  "packageRules": [
+    {
+      "updateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ]
+}
