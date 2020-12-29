@@ -1,3 +1,4 @@
+import { pascalCase } from 'change-case';
 import type { OpenAPIV3 } from 'openapi-types';
 import type { ParameterInfo, ParserContext, TypeInfo } from 'parser/types';
 import { getLogger } from 'utils/logging';
@@ -65,7 +66,7 @@ export const resolveContentType = (
       }
 
       if (contentObject.content !== undefined) {
-        return Object.entries(contentObject.content)
+        const contentTypes = Object.entries(contentObject.content)
           .map(([contentType, content]) => {
             if (
               [
@@ -79,6 +80,8 @@ export const resolveContentType = (
               return resolveType(content.schema);
             }
 
+            // TODO: Handle 'application/x-www-form-urlencoded'
+
             // TODO: Generate a proper type for this.
             if (contentType.startsWith('multipart/form-data')) {
               return { type: 'unknown' };
@@ -89,6 +92,9 @@ export const resolveContentType = (
             return undefined;
           })
           .filter(Boolean) as TypeInfo[];
+
+        // The array is empty in case no supported media type has been found
+        return contentTypes.length === 0 ? [{ type: 'unknown' }] : contentTypes;
       }
 
       return [{ type: 'void' }];
@@ -103,7 +109,7 @@ export const resolveContentType = (
 const resolveRefType = ($ref: OpenAPIV3.ReferenceObject['$ref']): TypeInfo => {
   if ($ref.startsWith('#/components/schemas')) {
     return {
-      type: $ref.replace('#/components/schemas/', ''),
+      type: pascalCase($ref.replace('#/components/schemas/', '')),
     };
   }
   throw Error(

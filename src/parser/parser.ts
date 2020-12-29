@@ -1,3 +1,4 @@
+import { camelCase } from 'change-case';
 import type { OpenAPIV3 } from 'openapi-types';
 import { resolveContentType, resolveParameter } from 'parser/resolver';
 import type {
@@ -98,11 +99,9 @@ const parseOperationObject = (
   return {
     path,
     method,
-    operationId,
+    operationId: camelCase(operationId),
     summary,
-    // The explicit void type is necessary for requests not explicitly defining
-    // a response for OK response codes
-    responseType: responseType.length === 0 ? [{ type: 'void' }] : responseType,
+    responseType,
     requestBodyType,
     parameters: operationParameters,
   };

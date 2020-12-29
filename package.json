@@ -33,6 +33,7 @@
     "postpublish": "pinst --enable"
   },
   "dependencies": {
+    "change-case": "4.1.2",
     "handlebars": "4.7.6",
     "openapi-types": "7.0.1",
     "prettier": "2.2.1",

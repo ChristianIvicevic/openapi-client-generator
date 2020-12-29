@@ -1,308 +1,337 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Handlebars Generator Integration compiles the petstore schema 1`] = `
+exports[`Handlebars Generator Integration compiles the expanded petstore schema 1`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
 import axios, { AxiosRequestConfig } from 'axios';
-import { ApiResponse, Order, Pet, User } from './types';
+import { Error, NewPet, Pet } from './types';
 
 /**
- * Add a new pet to the store
  * @param requestBody The payload to send with this request
  * @param config Overrides of the axios configuration for this request
  */
-export const addPet = async (requestBody: Pet, config?: AxiosRequestConfig) =>
-  axios.post<Pet>(\`/pet\`, requestBody, config);
-
-/**
- * Create user
- * @param requestBody The payload to send with this request
- * @param config Overrides of the axios configuration for this request
- */
-export const createUser = async (
-  requestBody: User,
+export const addPet = async (
+  requestBody: NewPet,
   config?: AxiosRequestConfig,
-) => axios.post<User>(\`/user\`, requestBody, config);
+) => axios.post<Pet | Error>(\`/pets\`, requestBody, config);
 
 /**
- * Creates list of users with given input array
- * @param requestBody The payload to send with this request
- * @param config Overrides of the axios configuration for this request
- */
-export const createUsersWithListInput = async (
-  requestBody: readonly User[],
-  config?: AxiosRequestConfig,
-) => axios.post<User | void>(\`/user/createWithList\`, requestBody, config);
-
-/**
- * Delete purchase order by ID
- * @param parameters Parameters associated with this request
- * @param config Overrides of the axios configuration for this request
- */
-export const deleteOrder = async (
-  parameters: {
-    /**
-     * ID of the order that needs to be deleted
-     */
-    orderId: number;
-  },
-  config?: AxiosRequestConfig,
-) => axios.delete<void>(\`/store/order/\${parameters.orderId}\`, config);
-
-/**
- * Deletes a pet
  * @param parameters Parameters associated with this request
  * @param config Overrides of the axios configuration for this request
  */
 export const deletePet = async (
   parameters: {
     /**
-     *
+     * ID of pet to delete
      */
-    api_key: string;
-    /**
-     * Pet id to delete
-     */
-    petId: number;
+    id: number;
   },
   config?: AxiosRequestConfig,
-) => axios.delete<void>(\`/pet/\${parameters.petId}\`, config);
+) => axios.delete<void | Error>(\`/pets/\${parameters.id}\`, config);
 
 /**
- * Delete user
  * @param parameters Parameters associated with this request
  * @param config Overrides of the axios configuration for this request
  */
-export const deleteUser = async (
+export const findPetById = async (
   parameters: {
     /**
-     * The name that needs to be deleted
+     * ID of pet to fetch
+     */
+    id: number;
+  },
+  config?: AxiosRequestConfig,
+) => axios.get<Pet | Error>(\`/pets/\${parameters.id}\`, config);
+
+/**
+ * @param parameters Parameters associated with this request
+ * @param config Overrides of the axios configuration for this request
+ */
+export const findPets = async (
+  parameters: {
+    /**
+     * tags to filter by
+     */
+    tags: readonly string[];
+    /**
+     * maximum number of results to return
+     */
+    limit: number;
+  },
+  config?: AxiosRequestConfig,
+) =>
+  axios.get<readonly Pet[] | Error>(\`/pets\`, {
+    ...config,
+    params: {
+      tags: parameters.tags,
+      limit: parameters.limit,
+    },
+  });
+"
+`;
+
+exports[`Handlebars Generator Integration compiles the link example schema 1`] = `
+"/* eslint-disable */
+/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+
+import axios, { AxiosRequestConfig } from 'axios';
+import { Pullrequest, Repository, User } from './types';
+
+/**
+ * @param parameters Parameters associated with this request
+ * @param config Overrides of the axios configuration for this request
+ */
+export const getPullRequestsById = async (
+  parameters: {
+    /**
+     *
+     */
+    username: string;
+    /**
+     *
+     */
+    slug: string;
+    /**
+     *
+     */
+    pid: string;
+  },
+  config?: AxiosRequestConfig,
+) =>
+  axios.get<Pullrequest>(
+    \`/2.0/repositories/\${parameters.username}/\${parameters.slug}/pullrequests/\${parameters.pid}\`,
+    config,
+  );
+
+/**
+ * @param parameters Parameters associated with this request
+ * @param config Overrides of the axios configuration for this request
+ */
+export const getPullRequestsByRepository = async (
+  parameters: {
+    /**
+     *
+     */
+    username: string;
+    /**
+     *
+     */
+    slug: string;
+    /**
+     *
+     */
+    state: string;
+  },
+  config?: AxiosRequestConfig,
+) =>
+  axios.get<readonly Pullrequest[]>(
+    \`/2.0/repositories/\${parameters.username}/\${parameters.slug}/pullrequests\`,
+    {
+      ...config,
+      params: {
+        state: parameters.state,
+      },
+    },
+  );
+
+/**
+ * @param parameters Parameters associated with this request
+ * @param config Overrides of the axios configuration for this request
+ */
+export const getRepositoriesByOwner = async (
+  parameters: {
+    /**
+     *
      */
     username: string;
   },
   config?: AxiosRequestConfig,
-) => axios.delete<void>(\`/user/\${parameters.username}\`, config);
+) =>
+  axios.get<readonly Repository[]>(
+    \`/2.0/repositories/\${parameters.username}\`,
+    config,
+  );
 
 /**
- * Finds Pets by status
  * @param parameters Parameters associated with this request
  * @param config Overrides of the axios configuration for this request
  */
-export const findPetsByStatus = async (
+export const getRepository = async (
   parameters: {
     /**
-     * Status values that need to be considered for filter
+     *
      */
-    status: string;
+    username: string;
+    /**
+     *
+     */
+    slug: string;
   },
   config?: AxiosRequestConfig,
 ) =>
-  axios.get<readonly Pet[]>(\`/pet/findByStatus\`, {
-    ...config,
-    params: {
-      status: parameters.status,
-    },
-  });
+  axios.get<Repository>(
+    \`/2.0/repositories/\${parameters.username}/\${parameters.slug}\`,
+    config,
+  );
 
 /**
- * Finds Pets by tags
- * @param parameters Parameters associated with this request
- * @param config Overrides of the axios configuration for this request
- */
-export const findPetsByTags = async (
-  parameters: {
-    /**
-     * Tags to filter by
-     */
-    tags: readonly string[];
-  },
-  config?: AxiosRequestConfig,
-) =>
-  axios.get<readonly Pet[]>(\`/pet/findByTags\`, {
-    ...config,
-    params: {
-      tags: parameters.tags,
-    },
-  });
-
-/**
- * Returns pet inventories by status
- * @param config Overrides of the axios configuration for this request
- */
-export const getInventory = async (config?: AxiosRequestConfig) =>
-  axios.get<object>(\`/store/inventory\`, config);
-
-/**
- * Find purchase order by ID
- * @param parameters Parameters associated with this request
- * @param config Overrides of the axios configuration for this request
- */
-export const getOrderById = async (
-  parameters: {
-    /**
-     * ID of order that needs to be fetched
-     */
-    orderId: number;
-  },
-  config?: AxiosRequestConfig,
-) => axios.get<Order>(\`/store/order/\${parameters.orderId}\`, config);
-
-/**
- * Find pet by ID
- * @param parameters Parameters associated with this request
- * @param config Overrides of the axios configuration for this request
- */
-export const getPetById = async (
-  parameters: {
-    /**
-     * ID of pet to return
-     */
-    petId: number;
-  },
-  config?: AxiosRequestConfig,
-) => axios.get<Pet>(\`/pet/\${parameters.petId}\`, config);
-
-/**
- * Get user by user name
  * @param parameters Parameters associated with this request
  * @param config Overrides of the axios configuration for this request
  */
 export const getUserByName = async (
   parameters: {
     /**
-     * The name that needs to be fetched. Use user1 for testing.
+     *
      */
     username: string;
   },
   config?: AxiosRequestConfig,
-) => axios.get<User>(\`/user/\${parameters.username}\`, config);
+) => axios.get<User>(\`/2.0/users/\${parameters.username}\`, config);
 
 /**
- * Logs user into the system
  * @param parameters Parameters associated with this request
  * @param config Overrides of the axios configuration for this request
  */
-export const loginUser = async (
+export const mergePullRequest = async (
   parameters: {
     /**
-     * The user name for login
+     *
      */
     username: string;
     /**
-     * The password for login in clear text
+     *
      */
-    password: string;
+    slug: string;
+    /**
+     *
+     */
+    pid: string;
   },
   config?: AxiosRequestConfig,
 ) =>
-  axios.get<string>(\`/user/login\`, {
+  axios.post<void>(
+    \`/2.0/repositories/\${parameters.username}/\${parameters.slug}/pullrequests/\${parameters.pid}/merge\`,
+    undefined,
+    config,
+  );
+"
+`;
+
+exports[`Handlebars Generator Integration compiles the petstore schema 1`] = `
+"/* eslint-disable */
+/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+
+import axios, { AxiosRequestConfig } from 'axios';
+import { Error, Pet, Pets } from './types';
+
+/**
+ * Create a pet
+ * @param config Overrides of the axios configuration for this request
+ */
+export const createPets = async (config?: AxiosRequestConfig) =>
+  axios.post<void | Error>(\`/pets\`, undefined, config);
+
+/**
+ * List all pets
+ * @param parameters Parameters associated with this request
+ * @param config Overrides of the axios configuration for this request
+ */
+export const listPets = async (
+  parameters: {
+    /**
+     * How many items to return at one time (max 100)
+     */
+    limit: number;
+  },
+  config?: AxiosRequestConfig,
+) =>
+  axios.get<Pets | Error>(\`/pets\`, {
     ...config,
     params: {
-      username: parameters.username,
-      password: parameters.password,
+      limit: parameters.limit,
     },
   });
 
 /**
- * Logs out current logged in user session
- * @param config Overrides of the axios configuration for this request
- */
-export const logoutUser = async (config?: AxiosRequestConfig) =>
-  axios.get<void>(\`/user/logout\`, config);
-
-/**
- * Place an order for a pet
- * @param requestBody The payload to send with this request
- * @param config Overrides of the axios configuration for this request
- */
-export const placeOrder = async (
-  requestBody: Order,
-  config?: AxiosRequestConfig,
-) => axios.post<Order>(\`/store/order\`, requestBody, config);
-
-/**
- * Update an existing pet
- * @param requestBody The payload to send with this request
- * @param config Overrides of the axios configuration for this request
- */
-export const updatePet = async (
-  requestBody: Pet,
-  config?: AxiosRequestConfig,
-) => axios.put<Pet>(\`/pet\`, requestBody, config);
-
-/**
- * Updates a pet in the store with form data
+ * Info for a specific pet
  * @param parameters Parameters associated with this request
  * @param config Overrides of the axios configuration for this request
  */
-export const updatePetWithForm = async (
+export const showPetById = async (
   parameters: {
     /**
-     * ID of pet that needs to be updated
+     * The id of the pet to retrieve
      */
-    petId: number;
+    petId: string;
+  },
+  config?: AxiosRequestConfig,
+) => axios.get<Pet | Error>(\`/pets/\${parameters.petId}\`, config);
+"
+`;
+
+exports[`Handlebars Generator Integration compiles the uspto schema 1`] = `
+"/* eslint-disable */
+/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+
+import axios, { AxiosRequestConfig } from 'axios';
+import { DataSetList } from './types';
+
+/**
+ * List available data sets
+ * @param config Overrides of the axios configuration for this request
+ */
+export const listDataSets = async (config?: AxiosRequestConfig) =>
+  axios.get<DataSetList>(\`/\`, config);
+
+/**
+ * Provides the general information about the API and the list of fields that
+ * can be used to query the dataset.
+ * @param parameters Parameters associated with this request
+ * @param config Overrides of the axios configuration for this request
+ */
+export const listSearchableFields = async (
+  parameters: {
     /**
-     * Name of pet that needs to be updated
+     * Name of the dataset.
      */
-    name: string;
+    dataset: string;
     /**
-     * Status of pet that needs to be updated
+     * Version of the dataset.
      */
-    status: string;
+    version: string;
   },
   config?: AxiosRequestConfig,
 ) =>
-  axios.post<void>(\`/pet/\${parameters.petId}\`, undefined, {
-    ...config,
-    params: {
-      name: parameters.name,
-      status: parameters.status,
-    },
-  });
+  axios.get<string>(
+    \`/\${parameters.dataset}/\${parameters.version}/fields\`,
+    config,
+  );
 
 /**
- * Update user
+ * Provides search capability for the data set with the given search criteria.
  * @param parameters Parameters associated with this request
  * @param requestBody The payload to send with this request
  * @param config Overrides of the axios configuration for this request
  */
-export const updateUser = async (
+export const performSearch = async (
   parameters: {
     /**
-     * name that need to be deleted
+     * Version of the dataset.
      */
-    username: string;
-  },
-  requestBody: User,
-  config?: AxiosRequestConfig,
-) => axios.put<void>(\`/user/\${parameters.username}\`, requestBody, config);
-
-/**
- * uploads an image
- * @param parameters Parameters associated with this request
- * @param requestBody The payload to send with this request
- * @param config Overrides of the axios configuration for this request
- */
-export const uploadFile = async (
-  parameters: {
+    version: string;
     /**
-     * ID of pet to update
+     * Name of the dataset. In this case, the default value is oa_citations
      */
-    petId: number;
-    /**
-     * Additional Metadata
-     */
-    additionalMetadata: string;
+    dataset: string;
   },
-  requestBody: string,
+  requestBody: unknown,
   config?: AxiosRequestConfig,
 ) =>
-  axios.post<ApiResponse>(\`/pet/\${parameters.petId}/uploadImage\`, requestBody, {
-    ...config,
-    params: {
-      additionalMetadata: parameters.additionalMetadata,
-    },
-  });
+  axios.post<readonly object[]>(
+    \`/\${parameters.dataset}/\${parameters.version}/records\`,
+    requestBody,
+    config,
+  );
 "
 `;

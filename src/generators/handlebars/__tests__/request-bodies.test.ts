@@ -46,6 +46,7 @@ describe('Handlebars Generator Response Bodies', () => {
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
         import axios, { AxiosRequestConfig } from 'axios';
+        import { SampleDto } from './types';
 
         /**
          * Endpoint Summary
@@ -95,6 +96,7 @@ describe('Handlebars Generator Response Bodies', () => {
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
         import axios, { AxiosRequestConfig } from 'axios';
+        import { SampleDto } from './types';
 
         /**
          * Endpoint Summary

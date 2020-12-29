@@ -91,26 +91,27 @@ export const compileUsingHandlebars = async (
     .flat()
     .sort((a, b) => a.operationId.localeCompare(b.operationId));
 
-  const parameterSchemaTypes = operations.flatMap(({ parameters }) =>
-    parameters.flatMap(({ typeInfo: { type } }) => type),
+  const referencedTypes = operations.flatMap(
+    ({ parameters, requestBodyType, responseType }) => [
+      ...parameters.map(({ typeInfo: { type } }) => type),
+      ...(requestBodyType?.map(({ type }) => type) ?? []),
+      ...responseType.map(({ type }) => type),
+    ],
   );
 
   const schemaTypes = [
     ...new Set(
-      operations
-        .flatMap(({ responseType }) => responseType.flatMap(({ type }) => type))
-        .concat(parameterSchemaTypes)
-        .filter(
-          type =>
-            ![
-              'boolean',
-              'number',
-              'object',
-              'string',
-              'unknown',
-              'void',
-            ].includes(type),
-        ),
+      referencedTypes.filter(
+        type =>
+          ![
+            'boolean',
+            'number',
+            'object',
+            'string',
+            'unknown',
+            'void',
+          ].includes(type),
+      ),
     ),
   ].sort((a, b) => a.localeCompare(b));
 
