@@ -4,7 +4,8 @@
 
 ![Tests](https://github.com/ChristianIvicevic/openapi-client-generator/workflows/Tests/badge.svg)
 [![codecov](https://codecov.io/gh/ChristianIvicevic/openapi-client-generator/branch/main/graph/badge.svg?token=JB66SCDW2Q)](https://codecov.io/gh/ChristianIvicevic/openapi-client-generator)
-[![npm (scoped)](https://img.shields.io/npm/v/@ivicevic/openapi-client-generator)](https://www.npmjs.com/package/@ivicevic/openapi-client-generator)
+[![npm](https://img.shields.io/npm/v/@ivicevic/openapi-client-generator)](https://www.npmjs.com/package/@ivicevic/openapi-client-generator)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 Consuming a REST API can be needlessly complicated at times, especially when having to manually maintain client code, paths etc.
 In one of our projects at work we relied on [`restful-react`](https://github.com/contiamo/restful-react) to generate React components and hooks based on an OpenAPI schema which was really nice.
@@ -105,7 +106,9 @@ To contribute to the code clone the repository, use the Node version denoted in 
 * Tests are written using Jest and can be executed via either
   * `yarn test`
   * `yarn test:coverage`
-* Test your code using `yarn lint` and keep PRs small and concise and follow the [conventional commits](https://www.conventionalcommits.org/) so that the changelog can be update automatically
+* Test your code using `yarn lint` and keep PRs small and concise
+* Commits have to follow the [conventional commits](https://www.conventionalcommits.org/) standard.
+  For that purpose you can run `yarn cm` for interactive commits using `commitizen`, otherwise `commitlint` will lint your commit messages using `husky`
 
 ## License
 
