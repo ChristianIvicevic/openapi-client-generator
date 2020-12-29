@@ -1,5 +1,12 @@
 # `openapi-client-generator`
 
+**Simple Typescript code generator based on an OpenAPI V3 schema**
+
+![Tests](https://github.com/ChristianIvicevic/openapi-client-generator/workflows/Tests/badge.svg)
+[![codecov](https://codecov.io/gh/ChristianIvicevic/openapi-client-generator/branch/main/graph/badge.svg?token=JB66SCDW2Q)](https://codecov.io/gh/ChristianIvicevic/openapi-client-generator)
+[![npm (scoped)](https://img.shields.io/npm/v/@ivicevic/openapi-client-generator)](https://www.npmjs.com/package/@ivicevic/openapi-client-generator)
+![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@ivicevic/openapi-client-generator?label=size)
+
 Consuming a REST API can be needlessly complicated at times, especially when having to manually maintain client code, paths etc.
 In one of our projects at work we relied on [`restful-react`](https://github.com/contiamo/restful-react) to generate React components and hooks based on an OpenAPI schema which was really nice.
 However `restful-react` can be too sophisticated at times and restrictive which we noticed as our application handles a lot of dynamic data that cannot be easily expressed by generic hooks.
@@ -54,7 +61,7 @@ openapi-client-generator --input [INPUT] --output [OUTPUT] --types [TYPES]
 In our project we run the CLI with the following command:
 
 ```
-openapi-client-generator -i ./submodules/schema/v2.yaml -o ./src/api/requests.ts -t ./types.ts
+openapi-client-generator -i ./submodules/schema/v2.yaml -o ./src/api/requests.ts -t ./types
 ```
 
 To display more detailed log outputs you can append the `--verbose` or `--debug` flags to any command to debug any issues.
