@@ -58,6 +58,8 @@ export const resolveContentType = (
   const logger = getLogger();
   return contentObjects
     .map(contentObject => {
+      // TODO: This seems to be only true for referenced responses and request
+      // bodies in the components list
       if (isReferenceObject(contentObject)) {
         return [resolveRefType(contentObject.$ref)];
       }
