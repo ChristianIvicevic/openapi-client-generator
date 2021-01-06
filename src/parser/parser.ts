@@ -36,6 +36,8 @@ export const parseYaml = (content: string): DocumentInfo => {
 
   const pathItemObjects = Object.entries(document.paths ?? {}).map(
     ([path, pathItemObject]) => {
+      assertIsDefined(pathItemObject);
+
       logger.verbose(`Parsing path '${path}'`);
 
       const context: ParserContext = { document, path };
