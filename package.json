@@ -35,7 +35,7 @@
   "dependencies": {
     "change-case": "4.1.2",
     "handlebars": "4.7.6",
-    "openapi-types": "7.0.1",
+    "openapi-types": "7.2.2",
     "prettier": "2.2.1",
     "ramda": "0.27.1",
     "type-fest": "0.20.2",

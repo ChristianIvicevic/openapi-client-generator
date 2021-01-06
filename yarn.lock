@@ -633,7 +633,7 @@ __metadata:
     husky: next
     jest: 26.6.3
     nodemon: 2.0.7
-    openapi-types: 7.0.1
+    openapi-types: 7.2.2
     pinst: 2.1.1
     prettier: 2.2.1
     ramda: 0.27.1
@@ -6247,10 +6247,10 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"openapi-types@npm:7.0.1":
-  version: 7.0.1
-  resolution: "openapi-types@npm:7.0.1"
-  checksum: 5d39589ea47d4e2f1f4552eedf97f19193ee5b1219a0d5d4fe0944a2f1bf482a3b5fa6a030b15538f263ed32d79ce466f5ca729a99bcee5879ec75d69bd6d113
+"openapi-types@npm:7.2.2":
+  version: 7.2.2
+  resolution: "openapi-types@npm:7.2.2"
+  checksum: dc7deaa05e2822a9b6d7dd43294668b833a6f8d222d6b4b10359bd36bca374c544ff4344a09f4bc0932135104e92b57ed94f236323a130c933aebde04cac1676
   languageName: node
   linkType: hard
 
