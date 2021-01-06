@@ -17,7 +17,22 @@ export const parseYaml = (content: string): DocumentInfo => {
   const logger = getLogger();
   const document = yaml.parse(content) as OpenAPIV3.Document;
 
-  // TODO: Add type generation for schemas.
+  const schemaObjects = Object.entries(
+    document.components?.schemas ?? {},
+  ).reduce<
+    Record<
+      string,
+      | OpenAPIV3.ReferenceObject
+      | OpenAPIV3.ArraySchemaObject
+      | OpenAPIV3.NonArraySchemaObject
+    >
+  >(
+    (currentSchemas, [schemaName, schemaObject]) => ({
+      ...currentSchemas,
+      [schemaName]: schemaObject,
+    }),
+    {},
+  );
 
   const pathItemObjects = Object.entries(document.paths).map(
     ([path, pathItemObject]) => {
@@ -28,7 +43,7 @@ export const parseYaml = (content: string): DocumentInfo => {
     },
   );
 
-  return { pathItemObjects };
+  return { schemaObjects, pathItemObjects };
 };
 
 const parsePathItemObject = (
@@ -64,6 +79,7 @@ const parseOperationObject = (
   const logger = getLogger();
   const { path, method, parameters } = context;
 
+  assertIsDefined(path);
   assertIsDefined(method);
 
   if (operationObject === undefined) {

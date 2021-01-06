@@ -12,10 +12,10 @@ describe('Handlebars Generator Integration', () => {
     const document = readFileSync('test/link-example.yaml').toString();
 
     // WHEN compiling with the handlebars generator
-    const actualCompiledOutput = await compile(document);
+    const { requests } = await compile(document);
 
     // THEN the output matches the snapshot
-    expect(actualCompiledOutput).toMatchSnapshot();
+    expect(requests).toMatchSnapshot();
   });
 
   it('compiles the petstore schema', async () => {
@@ -23,10 +23,10 @@ describe('Handlebars Generator Integration', () => {
     const document = readFileSync('test/petstore.yaml').toString();
 
     // WHEN compiling with the handlebars generator
-    const actualCompiledOutput = await compile(document);
+    const { requests } = await compile(document);
 
     // THEN the output matches the snapshot
-    expect(actualCompiledOutput).toMatchSnapshot();
+    expect(requests).toMatchSnapshot();
   });
 
   it('compiles the expanded petstore schema', async () => {
@@ -34,10 +34,10 @@ describe('Handlebars Generator Integration', () => {
     const document = readFileSync('test/petstore-expanded.yaml').toString();
 
     // WHEN compiling with the handlebars generator
-    const actualCompiledOutput = await compile(document);
+    const { requests } = await compile(document);
 
     // THEN the output matches the snapshot
-    expect(actualCompiledOutput).toMatchSnapshot();
+    expect(requests).toMatchSnapshot();
   });
 
   it('compiles the uspto schema', async () => {
@@ -45,9 +45,9 @@ describe('Handlebars Generator Integration', () => {
     const document = readFileSync('test/uspto.yaml').toString();
 
     // WHEN compiling with the handlebars generator
-    const actualCompiledOutput = await compile(document);
+    const { requests } = await compile(document);
 
     // THEN the output matches the snapshot
-    expect(actualCompiledOutput).toMatchSnapshot();
+    expect(requests).toMatchSnapshot();
   });
 });

@@ -27,10 +27,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -64,10 +64,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -101,10 +101,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -138,10 +138,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -184,10 +184,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -229,10 +229,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -274,10 +274,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -319,10 +319,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -369,10 +369,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -417,10 +417,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -465,10 +465,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -513,10 +513,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -563,10 +563,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -610,10 +610,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -657,10 +657,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
@@ -704,10 +704,10 @@ describe('Handlebars Generator Requests', () => {
       });
 
       // WHEN compiling with the handlebars generator
-      const actualCompiledOutput = await compile(document);
+      const { requests } = await compile(document);
 
       // THEN the output matches the snapshot
-      expect(actualCompiledOutput).toMatchInlineSnapshot(`
+      expect(requests).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
