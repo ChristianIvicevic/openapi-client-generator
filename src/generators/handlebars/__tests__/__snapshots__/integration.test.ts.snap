@@ -5,7 +5,7 @@ exports[`Handlebars Generator Integration compiles the expanded petstore schema 
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
 import axios, { AxiosRequestConfig } from 'axios';
-import { Error, NewPet, Pet } from './types';
+import type { Error, NewPet, Pet } from './schemas';
 
 /**
  * @param requestBody The payload to send with this request
@@ -76,7 +76,7 @@ exports[`Handlebars Generator Integration compiles the link example schema 1`] =
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
 import axios, { AxiosRequestConfig } from 'axios';
-import { Pullrequest, Repository, User } from './types';
+import type { Pullrequest, Repository, User } from './schemas';
 
 /**
  * @param parameters Parameters associated with this request
@@ -223,7 +223,7 @@ exports[`Handlebars Generator Integration compiles the petstore schema 1`] = `
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
 import axios, { AxiosRequestConfig } from 'axios';
-import { Error, Pet, Pets } from './types';
+import type { Error, Pet, Pets } from './schemas';
 
 /**
  * Create a pet
@@ -275,7 +275,7 @@ exports[`Handlebars Generator Integration compiles the uspto schema 1`] = `
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
 import axios, { AxiosRequestConfig } from 'axios';
-import { DataSetList } from './types';
+import type { DataSetList } from './schemas';
 
 /**
  * List available data sets
