@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { createLogger, format, transports } from 'winston';
 import { consoleFormat } from 'winston-console-format';
 

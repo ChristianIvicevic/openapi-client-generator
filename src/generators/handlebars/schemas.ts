@@ -8,10 +8,14 @@ export const generateSchema = (
     | OpenAPIV3.ReferenceObject
     | OpenAPIV3.NonArraySchemaObject
     | OpenAPIV3.ArraySchemaObject,
-): string =>
-  isReferenceObject(schemaObject)
-    ? generateRefSchema(schemaObject.$ref)
-    : generateScalarSchema(schemaObject);
+): string => {
+  if (isReferenceObject(schemaObject)) {
+    return generateRefSchema(schemaObject.$ref);
+  }
+
+  const nullable = schemaObject.nullable ? ' | null' : '';
+  return `${generateScalarSchema(schemaObject)}${nullable}`;
+};
 
 const generateScalarSchema = (
   schemaObject: OpenAPIV3.ArraySchemaObject | OpenAPIV3.NonArraySchemaObject,
@@ -113,14 +117,10 @@ const generateObjectSchema = (schemaObject: OpenAPIV3.NonArraySchemaObject) => {
 
   const isRequired = (property: string) => (required ?? []).includes(property);
 
-  const objectProperties = Object.entries(properties).map(([name, prop]) => {
-    const isNullable = !isReferenceObject(prop) && prop.nullable === true;
-
-    const optional = isRequired(name) ? '' : '?';
-    const nullable = isNullable ? ' | null' : '';
-
-    return `readonly ${name}${optional}: ${generateSchema(prop)}${nullable}`;
-  });
+  const objectProperties = Object.entries(properties).map(
+    ([name, prop]) =>
+      `readonly ${name}${isRequired(name) ? '' : '?'}: ${generateSchema(prop)}`,
+  );
 
   return objectProperties.length === 0
     ? 'unknown'
@@ -130,14 +130,10 @@ const generateObjectSchema = (schemaObject: OpenAPIV3.NonArraySchemaObject) => {
 const generateDictionarySchema = ({
   additionalProperties,
 }: OpenAPIV3.NonArraySchemaObject) => {
-  const hasIndexSignature =
-    (additionalProperties as OpenAPIV3.SchemaObject)?.type !== undefined ??
-    false;
-
+  // TODO: additionalProperties === true is not handled yet
   if (
     additionalProperties !== undefined &&
-    typeof additionalProperties !== 'boolean' &&
-    hasIndexSignature
+    typeof additionalProperties !== 'boolean'
   ) {
     const recordType = generateSchema(additionalProperties);
     return `Record<string, ${recordType}>`;

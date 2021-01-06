@@ -130,8 +130,6 @@ const resolveArrayType = (
 const resolveScalarType = (
   schemaObject: OpenAPIV3.NonArraySchemaObject | OpenAPIV3.ArraySchemaObject,
 ): TypeInfo => {
-  // TODO: Handle nullable flag.
-
   switch (schemaObject.type) {
     case 'integer':
     case 'number':
@@ -155,6 +153,7 @@ const resolveScalarType = (
   }
 };
 
+// TODO: Handle nullable flag similar to the generator if possible.
 const resolveType = (
   schemaObject:
     | OpenAPIV3.ReferenceObject

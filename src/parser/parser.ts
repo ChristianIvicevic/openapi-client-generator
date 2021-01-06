@@ -34,7 +34,7 @@ export const parseYaml = (content: string): DocumentInfo => {
     {},
   );
 
-  const pathItemObjects = Object.entries(document.paths).map(
+  const pathItemObjects = Object.entries(document.paths ?? {}).map(
     ([path, pathItemObject]) => {
       logger.verbose(`Parsing path '${path}'`);
 
