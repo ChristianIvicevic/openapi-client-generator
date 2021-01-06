@@ -3,7 +3,7 @@
 
 import axios, { AxiosRequestConfig } from 'axios';
 {{#if referencedSchemas}}
-import {
+import type {
 {{#each referencedSchemas}}
   {{this}},
 {{/each}}
