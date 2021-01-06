@@ -71,6 +71,35 @@ export const findPets = async (
 "
 `;
 
+exports[`Handlebars Generator Integration compiles the expanded petstore schema 2`] = `
+"/* eslint-disable */
+/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+
+/**
+ *
+ */
+export type Error = {
+  readonly code: number;
+  readonly message: string;
+};
+
+/**
+ *
+ */
+export type NewPet = {
+  readonly name: string;
+  readonly tag?: string;
+};
+
+/**
+ *
+ */
+export type Pet = NewPet & {
+  readonly id: number;
+};
+"
+`;
+
 exports[`Handlebars Generator Integration compiles the link example schema 1`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
@@ -218,6 +247,38 @@ export const mergePullRequest = async (
 "
 `;
 
+exports[`Handlebars Generator Integration compiles the link example schema 2`] = `
+"/* eslint-disable */
+/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+
+/**
+ *
+ */
+export type Pullrequest = {
+  readonly id?: number;
+  readonly title?: string;
+  readonly repository?: Repository;
+  readonly author?: User;
+};
+
+/**
+ *
+ */
+export type Repository = {
+  readonly slug?: string;
+  readonly owner?: User;
+};
+
+/**
+ *
+ */
+export type User = {
+  readonly username?: string;
+  readonly uuid?: string;
+};
+"
+`;
+
 exports[`Handlebars Generator Integration compiles the petstore schema 1`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
@@ -267,6 +328,34 @@ export const showPetById = async (
   },
   config?: AxiosRequestConfig,
 ) => axios.get<Pet | Error>(\`/pets/\${parameters.petId}\`, config);
+"
+`;
+
+exports[`Handlebars Generator Integration compiles the petstore schema 2`] = `
+"/* eslint-disable */
+/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+
+/**
+ *
+ */
+export type Error = {
+  readonly code: number;
+  readonly message: string;
+};
+
+/**
+ *
+ */
+export type Pet = {
+  readonly id: number;
+  readonly name: string;
+  readonly tag?: string;
+};
+
+/**
+ *
+ */
+export type Pets = readonly Pet[];
 "
 `;
 
@@ -333,5 +422,24 @@ export const performSearch = async (
     requestBody,
     config,
   );
+"
+`;
+
+exports[`Handlebars Generator Integration compiles the uspto schema 2`] = `
+"/* eslint-disable */
+/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+
+/**
+ *
+ */
+export type DataSetList = {
+  readonly total?: number;
+  readonly apis?: readonly {
+    readonly apiKey?: string;
+    readonly apiVersionNumber?: string;
+    readonly apiUrl?: string;
+    readonly apiDocumentationUrl?: string;
+  }[];
+};
 "
 `;
