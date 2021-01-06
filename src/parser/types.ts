@@ -2,12 +2,18 @@ import type { OpenAPIV3 } from 'openapi-types';
 import type { LiteralUnion } from 'type-fest';
 
 export type DocumentInfo = {
+  readonly schemaObjects: Record<
+    string,
+    | OpenAPIV3.ReferenceObject
+    | OpenAPIV3.ArraySchemaObject
+    | OpenAPIV3.NonArraySchemaObject
+  >;
   readonly pathItemObjects: readonly PathItemObjectInfo[];
 };
 
 export type ParserContext = {
   readonly document: OpenAPIV3.Document;
-  readonly path: string;
+  readonly path?: string;
   readonly method?: OperationMethod;
   readonly parameters?: readonly ParameterInfo[];
 };

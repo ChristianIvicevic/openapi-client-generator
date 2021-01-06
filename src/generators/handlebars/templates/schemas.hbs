@@ -1,0 +1,10 @@
+/* eslint-disable */
+/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+
+{{#each schemaObjects}}
+/**
+ * {{wrap-jsdoc schemaObject.description}}
+ */
+export type {{name}} = {{{generate-schema schemaObject}}};
+
+{{/each}}

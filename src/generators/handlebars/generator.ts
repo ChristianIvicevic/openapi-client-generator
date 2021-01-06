@@ -1,4 +1,9 @@
-import type { CompilationContext } from 'generators/handlebars/types';
+import { pascalCase } from 'change-case';
+import { generateSchema } from 'generators/handlebars/schemas';
+import type {
+  RequestsCompilationContext,
+  SchemasCompilationContext,
+} from 'generators/handlebars/types';
 import * as Handlebars from 'handlebars';
 import type {
   DocumentInfo,
@@ -20,6 +25,8 @@ const wrapJsdoc = (text: string) =>
 
 // BEGIN Handlebars helper functions
 
+const formatParameters = (text: string) => text.replace(/\{/g, '${parameters.');
+
 const getRequestBodyArgument = (
   method: OperationMethod,
   typeInfo?: readonly TypeInfo[],
@@ -30,8 +37,6 @@ const getRequestBodyArgument = (
 
   return typeInfo === undefined ? 'undefined,' : 'requestBody,';
 };
-
-const formatParameters = (text: string) => text.replace(/\{/g, '${parameters.');
 
 const hasQueryParameters = (parameterInfo: ParameterInfo[]) =>
   parameterInfo.some(parameter => parameter.in === 'query');
@@ -60,6 +65,7 @@ const resolveTypes = (typeInfo?: readonly TypeInfo[]) => {
 
 Handlebars.registerHelper('format-parameters', formatParameters);
 Handlebars.registerHelper('get-request-body-arg', getRequestBodyArgument);
+Handlebars.registerHelper('generate-schema', generateSchema);
 Handlebars.registerHelper('has-query-parameters', hasQueryParameters);
 Handlebars.registerHelper('has-request-body', hasRequestBody);
 Handlebars.registerHelper('is-query-parameter', isQueryParameter);
@@ -69,21 +75,34 @@ Handlebars.registerHelper('wrap-jsdoc', wrapJsdoc);
 
 // END Handlebars helper functions
 
-export const compileUsingHandlebars = async (
-  documentInfo: DocumentInfo,
-  { typesPath }: Pick<CompilationContext, 'typesPath'> = {
-    typesPath: './types',
-  },
-) => {
+const prettier = (content: string) =>
+  format(content, {
+    ...{
+      arrowParens: 'avoid',
+      singleQuote: true,
+      tabWidth: 2,
+      trailingComma: 'all',
+    },
+    parser: 'typescript',
+  });
+
+export const compileUsingHandlebars = async ({
+  pathItemObjects,
+  schemaObjects,
+}: DocumentInfo) => {
   // The import MUST have the explicit suffix otherwise the ts path plugin
   // won't be able to resolve it properly for runtime
-  await import('generators/handlebars/requests.precompiled.js');
+  await import('generators/handlebars/templates/templates.precompiled.js');
+
+  const schemasTemplate = Handlebars.templates[
+    'schemas.hbs'
+  ] as HandlebarsTemplateDelegate<SchemasCompilationContext>;
 
   const requestsTemplate = Handlebars.templates[
     'requests.hbs'
-  ] as HandlebarsTemplateDelegate<CompilationContext>;
+  ] as HandlebarsTemplateDelegate<RequestsCompilationContext>;
 
-  const operations = Object.values(documentInfo.pathItemObjects)
+  const operations = Object.values(pathItemObjects)
     .map(
       pathItemObject =>
         Object.values(pathItemObject).filter(Boolean) as OperationInfo[],
@@ -99,7 +118,7 @@ export const compileUsingHandlebars = async (
     ],
   );
 
-  const schemaTypes = [
+  const referencedSchemas = [
     ...new Set(
       referencedTypes.filter(
         type =>
@@ -115,19 +134,21 @@ export const compileUsingHandlebars = async (
     ),
   ].sort((a, b) => a.localeCompare(b));
 
-  const compiledOutput = requestsTemplate({
-    typesPath,
-    operations,
-    schemaTypes,
+  const parsedSchemaObjects = Object.entries(schemaObjects)
+    .map(([name, schemaObject]) => ({ name: pascalCase(name), schemaObject }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const compiledSchemasOutput = schemasTemplate({
+    schemaObjects: parsedSchemaObjects,
   });
 
-  return format(compiledOutput, {
-    ...{
-      arrowParens: 'avoid',
-      singleQuote: true,
-      tabWidth: 2,
-      trailingComma: 'all',
-    },
-    parser: 'typescript',
+  const compiledRequestsOutput = requestsTemplate({
+    operations,
+    referencedSchemas,
   });
+
+  return {
+    schemas: prettier(compiledSchemasOutput),
+    requests: prettier(compiledRequestsOutput),
+  };
 };

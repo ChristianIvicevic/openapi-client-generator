@@ -2,12 +2,12 @@
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 
 import axios, { AxiosRequestConfig } from 'axios';
-{{#if schemaTypes}}
+{{#if referencedSchemas}}
 import {
-{{#each schemaTypes}}
+{{#each referencedSchemas}}
   {{this}},
 {{/each}}
-} from '{{typesPath}}';
+} from './schemas';
 {{/if}}
 
 {{#if operations}}
