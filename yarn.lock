@@ -612,7 +612,7 @@ __metadata:
     "@commitlint/cli": 11.0.0
     "@commitlint/config-conventional": 11.0.0
     "@jest/types": 26.6.2
-    "@types/jest": 26.0.19
+    "@types/jest": 26.0.20
     "@types/node": 14.14.20
     "@types/prettier": 2.1.6
     "@types/ramda": 0.27.34
@@ -986,7 +986,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:26.0.19, @types/jest@npm:26.x":
+"@types/jest@npm:26.0.20":
+  version: 26.0.20
+  resolution: "@types/jest@npm:26.0.20"
+  dependencies:
+    jest-diff: ^26.0.0
+    pretty-format: ^26.0.0
+  checksum: 221e39c7c9ce8d71ae4b2ba6abeef1a5b04f1cd96419b9fbbb65534bef4c4215b650561183073dcf47584ff1888d1f4fa7d2af2a38492b7feb9a3bfdcd24c44f
+  languageName: node
+  linkType: hard
+
+"@types/jest@npm:26.x":
   version: 26.0.19
   resolution: "@types/jest@npm:26.0.19"
   dependencies:
