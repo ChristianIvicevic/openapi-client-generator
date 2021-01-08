@@ -54,6 +54,8 @@ The CLI command usage looks as follows where `INPUT` is the OpenAPI schema file 
 openapi-client-generator --input [INPUT] --output [OUTPUT]
 ```
 
+When executing the CLI two files will be generated, namely `requests.ts` and `schemas.ts` in the specified output folder.
+
 In our project we run the CLI with the following command:
 
 ```
@@ -88,9 +90,6 @@ Since we don't fully support all features of the OpenAPI spec it is really helpf
 
 To contribute to the code clone the repository, use the Node version denoted in the `.nvmrc` file (most likely by running `nvm use`), install its dependencies using `yarn install` (we are using Yarn 2) and use the following commands as necessary:
 
-* Handlebars template files are compiled using either
-  * `yarn build:templates`
-  * `yarn watch:templates`
 * The library and CLI are compiled using either
   * `yarn build:main`
   * `yarn watch:build`
