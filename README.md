@@ -74,7 +74,6 @@ If you really want to walk down that dark path nonetheless refer to the `src/cli
 
 The order of these features does not reflect any priorization.
 
-* More reliable code generation via `typescript` and/or `ts-morph` itself rather than using Handlebars
 * Add `fetch` as an alternative to `axios`
 * Handling `nullable` and `required` parameters and objects correctly
 * Resolving array types that include either `items.allOf`, `items.oneOf` or `items.enum`
