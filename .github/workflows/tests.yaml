@@ -20,8 +20,6 @@ jobs:
           check-latest: true
       - name: Install dependencies
         run: yarn install --immutable
-      - name: Generate templates
-        run: yarn build:templates
       - name: Lint
         run: yarn lint
       - name: Test
