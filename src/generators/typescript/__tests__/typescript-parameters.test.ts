@@ -1,16 +1,14 @@
-import { compileUsingHandlebars } from 'generators/handlebars/generator';
+import { compileUsingTypescript } from 'generators/typescript/generator';
 import type { OpenAPIV3 } from 'openapi-types';
-import { parseYamlToDocumentInfo } from 'parser/parser';
+import { parseYaml } from 'parser/parser';
 import { compose } from 'ramda';
 import { createTestDocument, createTestDocumentWithPaths } from 'utils/testing';
 
 // TESTEE function
-const compile = compose(compileUsingHandlebars, parseYamlToDocumentInfo);
+const compile = compose(compileUsingTypescript, parseYaml);
 
-// TODO: Handle 'required' query parameters
-
-describe('Handlebars Generator Parameters', () => {
-  it('compiles operations with path parameter $refs at path level', async () => {
+describe('Typescript Generator Parameters', () => {
+  it('compiles operations with path parameter $refs at path level', () => {
     // GIVEN an OpenAPI schema that contains operations with path parameter
     // $refs at path level
     const document = createTestDocument({
@@ -20,9 +18,7 @@ describe('Handlebars Generator Parameters', () => {
             in: 'path',
             description: 'ID of the sample to get',
             name: 'id',
-            schema: {
-              type: 'string',
-            },
+            schema: {},
           },
         },
       },
@@ -73,72 +69,56 @@ describe('Handlebars Generator Parameters', () => {
       },
     });
 
-    // WHEN compiling with the handlebars generator
-    const { requests } = await compile(document);
+    // WHEN compiling with the typescript generator
+    const { requests } = compile(document);
 
     // THEN the output matches the snapshot
     expect(requests).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-
-      import axios, { AxiosRequestConfig } from 'axios';
-
+      import type { AxiosRequestConfig } from 'axios';
+      import axios from 'axios';
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.delete<void>(\`/api/sample/\${parameters.id}\`, config);
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const getSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.get<void>(\`/api/sample/\${parameters.id}\`, config);
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const postSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.post<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const putSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.put<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
@@ -146,7 +126,7 @@ describe('Handlebars Generator Parameters', () => {
     `);
   });
 
-  it('compiles operations with path parameter $refs at operation level', async () => {
+  it('compiles operations with path parameter $refs at operation level', () => {
     // GIVEN an OpenAPI schema that contains operations with path parameter
     // $refs at operation level
     const document = createTestDocument({
@@ -156,9 +136,7 @@ describe('Handlebars Generator Parameters', () => {
             in: 'path',
             description: 'ID of the sample to get',
             name: 'id',
-            schema: {
-              type: 'string',
-            },
+            schema: {},
           },
         },
       },
@@ -224,72 +202,56 @@ describe('Handlebars Generator Parameters', () => {
       },
     });
 
-    // WHEN compiling with the handlebars generator
-    const { requests } = await compile(document);
+    // WHEN compiling with the typescript generator
+    const { requests } = compile(document);
 
     // THEN the output matches the snapshot
     expect(requests).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-
-      import axios, { AxiosRequestConfig } from 'axios';
-
+      import type { AxiosRequestConfig } from 'axios';
+      import axios from 'axios';
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.delete<void>(\`/api/sample/\${parameters.id}\`, config);
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const getSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.get<void>(\`/api/sample/\${parameters.id}\`, config);
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const postSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.post<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const putSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.put<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
@@ -297,7 +259,7 @@ describe('Handlebars Generator Parameters', () => {
     `);
   });
 
-  it('compiles operations with inline path parameters at path level', async () => {
+  it('compiles operations with inline path parameters at path level', () => {
     // GIVEN an OpenAPI schema that contains operations with inline path
     // parameters at path level
     const document = createTestDocumentWithPaths({
@@ -307,9 +269,7 @@ describe('Handlebars Generator Parameters', () => {
             in: 'path',
             description: 'ID of the sample to get',
             name: 'id',
-            schema: {
-              type: 'string',
-            },
+            schema: {},
           },
         ],
         get: {
@@ -351,72 +311,56 @@ describe('Handlebars Generator Parameters', () => {
       },
     });
 
-    // WHEN compiling with the handlebars generator
-    const { requests } = await compile(document);
+    // WHEN compiling with the typescript generator
+    const { requests } = compile(document);
 
     // THEN the output matches the snapshot
     expect(requests).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-
-      import axios, { AxiosRequestConfig } from 'axios';
-
+      import type { AxiosRequestConfig } from 'axios';
+      import axios from 'axios';
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.delete<void>(\`/api/sample/\${parameters.id}\`, config);
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const getSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.get<void>(\`/api/sample/\${parameters.id}\`, config);
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const postSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.post<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const putSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.put<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
@@ -424,7 +368,7 @@ describe('Handlebars Generator Parameters', () => {
     `);
   });
 
-  it('compiles operations with inline path parameters at operation level', async () => {
+  it('compiles operations with inline path parameters at operation level', () => {
     // GIVEN an OpenAPI schema that contains operations with inline path
     // parameters at operation level
     const document = createTestDocumentWithPaths({
@@ -435,9 +379,7 @@ describe('Handlebars Generator Parameters', () => {
               in: 'path',
               description: 'ID of the sample to get',
               name: 'id',
-              schema: {
-                type: 'string',
-              },
+              schema: {},
             },
           ],
           operationId: 'getSample',
@@ -454,9 +396,7 @@ describe('Handlebars Generator Parameters', () => {
               in: 'path',
               description: 'ID of the sample to get',
               name: 'id',
-              schema: {
-                type: 'string',
-              },
+              schema: {},
             },
           ],
           operationId: 'postSample',
@@ -473,9 +413,7 @@ describe('Handlebars Generator Parameters', () => {
               in: 'path',
               description: 'ID of the sample to get',
               name: 'id',
-              schema: {
-                type: 'string',
-              },
+              schema: {},
             },
           ],
           operationId: 'putSample',
@@ -492,9 +430,7 @@ describe('Handlebars Generator Parameters', () => {
               in: 'path',
               description: 'ID of the sample to get',
               name: 'id',
-              schema: {
-                type: 'string',
-              },
+              schema: {},
             },
           ],
           operationId: 'deleteSample',
@@ -508,72 +444,56 @@ describe('Handlebars Generator Parameters', () => {
       },
     });
 
-    // WHEN compiling with the handlebars generator
-    const { requests } = await compile(document);
+    // WHEN compiling with the typescript generator
+    const { requests } = compile(document);
 
     // THEN the output matches the snapshot
     expect(requests).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-
-      import axios, { AxiosRequestConfig } from 'axios';
-
+      import type { AxiosRequestConfig } from 'axios';
+      import axios from 'axios';
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.delete<void>(\`/api/sample/\${parameters.id}\`, config);
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const getSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.get<void>(\`/api/sample/\${parameters.id}\`, config);
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const postSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.post<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const putSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
+          readonly id?: unknown;
         },
         config?: AxiosRequestConfig,
       ) => axios.put<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
@@ -581,7 +501,7 @@ describe('Handlebars Generator Parameters', () => {
     `);
   });
 
-  it('compiles operations with path and query parameters at path level', async () => {
+  it('compiles operations with path and query parameters at path level', () => {
     // GIVEN an OpenAPI schema that contains operations with path and query
     // parameters at path level
     const document = createTestDocumentWithPaths({
@@ -591,17 +511,13 @@ describe('Handlebars Generator Parameters', () => {
             in: 'path',
             description: 'ID of the sample to get',
             name: 'id',
-            schema: {
-              type: 'string',
-            },
+            schema: {},
           },
           {
             in: 'query',
             description: 'Name of the file',
             name: 'fileName',
-            schema: {
-              type: 'string',
-            },
+            schema: {},
           },
         ],
         get: {
@@ -643,31 +559,24 @@ describe('Handlebars Generator Parameters', () => {
       },
     });
 
-    // WHEN compiling with the handlebars generator
-    const { requests } = await compile(document);
+    // WHEN compiling with the typescript generator
+    const { requests } = compile(document);
 
     // THEN the output matches the snapshot
     expect(requests).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-
-      import axios, { AxiosRequestConfig } from 'axios';
-
+      import type { AxiosRequestConfig } from 'axios';
+      import axios from 'axios';
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
-          /**
-           * Name of the file
-           */
-          fileName: string;
+          readonly id?: unknown;
+          readonly fileName?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
@@ -677,22 +586,15 @@ describe('Handlebars Generator Parameters', () => {
             fileName: parameters.fileName,
           },
         });
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const getSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
-          /**
-           * Name of the file
-           */
-          fileName: string;
+          readonly id?: unknown;
+          readonly fileName?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
@@ -702,22 +604,15 @@ describe('Handlebars Generator Parameters', () => {
             fileName: parameters.fileName,
           },
         });
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const postSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
-          /**
-           * Name of the file
-           */
-          fileName: string;
+          readonly id?: unknown;
+          readonly fileName?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
@@ -727,22 +622,15 @@ describe('Handlebars Generator Parameters', () => {
             fileName: parameters.fileName,
           },
         });
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const putSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
-          /**
-           * Name of the file
-           */
-          fileName: string;
+          readonly id?: unknown;
+          readonly fileName?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
@@ -756,7 +644,7 @@ describe('Handlebars Generator Parameters', () => {
     `);
   });
 
-  it('compiles operations with path and query parameters at operation level', async () => {
+  it('compiles operations with path and query parameters at operation level', () => {
     // GIVEN an OpenAPI schema that contains operations with path and query
     // parameters at operation level
     const document = createTestDocumentWithPaths({
@@ -767,17 +655,13 @@ describe('Handlebars Generator Parameters', () => {
               in: 'path',
               description: 'ID of the sample to get',
               name: 'id',
-              schema: {
-                type: 'string',
-              },
+              schema: {},
             },
             {
               in: 'query',
               description: 'Name of the file',
               name: 'fileName',
-              schema: {
-                type: 'string',
-              },
+              schema: {},
             },
           ],
           operationId: 'getSample',
@@ -794,17 +678,13 @@ describe('Handlebars Generator Parameters', () => {
               in: 'path',
               description: 'ID of the sample to get',
               name: 'id',
-              schema: {
-                type: 'string',
-              },
+              schema: {},
             },
             {
               in: 'query',
               description: 'Name of the file',
               name: 'fileName',
-              schema: {
-                type: 'string',
-              },
+              schema: {},
             },
           ],
           operationId: 'postSample',
@@ -821,17 +701,13 @@ describe('Handlebars Generator Parameters', () => {
               in: 'path',
               description: 'ID of the sample to get',
               name: 'id',
-              schema: {
-                type: 'string',
-              },
+              schema: {},
             },
             {
               in: 'query',
               description: 'Name of the file',
               name: 'fileName',
-              schema: {
-                type: 'string',
-              },
+              schema: {},
             },
           ],
           operationId: 'putSample',
@@ -848,17 +724,13 @@ describe('Handlebars Generator Parameters', () => {
               in: 'path',
               description: 'ID of the sample to get',
               name: 'id',
-              schema: {
-                type: 'string',
-              },
+              schema: {},
             },
             {
               in: 'query',
               description: 'Name of the file',
               name: 'fileName',
-              schema: {
-                type: 'string',
-              },
+              schema: {},
             },
           ],
           operationId: 'deleteSample',
@@ -872,31 +744,24 @@ describe('Handlebars Generator Parameters', () => {
       },
     });
 
-    // WHEN compiling with the handlebars generator
-    const { requests } = await compile(document);
+    // WHEN compiling with the typescript generator
+    const { requests } = compile(document);
 
     // THEN the output matches the snapshot
     expect(requests).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-
-      import axios, { AxiosRequestConfig } from 'axios';
-
+      import type { AxiosRequestConfig } from 'axios';
+      import axios from 'axios';
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
-          /**
-           * Name of the file
-           */
-          fileName: string;
+          readonly id?: unknown;
+          readonly fileName?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
@@ -906,22 +771,15 @@ describe('Handlebars Generator Parameters', () => {
             fileName: parameters.fileName,
           },
         });
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const getSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
-          /**
-           * Name of the file
-           */
-          fileName: string;
+          readonly id?: unknown;
+          readonly fileName?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
@@ -931,22 +789,15 @@ describe('Handlebars Generator Parameters', () => {
             fileName: parameters.fileName,
           },
         });
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const postSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
-          /**
-           * Name of the file
-           */
-          fileName: string;
+          readonly id?: unknown;
+          readonly fileName?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
@@ -956,22 +807,15 @@ describe('Handlebars Generator Parameters', () => {
             fileName: parameters.fileName,
           },
         });
-
       /**
        * Endpoint under test
-       * @param parameters Parameters associated with this request
-       * @param config Overrides of the axios configuration for this request
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
       export const putSample = async (
         parameters: {
-          /**
-           * ID of the sample to get
-           */
-          id: string;
-          /**
-           * Name of the file
-           */
-          fileName: string;
+          readonly id?: unknown;
+          readonly fileName?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
@@ -981,6 +825,156 @@ describe('Handlebars Generator Parameters', () => {
             fileName: parameters.fileName,
           },
         });
+      "
+    `);
+  });
+
+  // TODO: Tests for handling default values
+  it('compiles operations with required flags', () => {
+    // GIVEN an OpenAPI schema that contains operations with path parameters that have either required or nullable flags
+    const document = createTestDocument({
+      components: {
+        parameters: {
+          optional: {
+            in: 'path',
+            description: 'Parameter under test',
+            name: 'optional',
+            schema: {},
+          },
+          required: {
+            in: 'path',
+            description: 'Parameter under test',
+            name: 'required',
+            required: true,
+            schema: {},
+          },
+        },
+      },
+      paths: {
+        '/api/sample/{required}/{optional}': {
+          parameters: [
+            {
+              $ref: '#/components/parameters/optional',
+            },
+            {
+              $ref: '#/components/parameters/required',
+            },
+          ],
+          get: {
+            operationId: 'getSample',
+            responses: {
+              204: {
+                description: 'No content',
+              },
+            },
+            summary: 'Endpoint under test',
+          } as OpenAPIV3.OperationObject,
+          post: {
+            operationId: 'postSample',
+            responses: {
+              204: {
+                description: 'No content',
+              },
+            },
+            summary: 'Endpoint under test',
+          } as OpenAPIV3.OperationObject,
+          put: {
+            operationId: 'putSample',
+            responses: {
+              204: {
+                description: 'No content',
+              },
+            },
+            summary: 'Endpoint under test',
+          } as OpenAPIV3.OperationObject,
+          delete: {
+            operationId: 'deleteSample',
+            responses: {
+              204: {
+                description: 'No content',
+              },
+            },
+            summary: 'Endpoint under test',
+          } as OpenAPIV3.OperationObject,
+        },
+      },
+    });
+
+    // WHEN compiling with the typescript generator
+    const { requests } = compile(document);
+
+    // THEN the output matches the snapshot
+    expect(requests).toMatchInlineSnapshot(`
+      "/* eslint-disable */
+      /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+      import type { AxiosRequestConfig } from 'axios';
+      import axios from 'axios';
+      /**
+       * Endpoint under test
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       */
+      export const deleteSample = async (
+        parameters: {
+          readonly optional?: unknown;
+          readonly required: unknown;
+        },
+        config?: AxiosRequestConfig,
+      ) =>
+        axios.delete<void>(
+          \`/api/sample/\${parameters.required}/\${parameters.optional}\`,
+          config,
+        );
+      /**
+       * Endpoint under test
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       */
+      export const getSample = async (
+        parameters: {
+          readonly optional?: unknown;
+          readonly required: unknown;
+        },
+        config?: AxiosRequestConfig,
+      ) =>
+        axios.get<void>(
+          \`/api/sample/\${parameters.required}/\${parameters.optional}\`,
+          config,
+        );
+      /**
+       * Endpoint under test
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       */
+      export const postSample = async (
+        parameters: {
+          readonly optional?: unknown;
+          readonly required: unknown;
+        },
+        config?: AxiosRequestConfig,
+      ) =>
+        axios.post<void>(
+          \`/api/sample/\${parameters.required}/\${parameters.optional}\`,
+          undefined,
+          config,
+        );
+      /**
+       * Endpoint under test
+       * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       */
+      export const putSample = async (
+        parameters: {
+          readonly optional?: unknown;
+          readonly required: unknown;
+        },
+        config?: AxiosRequestConfig,
+      ) =>
+        axios.put<void>(
+          \`/api/sample/\${parameters.required}/\${parameters.optional}\`,
+          undefined,
+          config,
+        );
       "
     `);
   });

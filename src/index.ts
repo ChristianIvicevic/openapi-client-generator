@@ -1,4 +1,5 @@
 /* istanbul ignore file */
 
 export { compileUsingHandlebars } from 'generators/handlebars/generator';
-export { parseYaml } from 'parser/parser';
+export { compileUsingTypescript } from 'generators/typescript/generator';
+export { parseYaml, parseYamlToDocumentInfo } from 'parser/parser';

@@ -1,13 +1,13 @@
-import { compileUsingHandlebars } from 'generators/handlebars/generator';
-import { parseYamlToDocumentInfo } from 'parser/parser';
+import { compileUsingTypescript } from 'generators/typescript/generator';
+import { parseYaml } from 'parser/parser';
 import { compose } from 'ramda';
 import { createTestDocumentWithSchemas } from 'utils/testing';
 
 // TESTEE function
-const compile = compose(compileUsingHandlebars, parseYamlToDocumentInfo);
+const compile = compose(compileUsingTypescript, parseYaml);
 
-describe('Handlebars Generator Schemas', () => {
-  it('compiles simple scalar types', async () => {
+describe('Typescript Generator Schemas', () => {
+  it('compiles simple scalar types', () => {
     // GIVEN an OpenAPI schema that contains schemas for simple scalar types
     const document = createTestDocumentWithSchemas({
       BooleanSchema: {
@@ -66,69 +66,57 @@ describe('Handlebars Generator Schemas', () => {
       },
     });
 
-    // WHEN compiling with the handlebars generator
-    const { schemas } = await compile(document);
+    // WHEN compiling with the typescript generator
+    const { schemas } = compile(document);
 
     // THEN the output matches the snapshot
     expect(schemas).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-
       /**
        * Schema under test.
        */
       export type BooleanSchema = boolean;
-
       /**
        * Schema under test.
        */
       export type IntegerSchema = number;
-
       /**
        * Schema under test.
        */
       export type NullableBooleanSchema = boolean | null;
-
       /**
        * Schema under test.
        */
       export type NullableIntegerSchema = number | null;
-
       /**
        * Schema under test.
        */
       export type NullableNumberSchema = number | null;
-
       /**
        * Schema under test.
        */
-      export type NullableStringEnumSchema = 'value1' | 'value2' | null;
-
+      export type NullableStringEnumSchema = ('value1' | 'value2') | null;
       /**
        * Schema under test.
        */
       export type NullableStringSchema = string | null;
-
       /**
        * Schema under test.
        */
       export type NullableUnknownSchema = unknown | null;
-
       /**
        * Schema under test.
        */
       export type NumberSchema = number;
-
       /**
        * Schema under test.
        */
       export type StringEnumSchema = 'value1' | 'value2';
-
       /**
        * Schema under test.
        */
       export type StringSchema = string;
-
       /**
        * Schema under test.
        */
@@ -137,7 +125,7 @@ describe('Handlebars Generator Schemas', () => {
     `);
   });
 
-  it('compiles scalar array types', async () => {
+  it('compiles scalar array types', () => {
     // GIVEN an OpenAPI schema that contains schemas for scalar array types
     const document = createTestDocumentWithSchemas({
       UnknownArraySchema: {
@@ -204,19 +192,17 @@ describe('Handlebars Generator Schemas', () => {
       },
     });
 
-    // WHEN compiling with the handlebars generator
-    const { schemas } = await compile(document);
+    // WHEN compiling with the typescript generator
+    const { schemas } = compile(document);
 
     // THEN the output matches the snapshot
     expect(schemas).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-
       /**
        * Schema under test.
        */
       export type NestedUnknownArraySchema = readonly (readonly unknown[])[];
-
       /**
        * Schema under test.
        */
@@ -224,38 +210,32 @@ describe('Handlebars Generator Schemas', () => {
         | readonly unknown[]
         | null
       )[];
-
       /**
        * Schema under test.
        */
       export type NullableNestedUnknownArraySchema =
         | readonly (readonly unknown[])[]
         | null;
-
       /**
        * Schema under test.
        */
       export type NullableNestedUnknownNullableArraySchema =
         | readonly (readonly unknown[] | null)[]
         | null;
-
       /**
        * Schema under test.
        */
       export type NullableUnknownArraySchema = readonly (unknown | null)[];
-
       /**
        * Schema under test.
        */
       export type NullableUnknownNullableArraySchema =
         | readonly (unknown | null)[]
         | null;
-
       /**
        * Schema under test.
        */
       export type UnknownArraySchema = readonly unknown[];
-
       /**
        * Schema under test.
        */
@@ -264,7 +244,7 @@ describe('Handlebars Generator Schemas', () => {
     `);
   });
 
-  it('compiles $ref array types', async () => {
+  it('compiles $ref array types', () => {
     // GIVEN an OpenAPI schema that contains schemas for $ref array types
     const document = createTestDocumentWithSchemas({
       Schema: {
@@ -287,24 +267,21 @@ describe('Handlebars Generator Schemas', () => {
       },
     });
 
-    // WHEN compiling with the handlebars generator
-    const { schemas } = await compile(document);
+    // WHEN compiling with the typescript generator
+    const { schemas } = compile(document);
 
     // THEN the output matches the snapshot
     expect(schemas).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-
       /**
        * Schema under test.
        */
       export type ArraySchema = readonly Schema[];
-
       /**
        * Schema under test.
        */
       export type NullableArraySchema = readonly Schema[] | null;
-
       /**
        * Schema under test.
        */
@@ -313,7 +290,7 @@ describe('Handlebars Generator Schemas', () => {
     `);
   });
 
-  it('compiles object types', async () => {
+  it('compiles object types', () => {
     // GIVEN an OpenAPI schema that contains schemas for object types
     const document = createTestDocumentWithSchemas({
       Schema: {
@@ -350,14 +327,13 @@ describe('Handlebars Generator Schemas', () => {
       },
     });
 
-    // WHEN compiling with the handlebars generator
-    const { schemas } = await compile(document);
+    // WHEN compiling with the typescript generator
+    const { schemas } = compile(document);
 
     // THEN the output matches the snapshot
     expect(schemas).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-
       /**
        * Schema under test.
        */
@@ -368,7 +344,6 @@ describe('Handlebars Generator Schemas', () => {
         readonly arrayProp?: readonly unknown[];
         readonly arrayRefProp?: readonly Schema[];
       };
-
       /**
        * Schema under test.
        */
@@ -377,7 +352,7 @@ describe('Handlebars Generator Schemas', () => {
     `);
   });
 
-  it('compiles combined types', async () => {
+  it('compiles combined types', () => {
     // GIVEN an OpenAPI schema that contains schemas for combined types
     const document = createTestDocumentWithSchemas({
       Schema: {
@@ -417,21 +392,19 @@ describe('Handlebars Generator Schemas', () => {
       },
     });
 
-    // WHEN compiling with the handlebars generator
-    const { schemas } = await compile(document);
+    // WHEN compiling with the typescript generator
+    const { schemas } = compile(document);
 
     // THEN the output matches the snapshot
     expect(schemas).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-
       /**
        * Schema under test.
        */
       export type AllOfSchema = Schema & {
         readonly prop?: unknown;
       };
-
       /**
        * Schema under test.
        */
@@ -440,7 +413,6 @@ describe('Handlebars Generator Schemas', () => {
         | {
             readonly prop?: unknown;
           };
-
       /**
        * Schema under test.
        */
@@ -449,7 +421,7 @@ describe('Handlebars Generator Schemas', () => {
     `);
   });
 
-  it('compiles dictionary types', async () => {
+  it('compiles dictionary types', () => {
     // GIVEN an OpenAPI schema that contains schemas for dictionary types
     const document = createTestDocumentWithSchemas({
       Schema: {
@@ -492,34 +464,29 @@ describe('Handlebars Generator Schemas', () => {
       },
     });
 
-    // WHEN compiling with the handlebars generator
-    const { schemas } = await compile(document);
+    // WHEN compiling with the typescript generator
+    const { schemas } = compile(document);
 
     // THEN the output matches the snapshot
     expect(schemas).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-
       /**
        * Schema under test.
        */
       export type ArrayDictionary = Record<string, readonly unknown[]>;
-
       /**
        * Schema under test.
        */
       export type Dictionary = Record<string, unknown>;
-
       /**
        * Schema under test.
        */
       export type Schema = unknown;
-
       /**
        * Schema under test.
        */
       export type SchemaArrayDictionary = Record<string, readonly Schema[]>;
-
       /**
        * Schema under test.
        */
@@ -529,7 +496,7 @@ describe('Handlebars Generator Schemas', () => {
   });
 
   describe('Special Cases', () => {
-    it('compiles actual null types according to OpenAPI v3.1', async () => {
+    it('compiles actual null types according to OpenAPI v3.1', () => {
       // GIVEN an OpenAPI schema that contains a schema with a null type
       const document = createTestDocumentWithSchemas({
         NullSchema1: {
@@ -548,19 +515,17 @@ describe('Handlebars Generator Schemas', () => {
         },
       });
 
-      // WHEN compiling with the handlebars generator
-      const { schemas } = await compile(document);
+      // WHEN compiling with the typescript generator
+      const { schemas } = compile(document);
 
       // THEN the output matches the snapshot
       expect(schemas).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-
         /**
          * Schema under test.
          */
         export type NullSchema1 = null;
-
         /**
          * Schema under test.
          */
@@ -569,7 +534,7 @@ describe('Handlebars Generator Schemas', () => {
       `);
     });
 
-    it('compiles unusual object type declarations', async () => {
+    it('compiles unusual object type declarations', () => {
       // GIVEN an OpenAPI schema that contains a schema with unusual object
       // types
       const document = createTestDocumentWithSchemas({
@@ -621,26 +586,23 @@ describe('Handlebars Generator Schemas', () => {
         },
       });
 
-      // WHEN compiling with the handlebars generator
-      const { schemas } = await compile(document);
+      // WHEN compiling with the typescript generator
+      const { schemas } = compile(document);
 
       // THEN the output matches the snapshot
       expect(schemas).toMatchInlineSnapshot(`
         "/* eslint-disable */
         /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-
         /**
          * Schema under test.
          */
         export type ExcessAllOfSchema = Schema & {
           readonly prop?: unknown;
         };
-
         /**
          * Schema under test.
          */
         export type ExcessObjectWithoutPropertiesSchema = unknown;
-
         /**
          * Schema under test.
          */
@@ -649,12 +611,10 @@ describe('Handlebars Generator Schemas', () => {
           | {
               readonly prop?: unknown;
             };
-
         /**
          * Schema under test.
          */
         export type ObjectWithEmptyPropertiesSchema = unknown;
-
         /**
          * Schema under test.
          */

@@ -1,13 +1,13 @@
-import { compileUsingHandlebars } from 'generators/handlebars/generator';
+import { compileUsingTypescript } from 'generators/typescript/generator';
 import type { OpenAPIV3 } from 'openapi-types';
-import { parseYamlToDocumentInfo } from 'parser/parser';
+import { parseYaml } from 'parser/parser';
 import { compose } from 'ramda';
 import { createTestDocument, createTestDocumentWithPaths } from 'utils/testing';
 
 // TESTEE function
-const compile = compose(compileUsingHandlebars, parseYamlToDocumentInfo);
+const compile = compose(compileUsingTypescript, parseYaml);
 
-describe('Handlebars Generator Error Handling', () => {
+describe('Typescript Generator Error Handling', () => {
   it('throws for an operation without an operationId', () => {
     // GIVEN an OpenAPI schema that contains a single endpoint with no
     // operationId
@@ -24,7 +24,7 @@ describe('Handlebars Generator Error Handling', () => {
       },
     });
 
-    // WHEN attempting to compile with the handlebars generator
+    // WHEN attempting to compile with the typescript generator
     const functionUnderTest = () => compile(document);
 
     // THEN the compiler should throw an error
@@ -55,7 +55,7 @@ describe('Handlebars Generator Error Handling', () => {
       },
     });
 
-    // WHEN attempting to compile with the handlebars generator
+    // WHEN attempting to compile with the typescript generator
     const functionUnderTest = () => compile(document);
 
     // THEN the compiler should throw an error
@@ -95,85 +95,12 @@ describe('Handlebars Generator Error Handling', () => {
       },
     });
 
-    // WHEN attempting to compile with the handlebars generator
+    // WHEN attempting to compile with the typescript generator
     const functionUnderTest = () => compile(document);
 
     // THEN the compiler should throw an error
     expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
       `"Dereferenced parameter '#/components/parameters/deep-param-ref' is a deep reference to '#/components/parameters/param-ref', which is not supported"`,
-    );
-  });
-
-  it('throws for an operation that references a parameter without a schema', () => {
-    // GIVEN an OpenAPI schema that contains a single endpoint with a reference
-    // to a parameter without a schema
-    const document = createTestDocument({
-      components: {
-        parameters: {
-          param: {
-            in: 'path',
-            name: 'param',
-          },
-        },
-      },
-      paths: {
-        '/api/sample/{param}': {
-          parameters: [
-            {
-              $ref: '#/components/parameters/param',
-            },
-          ],
-          get: {
-            operationId: 'getSample',
-            responses: {
-              204: {
-                description: 'No content',
-              },
-            },
-            summary: 'Endpoint under test',
-          } as OpenAPIV3.OperationObject,
-        },
-      },
-    });
-
-    // WHEN attempting to compile with the handlebars generator
-    const functionUnderTest = () => compile(document);
-
-    // THEN the compiler should throw an error
-    expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
-      `"There is no schema for the referenced parameter '#/components/parameters/param'"`,
-    );
-  });
-
-  it('throws for an operation that has an inline parameter without a schema', () => {
-    // GIVEN an OpenAPI schema that contains a single endpoint with an inline
-    // parameter without a schema
-    const document = createTestDocumentWithPaths({
-      '/api/sample/{param}': {
-        parameters: [
-          {
-            in: 'path',
-            name: 'param',
-          },
-        ],
-        get: {
-          operationId: 'getSample',
-          responses: {
-            204: {
-              description: 'No content',
-            },
-          },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
-      },
-    });
-
-    // WHEN attempting to compile with the handlebars generator
-    const functionUnderTest = () => compile(document);
-
-    // THEN the compiler should throw an error
-    expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
-      `"There is no schema for the parameter 'param'"`,
     );
   });
 
@@ -201,7 +128,7 @@ describe('Handlebars Generator Error Handling', () => {
       },
     });
 
-    // WHEN attempting to compile with the handlebars generator
+    // WHEN attempting to compile with the typescript generator
     const functionUnderTest = () => compile(document);
 
     // THEN the compiler should throw an error

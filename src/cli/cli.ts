@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { compileUsingHandlebars } from 'generators/handlebars/generator';
+import { compileUsingTypescript } from 'generators/typescript/generator';
 import { parseYaml } from 'parser/parser';
 import { join } from 'path';
 import { getLogger } from 'utils/logging';
@@ -45,7 +45,7 @@ const yargsObject = yargs
   })
   .wrap(80);
 
-void (async () => {
+void (() => {
   const {
     argv: { i: inputFile, o: outputFolder, v: verbose, d: debug },
   } = yargsObject;
@@ -70,7 +70,7 @@ void (async () => {
   try {
     const yamlContent = readFileSync(inputFile).toString();
     const document = parseYaml(yamlContent);
-    const { requests, schemas } = await compileUsingHandlebars(document);
+    const { requests, schemas } = compileUsingTypescript(document);
     writeFileSync(join(outputFolder, 'requests.ts'), requests);
     writeFileSync(join(outputFolder, 'schemas.ts'), schemas);
   } catch (e: unknown) {
