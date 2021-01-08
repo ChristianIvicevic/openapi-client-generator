@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.0.0...v2.1.0) (2021-01-08)
+
+
+### Features
+
+* add code generation using the actual typescript compiler ([ae6a881](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/ae6a881974b412b36c05433b0fc42754cd4af6b7))
+
 ## [2.0.0](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v1.0.0...v2.0.0) (2021-01-06)
 
 
