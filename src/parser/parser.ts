@@ -13,7 +13,10 @@ import { assertIsDefined } from 'utils/assert';
 import { getLogger } from 'utils/logging';
 import yaml from 'yaml';
 
-export const parseYaml = (content: string): DocumentInfo => {
+export const parseYaml = (content: string) =>
+  yaml.parse(content) as OpenAPIV3.Document;
+
+export const parseYamlToDocumentInfo = (content: string): DocumentInfo => {
   const logger = getLogger();
   const document = yaml.parse(content) as OpenAPIV3.Document;
 

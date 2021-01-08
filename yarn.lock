@@ -620,6 +620,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 4.12.0
     "@typescript-eslint/parser": 4.12.0
     "@zerollup/ts-transform-paths": 1.7.18
+    axios: 0.21.1
     change-case: 4.1.2
     commitizen: 4.2.2
     cz-conventional-changelog: 3.3.0
@@ -650,6 +651,7 @@ __metadata:
     yargs: 16.2.0
   peerDependencies:
     axios: "*"
+    typescript: ^4.0.0
   bin:
     openapi-client-generator: ./bin/openapi-client-generator.js
   languageName: unknown
@@ -1645,6 +1647,15 @@ __metadata:
   version: 1.11.0
   resolution: "aws4@npm:1.11.0"
   checksum: d30dce2b73839974894d8283a06c53e8374b74d643d3b08340d84c364e01158be011fcfd1a88f8462be946d69055313a3038202f2eafd155b039aaab3549ba21
+  languageName: node
+  linkType: hard
+
+"axios@npm:0.21.1":
+  version: 0.21.1
+  resolution: "axios@npm:0.21.1"
+  dependencies:
+    follow-redirects: ^1.10.0
+  checksum: 864fb7b5d077d236737f10adca53bf451a93f35a15271f56fba8da07265a02d26b7d881b935a6697dc6adb0549ea3e56d2eecb403edaa3bb78f6479901c10f69
   languageName: node
   linkType: hard
 
@@ -3578,6 +3589,16 @@ __metadata:
   version: 1.1.0
   resolution: "fn.name@npm:1.1.0"
   checksum: e33a39ffd68424b58d849cb3672c2ed9c4f8dadf0ef9416d5b5d9b8877258c1aa0f42554aaa2d15e87bcb5892ce4d4f78bdbbc5856f5a2b79fc31a10b6e69c8f
+  languageName: node
+  linkType: hard
+
+"follow-redirects@npm:^1.10.0":
+  version: 1.13.1
+  resolution: "follow-redirects@npm:1.13.1"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: c7c6c905876b939af04a1b27afa70e9c0ab5015d96f5ee49dd80db6952dc8c960b96a229647504468615d8a1a400da9bec9449e2aea9f9c6da6fdca0ba17d4c2
   languageName: node
   linkType: hard
 

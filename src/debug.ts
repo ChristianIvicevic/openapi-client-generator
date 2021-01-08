@@ -1,3 +1,3 @@
 /* istanbul ignore file */
 
-void (async () => {})();
+void (() => {})();
