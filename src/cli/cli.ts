@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { compileUsingTypescript } from 'generators/typescript/generator';
+import { compileDocument } from 'generator/generator';
 import { parseYaml } from 'parser/parser';
 import { join } from 'path';
 import { getLogger } from 'utils/logging';
@@ -70,7 +70,7 @@ void (() => {
   try {
     const yamlContent = readFileSync(inputFile).toString();
     const document = parseYaml(yamlContent);
-    const { requests, schemas } = compileUsingTypescript(document);
+    const { requests, schemas } = compileDocument(document);
     writeFileSync(join(outputFolder, 'requests.ts'), requests);
     writeFileSync(join(outputFolder, 'schemas.ts'), schemas);
   } catch (e: unknown) {

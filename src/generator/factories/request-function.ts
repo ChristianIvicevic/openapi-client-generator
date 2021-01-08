@@ -1,5 +1,5 @@
-import { Constants } from 'generators/typescript/constants';
-import type { OperationMethod } from 'parser/types';
+import { Constants } from 'generator/constants';
+import type { OperationMethod } from 'generator/types';
 import ts, { factory } from 'typescript';
 import { compact } from 'utils/fp';
 

@@ -1,9 +1,8 @@
 import { camelCase, pascalCase } from 'change-case';
-import { createLeadingTrivia } from 'generators/typescript/factories/leading-trivia';
-import { createRequestFunction } from 'generators/typescript/factories/request-function';
-import type { TypescriptCompilationContext } from 'generators/typescript/types';
+import { createLeadingTrivia } from 'generator/factories/leading-trivia';
+import { createRequestFunction } from 'generator/factories/request-function';
+import type { CompilationContext, OperationMethod } from 'generator/types';
 import type { OpenAPIV3 } from 'openapi-types';
-import { OperationMethod } from 'parser/types';
 import { partial, partition } from 'ramda';
 import ts, { factory } from 'typescript';
 import { assertIsDefined } from 'utils/assert';
@@ -12,7 +11,7 @@ import { compact } from 'utils/fp';
 import { getLogger } from 'utils/logging';
 import { isReferenceObject } from 'utils/type-guards';
 
-export const compileUsingTypescript = (document: OpenAPIV3.Document) => {
+export const compileDocument = (document: OpenAPIV3.Document) => {
   const logger = getLogger();
   const referencedSchemas: string[] = [];
 
@@ -119,7 +118,7 @@ export const compileUsingTypescript = (document: OpenAPIV3.Document) => {
 };
 
 const compileSchema = (
-  context: TypescriptCompilationContext,
+  context: CompilationContext,
   schemaName: string,
   schemaObject:
     | OpenAPIV3.ReferenceObject
@@ -143,7 +142,7 @@ const compileSchema = (
 };
 
 const compileOperation = (
-  context: TypescriptCompilationContext,
+  context: CompilationContext,
   method: OperationMethod,
   pathParameters: readonly (
     | OpenAPIV3.ReferenceObject
@@ -199,7 +198,7 @@ const compileOperation = (
 };
 
 const compileAndPartitionParameters = (
-  context: TypescriptCompilationContext,
+  context: CompilationContext,
   parameters: readonly (
     | OpenAPIV3.ReferenceObject
     | OpenAPIV3.ParameterObject
@@ -252,7 +251,7 @@ const compileAndPartitionParameters = (
 };
 
 const compileParameterSignatures = (
-  context: TypescriptCompilationContext,
+  context: CompilationContext,
   parameterObjects: readonly OpenAPIV3.ParameterObject[],
 ) =>
   parameterObjects.map(parameter =>
@@ -269,7 +268,7 @@ const compileParameterSignatures = (
   );
 
 const compileResponses = (
-  context: TypescriptCompilationContext,
+  context: CompilationContext,
   responses?: OpenAPIV3.ResponsesObject,
 ) => {
   if (responses === undefined) {
@@ -289,7 +288,7 @@ const compileResponses = (
 };
 
 const compileRequestBody = (
-  context: TypescriptCompilationContext,
+  context: CompilationContext,
   requestBody?: OpenAPIV3.ReferenceObject | OpenAPIV3.RequestBodyObject,
 ) => {
   if (requestBody === undefined) {
@@ -300,7 +299,7 @@ const compileRequestBody = (
 };
 
 const compileResponseOrRequestBody = (
-  context: TypescriptCompilationContext,
+  context: CompilationContext,
   component:
     | OpenAPIV3.ReferenceObject
     | OpenAPIV3.ResponseObject
@@ -321,7 +320,7 @@ const compileResponseOrRequestBody = (
 };
 
 const compileMediaType = (
-  context: TypescriptCompilationContext,
+  context: CompilationContext,
   mediaType: string,
   mediaTypeObject: OpenAPIV3.MediaTypeObject,
 ): ts.TypeNode => {
@@ -351,7 +350,7 @@ const compileMediaType = (
 };
 
 const resolveRefSchema = (
-  { referencedSchemas }: TypescriptCompilationContext,
+  { referencedSchemas }: CompilationContext,
   $ref: OpenAPIV3.ReferenceObject['$ref'],
 ) => {
   if ($ref.startsWith('#/components/schemas')) {
@@ -365,7 +364,7 @@ const resolveRefSchema = (
 };
 
 const resolveSchema = (
-  context: TypescriptCompilationContext,
+  context: CompilationContext,
   schemaObject:
     | OpenAPIV3.ReferenceObject
     | OpenAPIV3.NonArraySchemaObject
@@ -384,7 +383,7 @@ const resolveSchema = (
 };
 
 const resolveInlineSchema = (
-  context: TypescriptCompilationContext,
+  context: CompilationContext,
   schemaObject: OpenAPIV3.NonArraySchemaObject | OpenAPIV3.ArraySchemaObject,
 ) => {
   switch (schemaObject.type) {
@@ -426,7 +425,7 @@ const resolveInlineSchema = (
 };
 
 const resolveFallbackSchema = (
-  context: TypescriptCompilationContext,
+  context: CompilationContext,
   schemaObject: OpenAPIV3.NonArraySchemaObject,
 ) =>
   tryResolveCombinedSchema(context, schemaObject) ??
@@ -434,7 +433,7 @@ const resolveFallbackSchema = (
   factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword);
 
 const resolveObjectSchema = (
-  context: TypescriptCompilationContext,
+  context: CompilationContext,
   schemaObject: OpenAPIV3.NonArraySchemaObject,
 ) => {
   const { required, properties } = schemaObject;
@@ -462,7 +461,7 @@ const resolveObjectSchema = (
 };
 
 const tryResolveCombinedSchema = (
-  context: TypescriptCompilationContext,
+  context: CompilationContext,
   schemaObject: OpenAPIV3.NonArraySchemaObject,
 ) => {
   if (schemaObject.allOf) {
@@ -481,7 +480,7 @@ const tryResolveCombinedSchema = (
 };
 
 const tryResolveDictionarySchema = (
-  context: TypescriptCompilationContext,
+  context: CompilationContext,
   schemaObject: OpenAPIV3.NonArraySchemaObject,
 ) => {
   const { additionalProperties } = schemaObject;

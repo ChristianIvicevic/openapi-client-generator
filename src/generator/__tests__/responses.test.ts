@@ -1,11 +1,11 @@
-import { compileUsingTypescript } from 'generators/typescript/generator';
+import { compileDocument } from 'generator/generator';
 import type { OpenAPIV3 } from 'openapi-types';
 import { parseYaml } from 'parser/parser';
 import { compose } from 'ramda';
 import { createTestDocumentWithPaths } from 'utils/testing';
 
 // TESTEE function
-const compile = compose(compileUsingTypescript, parseYaml);
+const compile = compose(compileDocument, parseYaml);
 
 describe('Typescript Generator Requests', () => {
   it('compiles operations with empty responses', () => {
