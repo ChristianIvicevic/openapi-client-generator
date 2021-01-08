@@ -1,5 +1,5 @@
 import { pascalCase } from 'change-case';
-import { Constants } from 'generators/typescript/constants';
+import { Constants } from 'generator/constants';
 import ts, { factory } from 'typescript';
 import { compact } from 'utils/fp';
 
