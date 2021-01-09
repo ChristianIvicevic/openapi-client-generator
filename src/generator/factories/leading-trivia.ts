@@ -1,13 +1,16 @@
-import { pascalCase } from 'change-case';
 import { Constants } from 'generator/constants';
-import ts, { factory } from 'typescript';
+import { factory } from 'typescript';
 import { compact } from 'utils/fp';
 
 type Options = {
   readonly referencedSchemas: readonly string[];
+  readonly schemasFile?: string;
 };
 
-export const createLeadingTrivia = ({ referencedSchemas }: Options) => {
+export const createLeadingTrivia = ({
+  referencedSchemas,
+  schemasFile = './schemas',
+}: Options) => {
   const axiosRequestConfigImport = factory.createImportDeclaration(
     undefined,
     undefined,
@@ -45,26 +48,12 @@ export const createLeadingTrivia = ({ referencedSchemas }: Options) => {
         referencedSchemas.map(schema =>
           factory.createImportSpecifier(
             undefined,
-            factory.createIdentifier(pascalCase(schema)),
+            factory.createIdentifier(schema),
           ),
         ),
       ),
     ),
-    factory.createStringLiteral('./schemas'),
-  );
-
-  ts.addSyntheticLeadingComment(
-    axiosRequestConfigImport,
-    ts.SyntaxKind.MultiLineCommentTrivia,
-    ' eslint-disable ',
-    true,
-  );
-
-  ts.addSyntheticLeadingComment(
-    axiosRequestConfigImport,
-    ts.SyntaxKind.MultiLineCommentTrivia,
-    ' THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY ',
-    true,
+    factory.createStringLiteral(schemasFile),
   );
 
   return compact([

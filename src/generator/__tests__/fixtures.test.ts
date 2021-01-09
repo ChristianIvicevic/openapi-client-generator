@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
-import { compileDocument } from 'generator/generator';
-import { parseYaml } from 'parser/parser';
+import { compileDocument } from 'generator';
+import { parseYaml } from 'parser';
 import { compose } from 'ramda';
 
 // TESTEE function

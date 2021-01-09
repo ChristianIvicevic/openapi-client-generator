@@ -1,6 +1,6 @@
-import { compileDocument } from 'generator/generator';
+import { compileDocument } from 'generator';
 import type { OpenAPIV3 } from 'openapi-types';
-import { parseYaml } from 'parser/parser';
+import { parseYaml } from 'parser';
 import { compose } from 'ramda';
 import { createTestDocument, createTestDocumentWithPaths } from 'utils/testing';
 

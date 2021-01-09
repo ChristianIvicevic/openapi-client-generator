@@ -1,8 +1,8 @@
 /* istanbul ignore file */
 
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { compileDocument } from 'generator/generator';
-import { parseYaml } from 'parser/parser';
+import { compileDocument } from 'generator';
+import { parseYaml } from 'parser';
 import { join } from 'path';
 import { getLogger } from 'utils/logging';
 import yargs from 'yargs';
