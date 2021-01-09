@@ -1,7 +1,7 @@
 import { compileDocument } from 'generator';
 import { parseYaml } from 'parser';
 import { compose } from 'ramda';
-import { createTestDocumentWithPaths } from 'utils/testing';
+import { createTestDocument, createTestDocumentWithPaths } from 'utils/testing';
 
 // TESTEE function
 const compile = compose(compileDocument, parseYaml);
@@ -428,6 +428,101 @@ describe('Responses', () => {
        */
       export const putOperation = async (config?: AxiosRequestConfig) =>
         axios.put<readonly unknown[]>('/api/test', undefined, config);
+      "
+    `);
+  });
+
+  it('compiles operations with a response object that is a $ref', () => {
+    // GIVEN an OpenAPI schema that contains operations with a response object
+    // that is a $ref
+    const document = createTestDocument({
+      components: {
+        responses: {
+          TestResponse: {
+            description: 'No content.',
+            content: {
+              'application/json': {
+                schema: {},
+              },
+            },
+          },
+        },
+      },
+      paths: {
+        '/api/test': {
+          get: {
+            operationId: 'getOperation',
+            responses: {
+              204: {
+                $ref: '#/components/responses/TestResponse',
+              },
+            },
+            summary: 'Endpoint under test.',
+          },
+          post: {
+            operationId: 'postOperation',
+            responses: {
+              204: {
+                $ref: '#/components/responses/TestResponse',
+              },
+            },
+            summary: 'Endpoint under test.',
+          },
+          put: {
+            operationId: 'putOperation',
+            responses: {
+              204: {
+                $ref: '#/components/responses/TestResponse',
+              },
+            },
+            summary: 'Endpoint under test.',
+          },
+          delete: {
+            operationId: 'deleteOperation',
+            responses: {
+              204: {
+                $ref: '#/components/responses/TestResponse',
+              },
+            },
+            summary: 'Endpoint under test.',
+          },
+        },
+      },
+    });
+
+    // WHEN compiling
+    const { requests } = compile(document);
+
+    // THEN the output matches the snapshot
+    expect(requests).toMatchInlineSnapshot(`
+      "/* eslint-disable */
+      /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+      import type { AxiosRequestConfig } from 'axios';
+      import axios from 'axios';
+      /**
+       * Endpoint under test.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       */
+      export const deleteOperation = async (config?: AxiosRequestConfig) =>
+        axios.delete<unknown>('/api/test', config);
+      /**
+       * Endpoint under test.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       */
+      export const getOperation = async (config?: AxiosRequestConfig) =>
+        axios.get<unknown>('/api/test', config);
+      /**
+       * Endpoint under test.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       */
+      export const postOperation = async (config?: AxiosRequestConfig) =>
+        axios.post<unknown>('/api/test', undefined, config);
+      /**
+       * Endpoint under test.
+       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       */
+      export const putOperation = async (config?: AxiosRequestConfig) =>
+        axios.put<unknown>('/api/test', undefined, config);
       "
     `);
   });

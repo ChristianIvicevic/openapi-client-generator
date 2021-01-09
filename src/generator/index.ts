@@ -41,20 +41,26 @@ export const compileDocument = (document: OpenAPIV3.Document) => {
         return compact(
           Constants.SUPPORTED_OPERATION_METHODS.map((method):
             | CreateOperationOrThrowParameters
-            | undefined =>
-            pathItemObject[method]
-              ? {
-                  operationId:
-                    pathItemObject[method]?.operationId ?? '<NO OPERATION ID>',
-                  parameters: [
-                    { document, path, referencedSchemas },
-                    method,
-                    pathParameters,
-                    pathItemObject[method],
-                  ],
-                }
-              : undefined,
-          ),
+            | undefined => {
+            const operationObject = pathItemObject[method];
+
+            if (operationObject === undefined) {
+              logger.debug(
+                `Skipping empty '${method}' operation on path '${path}'`,
+              );
+              return undefined;
+            }
+
+            return {
+              operationId: operationObject.operationId ?? '<NO OPERATION ID>',
+              parameters: [
+                { document, path, referencedSchemas },
+                method,
+                pathParameters,
+                operationObject,
+              ],
+            };
+          }),
         );
       })
       .sort((a, b) => a.operationId.localeCompare(b.operationId))

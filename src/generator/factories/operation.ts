@@ -6,7 +6,6 @@ import { createResponses } from 'generator/factories/responses';
 import type { Context, OperationMethod } from 'generator/types';
 import type { OpenAPIV3 } from 'openapi-types';
 import { assertIsDefined } from 'utils/assert';
-import { getLogger } from 'utils/logging';
 
 export type CreateOperationOrThrowParameters = {
   operationId: string;
@@ -20,17 +19,11 @@ export const createOperationOrThrow = (
     | OpenAPIV3.ReferenceObject
     | OpenAPIV3.ParameterObject
   )[] = [],
-  operationObject?: OpenAPIV3.OperationObject,
+  operationObject: OpenAPIV3.OperationObject,
 ) => {
-  const logger = getLogger();
   const { path } = context;
 
   assertIsDefined(path);
-
-  if (operationObject === undefined) {
-    logger.debug(`Skipping empty '${method}' operation object`);
-    return undefined;
-  }
 
   const {
     operationId,
@@ -44,7 +37,9 @@ export const createOperationOrThrow = (
     throw Error(`'${method}' operation object has no operation id`);
   }
 
-  logger.debug(`Compiling operation '${operationId}'`);
+  if (responses === undefined) {
+    throw Error(`'${method}' operation object has no responses`);
+  }
 
   const responseTypes = createResponses(context, responses);
   // TODO: Handle required flag for the request body.

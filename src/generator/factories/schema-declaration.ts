@@ -4,6 +4,7 @@ import type { Context } from 'generator/types';
 import type { OpenAPIV3 } from 'openapi-types';
 import ts, { factory } from 'typescript';
 import { compact } from 'utils/fp';
+import { dereferenceName } from 'utils/openapi';
 import { isReferenceObject } from 'utils/type-guards';
 
 export const createSchemaDeclaration = (
@@ -14,12 +15,27 @@ export const createSchemaDeclaration = (
     | OpenAPIV3.ArraySchemaObject
     | OpenAPIV3.NonArraySchemaObject,
 ) => {
-  const description = isReferenceObject(schemaObject)
-    ? // TODO: Dereference description of deeply referenced schema object.
-      ''
-    : schemaObject.description ?? '';
+  const description =
+    (isReferenceObject(schemaObject) ? undefined : schemaObject.description) ??
+    '';
+  const seeReferencedSchemaTag = isReferenceObject(schemaObject)
+    ? factory.createJSDocSeeTag(
+        factory.createIdentifier('see'),
+        factory.createJSDocNameReference(
+          factory.createIdentifier(dereferenceName(schemaObject.$ref)),
+        ),
+      )
+    : undefined;
+
+  const hasJSDoc =
+    description.length !== 0 || seeReferencedSchemaTag !== undefined;
+
   return compact([
-    description.length !== 0 && factory.createJSDocComment(description, []),
+    hasJSDoc &&
+      factory.createJSDocComment(
+        description,
+        compact([seeReferencedSchemaTag]),
+      ),
     factory.createTypeAliasDeclaration(
       undefined,
       [factory.createModifier(ts.SyntaxKind.ExportKeyword)],

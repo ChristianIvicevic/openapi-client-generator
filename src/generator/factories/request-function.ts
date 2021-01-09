@@ -1,3 +1,4 @@
+import { camelCase } from 'change-case';
 import { Constants } from 'generator/constants';
 import type { OperationMethod } from 'generator/types';
 import ts, { factory } from 'typescript';
@@ -191,7 +192,7 @@ const compilePathInterpolationParameter = ({
       factory.createTemplateSpan(
         factory.createPropertyAccessExpression(
           factory.createIdentifier(Constants.PARAMETERS_PARAMETER_NAME),
-          factory.createIdentifier(pathParameters[index][1]),
+          factory.createIdentifier(camelCase(pathParameters[index][1])),
         ),
         (index === segmentsArray.length - 1
           ? factory.createTemplateTail

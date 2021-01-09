@@ -8,7 +8,7 @@ const compile = compose(compileDocument, parseYaml);
 
 describe('Error Handling', () => {
   it('throws for an operation without an operationId', () => {
-    // GIVEN an OpenAPI schema that contains a endpoints with no operationId
+    // GIVEN an OpenAPI schema that contains an endpoint with no operationId
     const document = createTestDocumentWithPaths({
       '/api/test': {
         get: {
@@ -28,6 +28,26 @@ describe('Error Handling', () => {
     // THEN the compiler should throw an error
     expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
       `"'get' operation object has no operation id"`,
+    );
+  });
+
+  it('throws for an operation without any responses', () => {
+    // GIVEN an OpenAPI schema that contains an endpoint with no responses
+    const document = createTestDocumentWithPaths({
+      '/api/test': {
+        get: {
+          operationId: 'getOperation',
+          summary: 'Endpoint under test.',
+        },
+      },
+    });
+
+    // WHEN attempting to compile
+    const functionUnderTest = () => compile(document);
+
+    // THEN the compiler should throw an error
+    expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
+      `"'get' operation object has no responses"`,
     );
   });
 
@@ -58,7 +78,7 @@ describe('Error Handling', () => {
 
     // THEN the compiler should throw an error
     expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
-      `"Cannot dereference parameter '#/components/parameters/does-not-exist'"`,
+      `"Cannot dereference component '#/components/parameters/does-not-exist'"`,
     );
   });
 
@@ -98,7 +118,7 @@ describe('Error Handling', () => {
 
     // THEN the compiler should throw an error
     expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
-      `"Dereferenced parameter '#/components/parameters/deep-param-ref' is a deep reference to '#/components/parameters/param-ref', which is not supported"`,
+      `"Dereferenced component '#/components/parameters/deep-param-ref' is a deep reference to '#/components/parameters/param-ref', which is not supported"`,
     );
   });
 
@@ -132,6 +152,75 @@ describe('Error Handling', () => {
     // THEN the compiler should throw an error
     expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
       `"The reference '#/components/examples/ExampleDto' does not match the pattern '#/components/schemas/*'"`,
+    );
+  });
+
+  it('throws when trying to dereference a deeply nested component', () => {
+    // GIVEN an OpenAPI schema that contains a single endpoint with a deeply
+    // nested component
+    const document = createTestDocument({
+      components: {
+        responses: {
+          TestRefResponse: {
+            $ref: '#/components/responses/TestResponse',
+          },
+          TestResponse: {
+            description: 'No content.',
+            content: {
+              'application/json': {
+                schema: {},
+              },
+            },
+          },
+        },
+      },
+      paths: {
+        '/api/test': {
+          get: {
+            operationId: 'getOperation',
+            responses: {
+              204: {
+                $ref: '#/components/responses/TestRefResponse',
+              },
+            },
+            summary: 'Endpoint under test.',
+          },
+        },
+      },
+    });
+
+    // WHEN attempting to compile
+    const functionUnderTest = () => compile(document);
+
+    // THEN the compiler should throw an error
+    expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
+      `"Dereferenced component '#/components/responses/TestRefResponse' is a deep reference to '#/components/responses/TestResponse', which is not supported"`,
+    );
+  });
+
+  it('throws when trying to dereference an unsupported component', () => {
+    // GIVEN an OpenAPI schema that contains a single endpoint with a deeply
+    // nested component
+    const document = createTestDocumentWithPaths({
+      '/api/test': {
+        get: {
+          operationId: 'getOperation',
+          responses: {
+            204: {
+              $ref: '#/components/callbacks/TestCallback',
+            },
+          },
+          summary: 'Endpoint under test.',
+        },
+      },
+    });
+
+    // WHEN attempting to compile
+    const functionUnderTest = () => compile(document);
+
+    // THEN the compiler should throw an error
+    expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
+      `"Cannot dereference component '#/components/callbacks/TestCallback'"`,
     );
   });
 });

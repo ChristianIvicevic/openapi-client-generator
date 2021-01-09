@@ -4,7 +4,7 @@ import type { Context } from 'generator/types';
 import type { OpenAPIV3 } from 'openapi-types';
 import ts, { factory } from 'typescript';
 import { getLogger } from 'utils/logging';
-import { isReferenceObject } from 'utils/type-guards';
+import { dereferenceOrThrow } from 'utils/openapi';
 
 export const createContentfulComponentOrThrow = (
   context: Context,
@@ -13,12 +13,9 @@ export const createContentfulComponentOrThrow = (
     | OpenAPIV3.ResponseObject
     | OpenAPIV3.RequestBodyObject,
 ) => {
-  if (isReferenceObject(component)) {
-    // TODO: Implement dereferencing via context.
-    throw Error('NYI: Resolving #/components/(responses|requestBodies)/*');
-  }
-
-  const { content } = component;
+  const { content } = dereferenceOrThrow(context, component) as
+    | OpenAPIV3.ResponseObject
+    | OpenAPIV3.RequestBodyObject;
 
   if (content === undefined) {
     return [factory.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword)];

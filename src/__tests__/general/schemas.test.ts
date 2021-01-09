@@ -495,6 +495,36 @@ describe('Schemas', () => {
     `);
   });
 
+  it('compiles deeply nested types', () => {
+    // GIVEN an OpenAPI schema that contains deeply nested schemas
+    const document = createTestDocumentWithSchemas({
+      TestSchema: {
+        description: 'Schema under test.',
+      },
+      TestRefSchema: {
+        $ref: '#/components/schemas/TestSchema',
+      },
+    });
+
+    // WHEN compiling
+    const { schemas } = compile(document);
+
+    // THEN the output matches the snapshot
+    expect(schemas).toMatchInlineSnapshot(`
+      "/* eslint-disable */
+      /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+      /**
+       * @see {TestSchema}
+       */
+      export type TestRefSchema = TestSchema;
+      /**
+       * Schema under test.
+       */
+      export type TestSchema = unknown;
+      "
+    `);
+  });
+
   // TODO: Extract into separate test file.
   describe('Special Cases', () => {
     it('compiles actual null types according to OpenAPI v3.1', () => {
