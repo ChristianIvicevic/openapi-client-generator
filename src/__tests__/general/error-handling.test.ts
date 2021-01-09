@@ -1,5 +1,4 @@
 import { compileDocument } from 'generator';
-import type { OpenAPIV3 } from 'openapi-types';
 import { parseYaml } from 'parser';
 import { compose } from 'ramda';
 import { createTestDocument, createTestDocumentWithPaths } from 'utils/testing';
@@ -7,24 +6,23 @@ import { createTestDocument, createTestDocumentWithPaths } from 'utils/testing';
 // TESTEE function
 const compile = compose(compileDocument, parseYaml);
 
-describe('Typescript Generator Error Handling', () => {
+describe('Error Handling', () => {
   it('throws for an operation without an operationId', () => {
-    // GIVEN an OpenAPI schema that contains a single endpoint with no
-    // operationId
+    // GIVEN an OpenAPI schema that contains a endpoints with no operationId
     const document = createTestDocumentWithPaths({
-      '/api/sample': {
+      '/api/test': {
         get: {
           responses: {
             204: {
-              description: 'No content',
+              description: 'Response under test.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
       },
     });
 
-    // WHEN attempting to compile with the typescript generator
+    // WHEN attempting to compile
     const functionUnderTest = () => compile(document);
 
     // THEN the compiler should throw an error
@@ -37,25 +35,25 @@ describe('Typescript Generator Error Handling', () => {
     // GIVEN an OpenAPI schema that contains a single endpoint with a reference
     // to a parameter that does not exist
     const document = createTestDocumentWithPaths({
-      '/api/sample/{does-not-exist}': {
+      '/api/test/{does-not-exist}': {
         parameters: [
           {
             $ref: '#/components/parameters/does-not-exist',
           },
         ],
         get: {
-          operationId: 'getSample',
+          operationId: 'getOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
       },
     });
 
-    // WHEN attempting to compile with the typescript generator
+    // WHEN attempting to compile
     const functionUnderTest = () => compile(document);
 
     // THEN the compiler should throw an error
@@ -76,26 +74,26 @@ describe('Typescript Generator Error Handling', () => {
         },
       },
       paths: {
-        '/api/sample/{param-ref}': {
+        '/api/test/{param-ref}': {
           parameters: [
             {
               $ref: '#/components/parameters/deep-param-ref',
             },
           ],
           get: {
-            operationId: 'getSample',
+            operationId: 'getOperation',
             responses: {
               204: {
-                description: 'No content',
+                description: 'No content.',
               },
             },
-            summary: 'Endpoint under test',
-          } as OpenAPIV3.OperationObject,
+            summary: 'Endpoint under test.',
+          },
         },
       },
     });
 
-    // WHEN attempting to compile with the typescript generator
+    // WHEN attempting to compile
     const functionUnderTest = () => compile(document);
 
     // THEN the compiler should throw an error
@@ -108,9 +106,9 @@ describe('Typescript Generator Error Handling', () => {
     // GIVEN an OpenAPI schema that contains a single endpoint with a reference
     // to a type that is not a schema
     const document = createTestDocumentWithPaths({
-      '/api/sample': {
+      '/api/test': {
         get: {
-          operationId: 'getSample',
+          operationId: 'getOperation',
           responses: {
             200: {
               description: 'OK',
@@ -123,12 +121,12 @@ describe('Typescript Generator Error Handling', () => {
               },
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
       },
     });
 
-    // WHEN attempting to compile with the typescript generator
+    // WHEN attempting to compile
     const functionUnderTest = () => compile(document);
 
     // THEN the compiler should throw an error

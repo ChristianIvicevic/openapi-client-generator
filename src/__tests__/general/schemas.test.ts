@@ -6,7 +6,7 @@ import { createTestDocumentWithSchemas } from 'utils/testing';
 // TESTEE function
 const compile = compose(compileDocument, parseYaml);
 
-describe('Typescript Generator Schemas', () => {
+describe('Schemas', () => {
   it('compiles simple scalar types', () => {
     // GIVEN an OpenAPI schema that contains schemas for simple scalar types
     const document = createTestDocumentWithSchemas({
@@ -66,7 +66,7 @@ describe('Typescript Generator Schemas', () => {
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { schemas } = compile(document);
 
     // THEN the output matches the snapshot
@@ -192,7 +192,7 @@ describe('Typescript Generator Schemas', () => {
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { schemas } = compile(document);
 
     // THEN the output matches the snapshot
@@ -247,14 +247,14 @@ describe('Typescript Generator Schemas', () => {
   it('compiles $ref array types', () => {
     // GIVEN an OpenAPI schema that contains schemas for $ref array types
     const document = createTestDocumentWithSchemas({
-      Schema: {
+      TestSchema: {
         description: 'Schema under test.',
       },
       ArraySchema: {
         description: 'Schema under test.',
         type: 'array',
         items: {
-          $ref: '#/components/schemas/Schema',
+          $ref: '#/components/schemas/TestSchema',
         },
       },
       NullableArraySchema: {
@@ -262,12 +262,12 @@ describe('Typescript Generator Schemas', () => {
         type: 'array',
         nullable: true,
         items: {
-          $ref: '#/components/schemas/Schema',
+          $ref: '#/components/schemas/TestSchema',
         },
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { schemas } = compile(document);
 
     // THEN the output matches the snapshot
@@ -277,15 +277,15 @@ describe('Typescript Generator Schemas', () => {
       /**
        * Schema under test.
        */
-      export type ArraySchema = readonly Schema[];
+      export type ArraySchema = readonly TestSchema[];
       /**
        * Schema under test.
        */
-      export type NullableArraySchema = readonly Schema[] | null;
+      export type NullableArraySchema = readonly TestSchema[] | null;
       /**
        * Schema under test.
        */
-      export type Schema = unknown;
+      export type TestSchema = unknown;
       "
     `);
   });
@@ -293,7 +293,7 @@ describe('Typescript Generator Schemas', () => {
   it('compiles object types', () => {
     // GIVEN an OpenAPI schema that contains schemas for object types
     const document = createTestDocumentWithSchemas({
-      Schema: {
+      TestSchema: {
         description: 'Schema under test.',
       },
       ObjectSchema: {
@@ -309,7 +309,7 @@ describe('Typescript Generator Schemas', () => {
           },
           refProp: {
             description: 'Property under test.',
-            $ref: '#/components/schemas/Schema',
+            $ref: '#/components/schemas/TestSchema',
           },
           arrayProp: {
             description: 'Property under test.',
@@ -320,14 +320,14 @@ describe('Typescript Generator Schemas', () => {
             description: 'Property under test.',
             type: 'array',
             items: {
-              $ref: '#/components/schemas/Schema',
+              $ref: '#/components/schemas/TestSchema',
             },
           },
         },
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { schemas } = compile(document);
 
     // THEN the output matches the snapshot
@@ -340,14 +340,14 @@ describe('Typescript Generator Schemas', () => {
       export type ObjectSchema = {
         readonly requiredProp: unknown;
         readonly optionalProp?: unknown;
-        readonly refProp?: Schema;
+        readonly refProp?: TestSchema;
         readonly arrayProp?: readonly unknown[];
-        readonly arrayRefProp?: readonly Schema[];
+        readonly arrayRefProp?: readonly TestSchema[];
       };
       /**
        * Schema under test.
        */
-      export type Schema = unknown;
+      export type TestSchema = unknown;
       "
     `);
   });
@@ -355,14 +355,14 @@ describe('Typescript Generator Schemas', () => {
   it('compiles combined types', () => {
     // GIVEN an OpenAPI schema that contains schemas for combined types
     const document = createTestDocumentWithSchemas({
-      Schema: {
+      TestSchema: {
         description: 'Schema under test.',
       },
       AllOfSchema: {
         description: 'Schema under test.',
         allOf: [
           {
-            $ref: '#/components/schemas/Schema',
+            $ref: '#/components/schemas/TestSchema',
           },
           {
             type: 'object',
@@ -378,7 +378,7 @@ describe('Typescript Generator Schemas', () => {
         description: 'Schema under test.',
         oneOf: [
           {
-            $ref: '#/components/schemas/Schema',
+            $ref: '#/components/schemas/TestSchema',
           },
           {
             type: 'object',
@@ -392,7 +392,7 @@ describe('Typescript Generator Schemas', () => {
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { schemas } = compile(document);
 
     // THEN the output matches the snapshot
@@ -402,21 +402,21 @@ describe('Typescript Generator Schemas', () => {
       /**
        * Schema under test.
        */
-      export type AllOfSchema = Schema & {
+      export type AllOfSchema = TestSchema & {
         readonly prop?: unknown;
       };
       /**
        * Schema under test.
        */
       export type OneOfSchema =
-        | Schema
+        | TestSchema
         | {
             readonly prop?: unknown;
           };
       /**
        * Schema under test.
        */
-      export type Schema = unknown;
+      export type TestSchema = unknown;
       "
     `);
   });
@@ -424,7 +424,7 @@ describe('Typescript Generator Schemas', () => {
   it('compiles dictionary types', () => {
     // GIVEN an OpenAPI schema that contains schemas for dictionary types
     const document = createTestDocumentWithSchemas({
-      Schema: {
+      TestSchema: {
         description: 'Schema under test.',
       },
       Dictionary: {
@@ -443,28 +443,28 @@ describe('Typescript Generator Schemas', () => {
           items: {},
         },
       },
-      SchemaDictionary: {
+      TestSchemaDictionary: {
         description: 'Schema under test.',
         type: 'object',
         additionalProperties: {
           description: 'Schema under test.',
-          $ref: '#/components/schemas/Schema',
+          $ref: '#/components/schemas/TestSchema',
         },
       },
-      SchemaArrayDictionary: {
+      TestSchemaArrayDictionary: {
         description: 'Schema under test.',
         type: 'object',
         additionalProperties: {
           description: 'Schema under test.',
           type: 'array',
           items: {
-            $ref: '#/components/schemas/Schema',
+            $ref: '#/components/schemas/TestSchema',
           },
         },
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { schemas } = compile(document);
 
     // THEN the output matches the snapshot
@@ -482,19 +482,20 @@ describe('Typescript Generator Schemas', () => {
       /**
        * Schema under test.
        */
-      export type Schema = unknown;
+      export type TestSchema = unknown;
       /**
        * Schema under test.
        */
-      export type SchemaArrayDictionary = Record<string, readonly Schema[]>;
+      export type TestSchemaArrayDictionary = Record<string, readonly TestSchema[]>;
       /**
        * Schema under test.
        */
-      export type SchemaDictionary = Record<string, Schema>;
+      export type TestSchemaDictionary = Record<string, TestSchema>;
       "
     `);
   });
 
+  // TODO: Extract into separate test file.
   describe('Special Cases', () => {
     it('compiles actual null types according to OpenAPI v3.1', () => {
       // GIVEN an OpenAPI schema that contains a schema with a null type
@@ -515,7 +516,7 @@ describe('Typescript Generator Schemas', () => {
         },
       });
 
-      // WHEN compiling with the typescript generator
+      // WHEN compiling
       const { schemas } = compile(document);
 
       // THEN the output matches the snapshot
@@ -538,7 +539,7 @@ describe('Typescript Generator Schemas', () => {
       // GIVEN an OpenAPI schema that contains a schema with unusual object
       // types
       const document = createTestDocumentWithSchemas({
-        Schema: {
+        TestSchema: {
           description: 'Schema under test.',
         },
         ExcessObjectWithoutPropertiesSchema: {
@@ -555,7 +556,7 @@ describe('Typescript Generator Schemas', () => {
           type: 'object',
           allOf: [
             {
-              $ref: '#/components/schemas/Schema',
+              $ref: '#/components/schemas/TestSchema',
             },
             {
               type: 'object',
@@ -572,7 +573,7 @@ describe('Typescript Generator Schemas', () => {
           type: 'object',
           oneOf: [
             {
-              $ref: '#/components/schemas/Schema',
+              $ref: '#/components/schemas/TestSchema',
             },
             {
               type: 'object',
@@ -586,7 +587,7 @@ describe('Typescript Generator Schemas', () => {
         },
       });
 
-      // WHEN compiling with the typescript generator
+      // WHEN compiling
       const { schemas } = compile(document);
 
       // THEN the output matches the snapshot
@@ -596,7 +597,7 @@ describe('Typescript Generator Schemas', () => {
         /**
          * Schema under test.
          */
-        export type ExcessAllOfSchema = Schema & {
+        export type ExcessAllOfSchema = TestSchema & {
           readonly prop?: unknown;
         };
         /**
@@ -607,7 +608,7 @@ describe('Typescript Generator Schemas', () => {
          * Schema under test.
          */
         export type ExcessOneOfSchema =
-          | Schema
+          | TestSchema
           | {
               readonly prop?: unknown;
             };
@@ -618,7 +619,7 @@ describe('Typescript Generator Schemas', () => {
         /**
          * Schema under test.
          */
-        export type Schema = unknown;
+        export type TestSchema = unknown;
         "
       `);
     });

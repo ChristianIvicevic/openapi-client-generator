@@ -1,5 +1,4 @@
 import { compileDocument } from 'generator';
-import type { OpenAPIV3 } from 'openapi-types';
 import { parseYaml } from 'parser';
 import { compose } from 'ramda';
 import { createTestDocumentWithPaths } from 'utils/testing';
@@ -7,54 +6,52 @@ import { createTestDocumentWithPaths } from 'utils/testing';
 // TESTEE function
 const compile = compose(compileDocument, parseYaml);
 
-// TODO: Responses with mediaType application/x-yaml
-
-describe('Typescript Generator Response Bodies', () => {
+describe('Response Bodies', () => {
   it('compiles operations with a request body content $ref', () => {
     // GIVEN an OpenAPI schema that contains operations with a request body
     // content $ref
     const document = createTestDocumentWithPaths({
-      '/api/sample': {
+      '/api/test': {
         post: {
-          operationId: 'postSample',
+          operationId: 'postOperation',
           requestBody: {
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/SampleDto',
+                  $ref: '#/components/schemas/TestDto',
                 },
               },
             },
           },
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint Summary',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
         put: {
-          operationId: 'putSample',
+          operationId: 'putOperation',
           requestBody: {
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/SampleDto',
+                  $ref: '#/components/schemas/TestDto',
                 },
               },
             },
           },
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint Summary',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { requests } = compile(document);
 
     // THEN the output matches the snapshot
@@ -63,25 +60,25 @@ describe('Typescript Generator Response Bodies', () => {
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
       import type { AxiosRequestConfig } from 'axios';
       import axios from 'axios';
-      import type { SampleDto } from './schemas';
+      import type { TestDto } from './schemas';
       /**
-       * Endpoint Summary
+       * Endpoint under test.
        * @param requestBody The HTTP request content sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const postSample = async (
-        requestBody: SampleDto,
+      export const postOperation = async (
+        requestBody: TestDto,
         config?: AxiosRequestConfig,
-      ) => axios.post<void>('/api/sample', requestBody, config);
+      ) => axios.post<void>('/api/test', requestBody, config);
       /**
-       * Endpoint Summary
+       * Endpoint under test.
        * @param requestBody The HTTP request content sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const putSample = async (
-        requestBody: SampleDto,
+      export const putOperation = async (
+        requestBody: TestDto,
         config?: AxiosRequestConfig,
-      ) => axios.put<void>('/api/sample', requestBody, config);
+      ) => axios.put<void>('/api/test', requestBody, config);
       "
     `);
   });
@@ -90,9 +87,9 @@ describe('Typescript Generator Response Bodies', () => {
     // GIVEN an OpenAPI schema that contains operations with inline request
     // body content
     const document = createTestDocumentWithPaths({
-      '/api/sample': {
+      '/api/test': {
         post: {
-          operationId: 'postSample',
+          operationId: 'postOperation',
           requestBody: {
             content: {
               'application/json': {
@@ -102,13 +99,13 @@ describe('Typescript Generator Response Bodies', () => {
           },
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint Summary',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
         put: {
-          operationId: 'putSample',
+          operationId: 'putOperation',
           requestBody: {
             content: {
               'application/json': {
@@ -118,15 +115,15 @@ describe('Typescript Generator Response Bodies', () => {
           },
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint Summary',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { requests } = compile(document);
 
     // THEN the output matches the snapshot
@@ -136,23 +133,23 @@ describe('Typescript Generator Response Bodies', () => {
       import type { AxiosRequestConfig } from 'axios';
       import axios from 'axios';
       /**
-       * Endpoint Summary
+       * Endpoint under test.
        * @param requestBody The HTTP request content sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const postSample = async (
+      export const postOperation = async (
         requestBody: unknown,
         config?: AxiosRequestConfig,
-      ) => axios.post<void>('/api/sample', requestBody, config);
+      ) => axios.post<void>('/api/test', requestBody, config);
       /**
-       * Endpoint Summary
+       * Endpoint under test.
        * @param requestBody The HTTP request content sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const putSample = async (
+      export const putOperation = async (
         requestBody: unknown,
         config?: AxiosRequestConfig,
-      ) => axios.put<void>('/api/sample', requestBody, config);
+      ) => axios.put<void>('/api/test', requestBody, config);
       "
     `);
   });

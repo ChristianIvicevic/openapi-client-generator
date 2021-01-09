@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Typescript Generator Fixtures compiles the expanded petstore schema 1`] = `
+exports[`Fixtures compiles the expanded petstore schema 1`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 import type { AxiosRequestConfig } from 'axios';
@@ -55,7 +55,7 @@ export const findPets = async (
 "
 `;
 
-exports[`Typescript Generator Fixtures compiles the expanded petstore schema 2`] = `
+exports[`Fixtures compiles the expanded petstore schema 2`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 export type Error = {
@@ -72,7 +72,7 @@ export type Pet = NewPet & {
 "
 `;
 
-exports[`Typescript Generator Fixtures compiles the link example schema 1`] = `
+exports[`Fixtures compiles the link example schema 1`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 import type { AxiosRequestConfig } from 'axios';
@@ -174,7 +174,7 @@ export const mergePullRequest = async (
 "
 `;
 
-exports[`Typescript Generator Fixtures compiles the link example schema 2`] = `
+exports[`Fixtures compiles the link example schema 2`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 export type Pullrequest = {
@@ -194,7 +194,7 @@ export type User = {
 "
 `;
 
-exports[`Typescript Generator Fixtures compiles the petstore schema 1`] = `
+exports[`Fixtures compiles the petstore schema 1`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 import type { AxiosRequestConfig } from 'axios';
@@ -237,7 +237,7 @@ export const showPetById = async (
 "
 `;
 
-exports[`Typescript Generator Fixtures compiles the petstore schema 2`] = `
+exports[`Fixtures compiles the petstore schema 2`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 export type Error = {
@@ -253,7 +253,7 @@ export type Pets = readonly Pet[];
 "
 `;
 
-exports[`Typescript Generator Fixtures compiles the uspto schema 1`] = `
+exports[`Fixtures compiles the uspto schema 1`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 import type { AxiosRequestConfig } from 'axios';
@@ -303,7 +303,7 @@ export const performSearch = async (
 "
 `;
 
-exports[`Typescript Generator Fixtures compiles the uspto schema 2`] = `
+exports[`Fixtures compiles the uspto schema 2`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 export type DataSetList = {

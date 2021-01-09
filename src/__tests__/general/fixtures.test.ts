@@ -6,12 +6,12 @@ import { compose } from 'ramda';
 // TESTEE function
 const compile = compose(compileDocument, parseYaml);
 
-describe('Typescript Generator Fixtures', () => {
+describe('Fixtures', () => {
   it('compiles the link example schema', () => {
     // GIVEN the link example OpenAPI schema
     const document = readFileSync('fixtures/link-example.yaml').toString();
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { requests, schemas } = compile(document);
 
     // THEN the output matches the snapshot
@@ -23,7 +23,7 @@ describe('Typescript Generator Fixtures', () => {
     // GIVEN the petstore OpenAPI schema
     const document = readFileSync('fixtures/petstore.yaml').toString();
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { requests, schemas } = compile(document);
 
     // THEN the output matches the snapshot
@@ -35,7 +35,7 @@ describe('Typescript Generator Fixtures', () => {
     // GIVEN the expanded petstore OpenAPI schema
     const document = readFileSync('fixtures/petstore-expanded.yaml').toString();
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { requests, schemas } = compile(document);
 
     // THEN the output matches the snapshot
@@ -47,7 +47,7 @@ describe('Typescript Generator Fixtures', () => {
     // GIVEN the uspto OpenAPI schema
     const document = readFileSync('fixtures/uspto.yaml').toString();
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { requests, schemas } = compile(document);
 
     // THEN the output matches the snapshot

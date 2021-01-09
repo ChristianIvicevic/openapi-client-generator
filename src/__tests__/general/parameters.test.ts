@@ -1,5 +1,4 @@
 import { compileDocument } from 'generator';
-import type { OpenAPIV3 } from 'openapi-types';
 import { parseYaml } from 'parser';
 import { compose } from 'ramda';
 import { createTestDocument, createTestDocumentWithPaths } from 'utils/testing';
@@ -7,69 +6,69 @@ import { createTestDocument, createTestDocumentWithPaths } from 'utils/testing';
 // TESTEE function
 const compile = compose(compileDocument, parseYaml);
 
-describe('Typescript Generator Parameters', () => {
+describe('Parameters', () => {
   it('compiles operations with path parameter $refs at path level', () => {
     // GIVEN an OpenAPI schema that contains operations with path parameter
     // $refs at path level
     const document = createTestDocument({
       components: {
         parameters: {
-          id: {
+          parameter: {
             in: 'path',
-            description: 'ID of the sample to get',
-            name: 'id',
+            description: 'Parameter under test.',
+            name: 'parameter',
             schema: {},
           },
         },
       },
       paths: {
-        '/api/sample/{id}': {
+        '/api/test/{parameter}': {
           parameters: [
             {
-              $ref: '#/components/parameters/id',
+              $ref: '#/components/parameters/parameter',
             },
           ],
           get: {
-            operationId: 'getSample',
+            operationId: 'getOperation',
             responses: {
               204: {
-                description: 'No content',
+                description: 'No content.',
               },
             },
-            summary: 'Endpoint under test',
-          } as OpenAPIV3.OperationObject,
+            summary: 'Endpoint under test.',
+          },
           post: {
-            operationId: 'postSample',
+            operationId: 'postOperation',
             responses: {
               204: {
-                description: 'No content',
+                description: 'No content.',
               },
             },
-            summary: 'Endpoint under test',
-          } as OpenAPIV3.OperationObject,
+            summary: 'Endpoint under test.',
+          },
           put: {
-            operationId: 'putSample',
+            operationId: 'putOperation',
             responses: {
               204: {
-                description: 'No content',
+                description: 'No content.',
               },
             },
-            summary: 'Endpoint under test',
-          } as OpenAPIV3.OperationObject,
+            summary: 'Endpoint under test.',
+          },
           delete: {
-            operationId: 'deleteSample',
+            operationId: 'deleteOperation',
             responses: {
               204: {
-                description: 'No content',
+                description: 'No content.',
               },
             },
-            summary: 'Endpoint under test',
-          } as OpenAPIV3.OperationObject,
+            summary: 'Endpoint under test.',
+          },
         },
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { requests } = compile(document);
 
     // THEN the output matches the snapshot
@@ -79,49 +78,49 @@ describe('Typescript Generator Parameters', () => {
       import type { AxiosRequestConfig } from 'axios';
       import axios from 'axios';
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const deleteSample = async (
+      export const deleteOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.delete<void>(\`/api/sample/\${parameters.id}\`, config);
+      ) => axios.delete<void>(\`/api/test/\${parameters.parameter}\`, config);
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const getSample = async (
+      export const getOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.get<void>(\`/api/sample/\${parameters.id}\`, config);
+      ) => axios.get<void>(\`/api/test/\${parameters.parameter}\`, config);
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const postSample = async (
+      export const postOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.post<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
+      ) => axios.post<void>(\`/api/test/\${parameters.parameter}\`, undefined, config);
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const putSample = async (
+      export const putOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.put<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
+      ) => axios.put<void>(\`/api/test/\${parameters.parameter}\`, undefined, config);
       "
     `);
   });
@@ -132,77 +131,77 @@ describe('Typescript Generator Parameters', () => {
     const document = createTestDocument({
       components: {
         parameters: {
-          id: {
+          parameter: {
             in: 'path',
-            description: 'ID of the sample to get',
-            name: 'id',
+            description: 'Parameter under test.',
+            name: 'parameter',
             schema: {},
           },
         },
       },
       paths: {
-        '/api/sample/{id}': {
+        '/api/test/{parameter}': {
           get: {
             parameters: [
               {
-                $ref: '#/components/parameters/id',
+                $ref: '#/components/parameters/parameter',
               },
             ],
-            operationId: 'getSample',
+            operationId: 'getOperation',
             responses: {
               204: {
-                description: 'No content',
+                description: 'No content.',
               },
             },
-            summary: 'Endpoint under test',
-          } as OpenAPIV3.OperationObject,
+            summary: 'Endpoint under test.',
+          },
           post: {
             parameters: [
               {
-                $ref: '#/components/parameters/id',
+                $ref: '#/components/parameters/parameter',
               },
             ],
-            operationId: 'postSample',
+            operationId: 'postOperation',
             responses: {
               204: {
-                description: 'No content',
+                description: 'No content.',
               },
             },
-            summary: 'Endpoint under test',
-          } as OpenAPIV3.OperationObject,
+            summary: 'Endpoint under test.',
+          },
           put: {
             parameters: [
               {
-                $ref: '#/components/parameters/id',
+                $ref: '#/components/parameters/parameter',
               },
             ],
-            operationId: 'putSample',
+            operationId: 'putOperation',
             responses: {
               204: {
-                description: 'No content',
+                description: 'No content.',
               },
             },
-            summary: 'Endpoint under test',
-          } as OpenAPIV3.OperationObject,
+            summary: 'Endpoint under test.',
+          },
           delete: {
             parameters: [
               {
-                $ref: '#/components/parameters/id',
+                $ref: '#/components/parameters/parameter',
               },
             ],
-            operationId: 'deleteSample',
+            operationId: 'deleteOperation',
             responses: {
               204: {
-                description: 'No content',
+                description: 'No content.',
               },
             },
-            summary: 'Endpoint under test',
-          } as OpenAPIV3.OperationObject,
+            summary: 'Endpoint under test.',
+          },
         },
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { requests } = compile(document);
 
     // THEN the output matches the snapshot
@@ -212,49 +211,49 @@ describe('Typescript Generator Parameters', () => {
       import type { AxiosRequestConfig } from 'axios';
       import axios from 'axios';
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const deleteSample = async (
+      export const deleteOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.delete<void>(\`/api/sample/\${parameters.id}\`, config);
+      ) => axios.delete<void>(\`/api/test/\${parameters.parameter}\`, config);
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const getSample = async (
+      export const getOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.get<void>(\`/api/sample/\${parameters.id}\`, config);
+      ) => axios.get<void>(\`/api/test/\${parameters.parameter}\`, config);
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const postSample = async (
+      export const postOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.post<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
+      ) => axios.post<void>(\`/api/test/\${parameters.parameter}\`, undefined, config);
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const putSample = async (
+      export const putOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.put<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
+      ) => axios.put<void>(\`/api/test/\${parameters.parameter}\`, undefined, config);
       "
     `);
   });
@@ -263,55 +262,55 @@ describe('Typescript Generator Parameters', () => {
     // GIVEN an OpenAPI schema that contains operations with inline path
     // parameters at path level
     const document = createTestDocumentWithPaths({
-      '/api/sample/{id}': {
+      '/api/test/{parameter}': {
         parameters: [
           {
             in: 'path',
-            description: 'ID of the sample to get',
-            name: 'id',
+            description: 'Parameter under test.',
+            name: 'parameter',
             schema: {},
           },
         ],
         get: {
-          operationId: 'getSample',
+          operationId: 'getOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
         post: {
-          operationId: 'postSample',
+          operationId: 'postOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
         put: {
-          operationId: 'putSample',
+          operationId: 'putOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
         delete: {
-          operationId: 'deleteSample',
+          operationId: 'deleteOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { requests } = compile(document);
 
     // THEN the output matches the snapshot
@@ -321,49 +320,49 @@ describe('Typescript Generator Parameters', () => {
       import type { AxiosRequestConfig } from 'axios';
       import axios from 'axios';
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const deleteSample = async (
+      export const deleteOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.delete<void>(\`/api/sample/\${parameters.id}\`, config);
+      ) => axios.delete<void>(\`/api/test/\${parameters.parameter}\`, config);
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const getSample = async (
+      export const getOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.get<void>(\`/api/sample/\${parameters.id}\`, config);
+      ) => axios.get<void>(\`/api/test/\${parameters.parameter}\`, config);
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const postSample = async (
+      export const postOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.post<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
+      ) => axios.post<void>(\`/api/test/\${parameters.parameter}\`, undefined, config);
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const putSample = async (
+      export const putOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.put<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
+      ) => axios.put<void>(\`/api/test/\${parameters.parameter}\`, undefined, config);
       "
     `);
   });
@@ -372,79 +371,79 @@ describe('Typescript Generator Parameters', () => {
     // GIVEN an OpenAPI schema that contains operations with inline path
     // parameters at operation level
     const document = createTestDocumentWithPaths({
-      '/api/sample/{id}': {
+      '/api/test/{parameter}': {
         get: {
           parameters: [
             {
               in: 'path',
-              description: 'ID of the sample to get',
-              name: 'id',
+              description: 'Parameter under test.',
+              name: 'parameter',
               schema: {},
             },
           ],
-          operationId: 'getSample',
+          operationId: 'getOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
         post: {
           parameters: [
             {
               in: 'path',
-              description: 'ID of the sample to get',
-              name: 'id',
+              description: 'Parameter under test.',
+              name: 'parameter',
               schema: {},
             },
           ],
-          operationId: 'postSample',
+          operationId: 'postOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
         put: {
           parameters: [
             {
               in: 'path',
-              description: 'ID of the sample to get',
-              name: 'id',
+              description: 'Parameter under test.',
+              name: 'parameter',
               schema: {},
             },
           ],
-          operationId: 'putSample',
+          operationId: 'putOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
         delete: {
           parameters: [
             {
               in: 'path',
-              description: 'ID of the sample to get',
-              name: 'id',
+              description: 'Parameter under test.',
+              name: 'parameter',
               schema: {},
             },
           ],
-          operationId: 'deleteSample',
+          operationId: 'deleteOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { requests } = compile(document);
 
     // THEN the output matches the snapshot
@@ -454,49 +453,49 @@ describe('Typescript Generator Parameters', () => {
       import type { AxiosRequestConfig } from 'axios';
       import axios from 'axios';
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const deleteSample = async (
+      export const deleteOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.delete<void>(\`/api/sample/\${parameters.id}\`, config);
+      ) => axios.delete<void>(\`/api/test/\${parameters.parameter}\`, config);
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const getSample = async (
+      export const getOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.get<void>(\`/api/sample/\${parameters.id}\`, config);
+      ) => axios.get<void>(\`/api/test/\${parameters.parameter}\`, config);
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const postSample = async (
+      export const postOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.post<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
+      ) => axios.post<void>(\`/api/test/\${parameters.parameter}\`, undefined, config);
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const putSample = async (
+      export const putOperation = async (
         parameters: {
-          readonly id?: unknown;
+          readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
-      ) => axios.put<void>(\`/api/sample/\${parameters.id}\`, undefined, config);
+      ) => axios.put<void>(\`/api/test/\${parameters.parameter}\`, undefined, config);
       "
     `);
   });
@@ -505,61 +504,61 @@ describe('Typescript Generator Parameters', () => {
     // GIVEN an OpenAPI schema that contains operations with path and query
     // parameters at path level
     const document = createTestDocumentWithPaths({
-      '/api/sample/{id}': {
+      '/api/test/{parameter}': {
         parameters: [
           {
             in: 'path',
-            description: 'ID of the sample to get',
-            name: 'id',
+            description: 'Parameter under test.',
+            name: 'parameter',
             schema: {},
           },
           {
             in: 'query',
-            description: 'Name of the file',
-            name: 'fileName',
+            description: 'Parameter under test.',
+            name: 'query',
             schema: {},
           },
         ],
         get: {
-          operationId: 'getSample',
+          operationId: 'getOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
         post: {
-          operationId: 'postSample',
+          operationId: 'postOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
         put: {
-          operationId: 'putSample',
+          operationId: 'putOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
         delete: {
-          operationId: 'deleteSample',
+          operationId: 'deleteOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { requests } = compile(document);
 
     // THEN the output matches the snapshot
@@ -569,75 +568,75 @@ describe('Typescript Generator Parameters', () => {
       import type { AxiosRequestConfig } from 'axios';
       import axios from 'axios';
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const deleteSample = async (
+      export const deleteOperation = async (
         parameters: {
-          readonly id?: unknown;
-          readonly fileName?: unknown;
+          readonly parameter?: unknown;
+          readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
-        axios.delete<void>(\`/api/sample/\${parameters.id}\`, {
+        axios.delete<void>(\`/api/test/\${parameters.parameter}\`, {
           ...config,
           params: {
-            fileName: parameters.fileName,
+            query: parameters.query,
           },
         });
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const getSample = async (
+      export const getOperation = async (
         parameters: {
-          readonly id?: unknown;
-          readonly fileName?: unknown;
+          readonly parameter?: unknown;
+          readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
-        axios.get<void>(\`/api/sample/\${parameters.id}\`, {
+        axios.get<void>(\`/api/test/\${parameters.parameter}\`, {
           ...config,
           params: {
-            fileName: parameters.fileName,
+            query: parameters.query,
           },
         });
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const postSample = async (
+      export const postOperation = async (
         parameters: {
-          readonly id?: unknown;
-          readonly fileName?: unknown;
+          readonly parameter?: unknown;
+          readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
-        axios.post<void>(\`/api/sample/\${parameters.id}\`, undefined, {
+        axios.post<void>(\`/api/test/\${parameters.parameter}\`, undefined, {
           ...config,
           params: {
-            fileName: parameters.fileName,
+            query: parameters.query,
           },
         });
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const putSample = async (
+      export const putOperation = async (
         parameters: {
-          readonly id?: unknown;
-          readonly fileName?: unknown;
+          readonly parameter?: unknown;
+          readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
-        axios.put<void>(\`/api/sample/\${parameters.id}\`, undefined, {
+        axios.put<void>(\`/api/test/\${parameters.parameter}\`, undefined, {
           ...config,
           params: {
-            fileName: parameters.fileName,
+            query: parameters.query,
           },
         });
       "
@@ -648,103 +647,103 @@ describe('Typescript Generator Parameters', () => {
     // GIVEN an OpenAPI schema that contains operations with path and query
     // parameters at operation level
     const document = createTestDocumentWithPaths({
-      '/api/sample/{id}': {
+      '/api/test/{parameter}': {
         get: {
           parameters: [
             {
               in: 'path',
-              description: 'ID of the sample to get',
-              name: 'id',
+              description: 'Parameter under test.',
+              name: 'parameter',
               schema: {},
             },
             {
               in: 'query',
-              description: 'Name of the file',
-              name: 'fileName',
+              description: 'Parameter under test.',
+              name: 'query',
               schema: {},
             },
           ],
-          operationId: 'getSample',
+          operationId: 'getOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
         post: {
           parameters: [
             {
               in: 'path',
-              description: 'ID of the sample to get',
-              name: 'id',
+              description: 'Parameter under test.',
+              name: 'parameter',
               schema: {},
             },
             {
               in: 'query',
-              description: 'Name of the file',
-              name: 'fileName',
+              description: 'Parameter under test.',
+              name: 'query',
               schema: {},
             },
           ],
-          operationId: 'postSample',
+          operationId: 'postOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
         put: {
           parameters: [
             {
               in: 'path',
-              description: 'ID of the sample to get',
-              name: 'id',
+              description: 'Parameter under test.',
+              name: 'parameter',
               schema: {},
             },
             {
               in: 'query',
-              description: 'Name of the file',
-              name: 'fileName',
+              description: 'Parameter under test.',
+              name: 'query',
               schema: {},
             },
           ],
-          operationId: 'putSample',
+          operationId: 'putOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
         delete: {
           parameters: [
             {
               in: 'path',
-              description: 'ID of the sample to get',
-              name: 'id',
+              description: 'Parameter under test.',
+              name: 'parameter',
               schema: {},
             },
             {
               in: 'query',
-              description: 'Name of the file',
-              name: 'fileName',
+              description: 'Parameter under test.',
+              name: 'query',
               schema: {},
             },
           ],
-          operationId: 'deleteSample',
+          operationId: 'deleteOperation',
           responses: {
             204: {
-              description: 'No content',
+              description: 'No content.',
             },
           },
-          summary: 'Endpoint under test',
-        } as OpenAPIV3.OperationObject,
+          summary: 'Endpoint under test.',
+        },
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { requests } = compile(document);
 
     // THEN the output matches the snapshot
@@ -754,75 +753,75 @@ describe('Typescript Generator Parameters', () => {
       import type { AxiosRequestConfig } from 'axios';
       import axios from 'axios';
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const deleteSample = async (
+      export const deleteOperation = async (
         parameters: {
-          readonly id?: unknown;
-          readonly fileName?: unknown;
+          readonly parameter?: unknown;
+          readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
-        axios.delete<void>(\`/api/sample/\${parameters.id}\`, {
+        axios.delete<void>(\`/api/test/\${parameters.parameter}\`, {
           ...config,
           params: {
-            fileName: parameters.fileName,
+            query: parameters.query,
           },
         });
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const getSample = async (
+      export const getOperation = async (
         parameters: {
-          readonly id?: unknown;
-          readonly fileName?: unknown;
+          readonly parameter?: unknown;
+          readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
-        axios.get<void>(\`/api/sample/\${parameters.id}\`, {
+        axios.get<void>(\`/api/test/\${parameters.parameter}\`, {
           ...config,
           params: {
-            fileName: parameters.fileName,
+            query: parameters.query,
           },
         });
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const postSample = async (
+      export const postOperation = async (
         parameters: {
-          readonly id?: unknown;
-          readonly fileName?: unknown;
+          readonly parameter?: unknown;
+          readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
-        axios.post<void>(\`/api/sample/\${parameters.id}\`, undefined, {
+        axios.post<void>(\`/api/test/\${parameters.parameter}\`, undefined, {
           ...config,
           params: {
-            fileName: parameters.fileName,
+            query: parameters.query,
           },
         });
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const putSample = async (
+      export const putOperation = async (
         parameters: {
-          readonly id?: unknown;
-          readonly fileName?: unknown;
+          readonly parameter?: unknown;
+          readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
       ) =>
-        axios.put<void>(\`/api/sample/\${parameters.id}\`, undefined, {
+        axios.put<void>(\`/api/test/\${parameters.parameter}\`, undefined, {
           ...config,
           params: {
-            fileName: parameters.fileName,
+            query: parameters.query,
           },
         });
       "
@@ -831,19 +830,20 @@ describe('Typescript Generator Parameters', () => {
 
   // TODO: Tests for handling default values
   it('compiles operations with required flags', () => {
-    // GIVEN an OpenAPI schema that contains operations with path parameters that have either required or nullable flags
+    // GIVEN an OpenAPI schema that contains operations with path parameters
+    // that have either required or nullable flags
     const document = createTestDocument({
       components: {
         parameters: {
           optional: {
             in: 'path',
-            description: 'Parameter under test',
+            description: 'Parameter under test.',
             name: 'optional',
             schema: {},
           },
           required: {
             in: 'path',
-            description: 'Parameter under test',
+            description: 'Parameter under test.',
             name: 'required',
             required: true,
             schema: {},
@@ -851,7 +851,7 @@ describe('Typescript Generator Parameters', () => {
         },
       },
       paths: {
-        '/api/sample/{required}/{optional}': {
+        '/api/test/{required}/{optional}': {
           parameters: [
             {
               $ref: '#/components/parameters/optional',
@@ -861,46 +861,46 @@ describe('Typescript Generator Parameters', () => {
             },
           ],
           get: {
-            operationId: 'getSample',
+            operationId: 'getOperation',
             responses: {
               204: {
-                description: 'No content',
+                description: 'No content.',
               },
             },
-            summary: 'Endpoint under test',
-          } as OpenAPIV3.OperationObject,
+            summary: 'Endpoint under test.',
+          },
           post: {
-            operationId: 'postSample',
+            operationId: 'postOperation',
             responses: {
               204: {
-                description: 'No content',
+                description: 'No content.',
               },
             },
-            summary: 'Endpoint under test',
-          } as OpenAPIV3.OperationObject,
+            summary: 'Endpoint under test.',
+          },
           put: {
-            operationId: 'putSample',
+            operationId: 'putOperation',
             responses: {
               204: {
-                description: 'No content',
+                description: 'No content.',
               },
             },
-            summary: 'Endpoint under test',
-          } as OpenAPIV3.OperationObject,
+            summary: 'Endpoint under test.',
+          },
           delete: {
-            operationId: 'deleteSample',
+            operationId: 'deleteOperation',
             responses: {
               204: {
-                description: 'No content',
+                description: 'No content.',
               },
             },
-            summary: 'Endpoint under test',
-          } as OpenAPIV3.OperationObject,
+            summary: 'Endpoint under test.',
+          },
         },
       },
     });
 
-    // WHEN compiling with the typescript generator
+    // WHEN compiling
     const { requests } = compile(document);
 
     // THEN the output matches the snapshot
@@ -910,11 +910,11 @@ describe('Typescript Generator Parameters', () => {
       import type { AxiosRequestConfig } from 'axios';
       import axios from 'axios';
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const deleteSample = async (
+      export const deleteOperation = async (
         parameters: {
           readonly optional?: unknown;
           readonly required: unknown;
@@ -922,15 +922,15 @@ describe('Typescript Generator Parameters', () => {
         config?: AxiosRequestConfig,
       ) =>
         axios.delete<void>(
-          \`/api/sample/\${parameters.required}/\${parameters.optional}\`,
+          \`/api/test/\${parameters.required}/\${parameters.optional}\`,
           config,
         );
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const getSample = async (
+      export const getOperation = async (
         parameters: {
           readonly optional?: unknown;
           readonly required: unknown;
@@ -938,15 +938,15 @@ describe('Typescript Generator Parameters', () => {
         config?: AxiosRequestConfig,
       ) =>
         axios.get<void>(
-          \`/api/sample/\${parameters.required}/\${parameters.optional}\`,
+          \`/api/test/\${parameters.required}/\${parameters.optional}\`,
           config,
         );
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const postSample = async (
+      export const postOperation = async (
         parameters: {
           readonly optional?: unknown;
           readonly required: unknown;
@@ -954,16 +954,16 @@ describe('Typescript Generator Parameters', () => {
         config?: AxiosRequestConfig,
       ) =>
         axios.post<void>(
-          \`/api/sample/\${parameters.required}/\${parameters.optional}\`,
+          \`/api/test/\${parameters.required}/\${parameters.optional}\`,
           undefined,
           config,
         );
       /**
-       * Endpoint under test
+       * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
        * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
        */
-      export const putSample = async (
+      export const putOperation = async (
         parameters: {
           readonly optional?: unknown;
           readonly required: unknown;
@@ -971,7 +971,7 @@ describe('Typescript Generator Parameters', () => {
         config?: AxiosRequestConfig,
       ) =>
         axios.put<void>(
-          \`/api/sample/\${parameters.required}/\${parameters.optional}\`,
+          \`/api/test/\${parameters.required}/\${parameters.optional}\`,
           undefined,
           config,
         );
