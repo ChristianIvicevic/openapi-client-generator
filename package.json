@@ -1,6 +1,6 @@
 {
   "name": "@ivicevic/openapi-client-generator",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "OpenAPI Client Generator allows automatic generation of Typescript API client libraries given an OpenAPI V3 Spec",
   "publishConfig": {
     "access": "public"

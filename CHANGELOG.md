@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.2.0...v2.3.0) (2021-01-09)
+
+
+### Features
+
+* add generation of jsdoc comments for path and query parameters ([f56fd91](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/f56fd917679f7b6917ae529f3471b14dd7b11372))
+
 ## [2.2.0](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.1.0...v2.2.0) (2021-01-09)
 
 
