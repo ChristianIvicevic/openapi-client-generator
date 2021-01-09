@@ -61,25 +61,25 @@ describe('Responses', () => {
       import axios from 'axios';
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteOperation = async (config?: AxiosRequestConfig) =>
         axios.delete<void>('/api/test', config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const getOperation = async (config?: AxiosRequestConfig) =>
         axios.get<void>('/api/test', config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (config?: AxiosRequestConfig) =>
         axios.post<void>('/api/test', undefined, config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (config?: AxiosRequestConfig) =>
         axios.put<void>('/api/test', undefined, config);
@@ -171,25 +171,25 @@ describe('Responses', () => {
       import type { TestDto } from './schemas';
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteOperation = async (config?: AxiosRequestConfig) =>
         axios.delete<TestDto>('/api/test', config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const getOperation = async (config?: AxiosRequestConfig) =>
         axios.get<TestDto>('/api/test', config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (config?: AxiosRequestConfig) =>
         axios.post<TestDto>('/api/test', undefined, config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (config?: AxiosRequestConfig) =>
         axios.put<TestDto>('/api/test', undefined, config);
@@ -293,25 +293,25 @@ describe('Responses', () => {
       import type { TestDto } from './schemas';
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteOperation = async (config?: AxiosRequestConfig) =>
         axios.delete<readonly TestDto[]>('/api/test', config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const getOperation = async (config?: AxiosRequestConfig) =>
         axios.get<readonly TestDto[]>('/api/test', config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (config?: AxiosRequestConfig) =>
         axios.post<readonly TestDto[]>('/api/test', undefined, config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (config?: AxiosRequestConfig) =>
         axios.put<readonly TestDto[]>('/api/test', undefined, config);
@@ -406,25 +406,25 @@ describe('Responses', () => {
       import axios from 'axios';
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteOperation = async (config?: AxiosRequestConfig) =>
         axios.delete<readonly unknown[]>('/api/test', config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const getOperation = async (config?: AxiosRequestConfig) =>
         axios.get<readonly unknown[]>('/api/test', config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (config?: AxiosRequestConfig) =>
         axios.post<readonly unknown[]>('/api/test', undefined, config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (config?: AxiosRequestConfig) =>
         axios.put<readonly unknown[]>('/api/test', undefined, config);
@@ -501,25 +501,25 @@ describe('Responses', () => {
       import axios from 'axios';
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteOperation = async (config?: AxiosRequestConfig) =>
         axios.delete<unknown>('/api/test', config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const getOperation = async (config?: AxiosRequestConfig) =>
         axios.get<unknown>('/api/test', config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (config?: AxiosRequestConfig) =>
         axios.post<unknown>('/api/test', undefined, config);
       /**
        * Endpoint under test.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (config?: AxiosRequestConfig) =>
         axios.put<unknown>('/api/test', undefined, config);

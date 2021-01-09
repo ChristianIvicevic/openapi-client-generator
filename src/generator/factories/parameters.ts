@@ -38,9 +38,9 @@ export const createAndPartitionParameters = (
 
 const createParameterSignature = (
   context: Context,
-  { name, required, schema }: OpenAPIV3.ParameterObject,
-) =>
-  factory.createPropertySignature(
+  { name, required, schema, description }: OpenAPIV3.ParameterObject,
+) => {
+  const propertySignature = factory.createPropertySignature(
     [factory.createModifier(ts.SyntaxKind.ReadonlyKeyword)],
     factory.createIdentifier(camelCase(name)),
     required ? undefined : factory.createToken(ts.SyntaxKind.QuestionToken),
@@ -48,3 +48,15 @@ const createParameterSignature = (
       ? factory.createKeywordTypeNode(ts.SyntaxKind.NeverKeyword)
       : resolveSchema(context, schema),
   );
+
+  if (description !== undefined) {
+    ts.addSyntheticLeadingComment(
+      propertySignature,
+      ts.SyntaxKind.MultiLineCommentTrivia,
+      `*\n * ${description}\n `,
+      true,
+    );
+  }
+
+  return propertySignature;
+};

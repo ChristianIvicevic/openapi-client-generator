@@ -111,7 +111,7 @@ const compileJSDocComment = ({
         false,
         undefined,
         false,
-        `A custom ${Constants.AXIOS_REQUEST_CONFIG_PARAMETER_NAME} object that is used to override the global configuration for this request. This value is optional.`,
+        `A custom \`${Constants.AXIOS_REQUEST_CONFIG_TYPE}\` object that is used to override the global configuration for this request. This value is optional.`,
       ),
     ]),
   );

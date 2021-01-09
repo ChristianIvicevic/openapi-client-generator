@@ -19,19 +19,41 @@ Therefore this command line tool has been created to simplify maintaining reliab
 The `openapi-client-generator` will parse an OpenAPI V3 schema file and create concise methods for each operation and their respective schemas yielding methods that look as follows:
 
 ```typescript
-export const createTodoItem = async (
+/**
+ * Endpoint under test.
+ * @param parameters The HTTP request (path, query, header and cookie)
+ * parameters sent to the server.
+ * @param requestBody The HTTP request content sent to the server.
+ * @param config A custom `AxiosRequestConfig` object that is used to override
+ * the global configuration for this request. This value is optional.
+ */
+export const postOperation = async (
   parameters: {
-    listId: string;
+    /**
+     * Path parameter under test.
+     */
+    readonly pathParameter: string;
+    /**
+     * Query parameter under test.
+     */
+    readonly queryParameter?: number;
   },
-  requestBody: TodoItemDto,
+  requestBody: TestRequestBodyType,
   config?: AxiosRequestConfig,
 ) =>
-  axios.post<TodoItemDto>(
-    `/api/lists/${parameters.listId}/items`,
+  axios.post<TestResponseType>(
+    `/api/test/${parameters.pathParameter}`,
     requestBody,
-    config,
+    {
+      ...config,
+      params: {
+        query: parameters.queryParameter,
+      },
+    }
   );
 ```
+
+Refer to the snapshots in the test files located at `src/__tests__` for further details of what the generated output will look like.
 
 ## Installation
 

@@ -64,7 +64,7 @@ describe('Response Bodies', () => {
       /**
        * Endpoint under test.
        * @param requestBody The HTTP request content sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (
         requestBody: TestDto,
@@ -73,7 +73,7 @@ describe('Response Bodies', () => {
       /**
        * Endpoint under test.
        * @param requestBody The HTTP request content sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (
         requestBody: TestDto,
@@ -135,7 +135,7 @@ describe('Response Bodies', () => {
       /**
        * Endpoint under test.
        * @param requestBody The HTTP request content sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (
         requestBody: unknown,
@@ -144,7 +144,7 @@ describe('Response Bodies', () => {
       /**
        * Endpoint under test.
        * @param requestBody The HTTP request content sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (
         requestBody: unknown,
@@ -211,7 +211,7 @@ describe('Response Bodies', () => {
       /**
        * Endpoint under test.
        * @param requestBody The HTTP request content sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (
         requestBody: unknown,
@@ -220,7 +220,7 @@ describe('Response Bodies', () => {
       /**
        * Endpoint under test.
        * @param requestBody The HTTP request content sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (
         requestBody: unknown,

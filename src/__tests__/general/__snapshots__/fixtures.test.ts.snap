@@ -8,7 +8,7 @@ import axios from 'axios';
 import type { Error, NewPet, Pet } from './schemas';
 /**
  * @param requestBody The HTTP request content sent to the server.
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const addPet = async (
   requestBody: NewPet,
@@ -16,31 +16,43 @@ export const addPet = async (
 ) => axios.post<Pet | Error>('/pets', requestBody, config);
 /**
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const deletePet = async (
   parameters: {
+    /**
+     * ID of pet to delete
+     */
     readonly id: number;
   },
   config?: AxiosRequestConfig,
 ) => axios.delete<void | Error>(\`/pets/\${parameters.id}\`, config);
 /**
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const findPetById = async (
   parameters: {
+    /**
+     * ID of pet to fetch
+     */
     readonly id: number;
   },
   config?: AxiosRequestConfig,
 ) => axios.get<Pet | Error>(\`/pets/\${parameters.id}\`, config);
 /**
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const findPets = async (
   parameters: {
+    /**
+     * tags to filter by
+     */
     readonly tags?: readonly string[];
+    /**
+     * maximum number of results to return
+     */
     readonly limit?: number;
   },
   config?: AxiosRequestConfig,
@@ -80,7 +92,7 @@ import axios from 'axios';
 import type { Pullrequest, Repository, User } from './schemas';
 /**
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const getPullRequestsById = async (
   parameters: {
@@ -96,7 +108,7 @@ export const getPullRequestsById = async (
   );
 /**
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const getPullRequestsByRepository = async (
   parameters: {
@@ -117,7 +129,7 @@ export const getPullRequestsByRepository = async (
   );
 /**
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const getRepositoriesByOwner = async (
   parameters: {
@@ -131,7 +143,7 @@ export const getRepositoriesByOwner = async (
   );
 /**
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const getRepository = async (
   parameters: {
@@ -146,7 +158,7 @@ export const getRepository = async (
   );
 /**
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const getUserByName = async (
   parameters: {
@@ -156,7 +168,7 @@ export const getUserByName = async (
 ) => axios.get<User>(\`/2.0/users/\${parameters.username}\`, config);
 /**
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const mergePullRequest = async (
   parameters: {
@@ -202,17 +214,20 @@ import axios from 'axios';
 import type { Error, Pet, Pets } from './schemas';
 /**
  * Create a pet
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const createPets = async (config?: AxiosRequestConfig) =>
   axios.post<void | Error>('/pets', undefined, config);
 /**
  * List all pets
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const listPets = async (
   parameters: {
+    /**
+     * How many items to return at one time (max 100)
+     */
     readonly limit?: number;
   },
   config?: AxiosRequestConfig,
@@ -226,10 +241,13 @@ export const listPets = async (
 /**
  * Info for a specific pet
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const showPetById = async (
   parameters: {
+    /**
+     * The id of the pet to retrieve
+     */
     readonly petId: string;
   },
   config?: AxiosRequestConfig,
@@ -261,18 +279,24 @@ import axios from 'axios';
 import type { DataSetList } from './schemas';
 /**
  * List available data sets
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const listDataSets = async (config?: AxiosRequestConfig) =>
   axios.get<DataSetList>('/', config);
 /**
  * Provides the general information about the API and the list of fields that can be used to query the dataset.
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const listSearchableFields = async (
   parameters: {
+    /**
+     * Name of the dataset.
+     */
     readonly dataset: string;
+    /**
+     * Version of the dataset.
+     */
     readonly version: string;
   },
   config?: AxiosRequestConfig,
@@ -285,11 +309,17 @@ export const listSearchableFields = async (
  * Provides search capability for the data set with the given search criteria.
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
  * @param requestBody The HTTP request content sent to the server.
- * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
 export const performSearch = async (
   parameters: {
+    /**
+     * Version of the dataset.
+     */
     readonly version: string;
+    /**
+     * Name of the dataset. In this case, the default value is oa_citations
+     */
     readonly dataset: string;
   },
   requestBody: unknown,

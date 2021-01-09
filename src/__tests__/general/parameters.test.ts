@@ -80,10 +80,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -91,10 +94,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const getOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -102,10 +108,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -113,10 +122,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -213,10 +225,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -224,10 +239,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const getOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -235,10 +253,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -246,10 +267,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -322,10 +346,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -333,10 +360,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const getOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -344,10 +374,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -355,10 +388,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -455,10 +491,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -466,10 +505,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const getOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -477,10 +519,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -488,10 +533,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -570,11 +618,17 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
+          /**
+           * Parameter under test.
+           */
           readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -588,11 +642,17 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const getOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
+          /**
+           * Parameter under test.
+           */
           readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -606,11 +666,17 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
+          /**
+           * Parameter under test.
+           */
           readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -624,11 +690,17 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
+          /**
+           * Parameter under test.
+           */
           readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -755,11 +827,17 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
+          /**
+           * Parameter under test.
+           */
           readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -773,11 +851,17 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const getOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
+          /**
+           * Parameter under test.
+           */
           readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -791,11 +875,17 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
+          /**
+           * Parameter under test.
+           */
           readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -809,11 +899,17 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: unknown;
+          /**
+           * Parameter under test.
+           */
           readonly query?: unknown;
         },
         config?: AxiosRequestConfig,
@@ -912,11 +1008,17 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly optional?: unknown;
+          /**
+           * Parameter under test.
+           */
           readonly required: unknown;
         },
         config?: AxiosRequestConfig,
@@ -928,11 +1030,17 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const getOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly optional?: unknown;
+          /**
+           * Parameter under test.
+           */
           readonly required: unknown;
         },
         config?: AxiosRequestConfig,
@@ -944,11 +1052,17 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly optional?: unknown;
+          /**
+           * Parameter under test.
+           */
           readonly required: unknown;
         },
         config?: AxiosRequestConfig,
@@ -961,11 +1075,17 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly optional?: unknown;
+          /**
+           * Parameter under test.
+           */
           readonly required: unknown;
         },
         config?: AxiosRequestConfig,
@@ -1051,10 +1171,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const deleteOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: never;
         },
         config?: AxiosRequestConfig,
@@ -1062,10 +1185,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const getOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: never;
         },
         config?: AxiosRequestConfig,
@@ -1073,10 +1199,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const postOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: never;
         },
         config?: AxiosRequestConfig,
@@ -1084,10 +1213,13 @@ describe('Parameters', () => {
       /**
        * Endpoint under test.
        * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
-       * @param config A custom config object that is used to override the global configuration for this request. This value is optional.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
        */
       export const putOperation = async (
         parameters: {
+          /**
+           * Parameter under test.
+           */
           readonly parameter?: never;
         },
         config?: AxiosRequestConfig,
