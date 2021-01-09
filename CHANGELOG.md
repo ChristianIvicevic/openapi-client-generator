@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.1.0...v2.2.0) (2021-01-09)
+
+
+### Features
+
+* components such as responses, request bodies and deeply nested schemas are now supported ([65c1f42](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/65c1f42340ccb6f355d8092e0f59c47f2f35e434))
+
 ## [2.1.0](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.0.0...v2.1.0) (2021-01-08)
 
 
