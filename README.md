@@ -1,5 +1,7 @@
 # `openapi-client-generator`
 
+![Logo](./docs/logo.png)
+
 > **Simple Typescript code generator based on an OpenAPI V3 schema**
 
 ![Tests](https://github.com/ChristianIvicevic/openapi-client-generator/workflows/Tests/badge.svg)
