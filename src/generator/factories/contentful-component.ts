@@ -17,13 +17,11 @@ export const createContentfulComponentOrThrow = (
     | OpenAPIV3.ResponseObject
     | OpenAPIV3.RequestBodyObject;
 
-  if (content === undefined) {
-    return [factory.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword)];
-  }
-
-  return Object.entries(content).map(([mediaType, mediaTypeObject]) =>
-    createMediaType(context, mediaType, mediaTypeObject),
-  );
+  return content === undefined
+    ? [factory.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword)]
+    : Object.entries(content).map(([mediaType, mediaTypeObject]) =>
+        createMediaType(context, mediaType, mediaTypeObject),
+      );
 };
 
 const createMediaType = (

@@ -1,19 +1,20 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "baseUrl": "src",
+    "baseUrl": ".",
     "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "incremental": true,
-    "inlineSourceMap": true,
     "lib": ["esnext", "dom"],
     "listEmittedFiles": false,
     "listFiles": false,
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "dist/main",
+    "paths": {
+      "*": ["src/*", "test/*"]
+    },
     "plugins": [
       {
         "transform": "@zerollup/ts-transform-paths"
@@ -22,12 +23,13 @@
     "pretty": true,
     "removeComments": false,
     "resolveJsonModule": true,
-    "rootDir": "src",
+    "rootDirs": ["src", "test"],
     "skipLibCheck": true,
+    "sourceMap": true,
     "strict": true,
     "target": "es6",
     "traceResolution": false
   },
   "exclude": ["node_modules/**"],
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts"]
 }

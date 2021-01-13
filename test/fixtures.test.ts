@@ -9,7 +9,7 @@ const compile = compose(compileDocument, parseYaml);
 describe('Fixtures', () => {
   it('compiles the link example schema', () => {
     // GIVEN the link example OpenAPI schema
-    const document = readFileSync('fixtures/link-example.yaml').toString();
+    const document = readFileSync('test/fixtures/link-example.yaml').toString();
 
     // WHEN compiling
     const { requests, schemas } = compile(document);
@@ -21,7 +21,7 @@ describe('Fixtures', () => {
 
   it('compiles the petstore schema', () => {
     // GIVEN the petstore OpenAPI schema
-    const document = readFileSync('fixtures/petstore.yaml').toString();
+    const document = readFileSync('test/fixtures/petstore.yaml').toString();
 
     // WHEN compiling
     const { requests, schemas } = compile(document);
@@ -33,7 +33,9 @@ describe('Fixtures', () => {
 
   it('compiles the expanded petstore schema', () => {
     // GIVEN the expanded petstore OpenAPI schema
-    const document = readFileSync('fixtures/petstore-expanded.yaml').toString();
+    const document = readFileSync(
+      'test/fixtures/petstore-expanded.yaml',
+    ).toString();
 
     // WHEN compiling
     const { requests, schemas } = compile(document);
@@ -45,7 +47,7 @@ describe('Fixtures', () => {
 
   it('compiles the uspto schema', () => {
     // GIVEN the uspto OpenAPI schema
-    const document = readFileSync('fixtures/uspto.yaml').toString();
+    const document = readFileSync('test/fixtures/uspto.yaml').toString();
 
     // WHEN compiling
     const { requests, schemas } = compile(document);

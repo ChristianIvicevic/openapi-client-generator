@@ -53,7 +53,7 @@ export const postOperation = async (
   );
 ```
 
-Refer to the snapshots in the test files located at `src/__tests__` for further details of what the generated output will look like.
+Refer to the snapshots in the test files located in the `test` directory for further details of what the generated output will look like.
 
 ## Installation
 
@@ -92,7 +92,7 @@ For more help run the command `openapi-client-generator --help` to show a list o
 ## API usage
 
 This package is intended to be used as a CLI and it is discouraged to use it via its API as its public methods haven't been properly exposed.
-If you really want to walk down that dark path nonetheless refer to the `src/cli/cli.ts` file until we establish a stable API.
+If you really want to walk down that dark path nonetheless refer to the `src/cli.ts` file until we establish a stable API.
 
 ## Feature roadmap
 

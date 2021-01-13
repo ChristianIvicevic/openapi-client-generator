@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
-    "module": "esnext",
-    "outDir": "dist/module",
     "paths": {
       "*": ["*"]
     },
+    "outDir": "dist/main",
     "rootDir": "src",
-    "rootDirs": ["src"],
-    "target": "esnext"
+    "rootDirs": ["src"]
   },
   "extends": "./tsconfig",
   "include": ["src/**/*.ts"],
