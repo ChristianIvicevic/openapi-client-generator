@@ -1,4 +1,4 @@
-import { createContentfulComponentOrThrow } from 'generator/factories/contentful-component';
+import { createContentfulComponent } from 'generator/factories/contentful-component';
 import type { Context } from 'generator/types';
 import type { OpenAPIV3 } from 'openapi-types';
 import { partial } from 'ramda';
@@ -16,4 +16,4 @@ export const createResponses = (
         statusCode.toString().startsWith('default'),
     )
     .map(([, response]) => response)
-    .flatMap(partial(createContentfulComponentOrThrow, [context]));
+    .flatMap(partial(createContentfulComponent, [context]));

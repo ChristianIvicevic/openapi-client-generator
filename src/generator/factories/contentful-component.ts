@@ -6,7 +6,7 @@ import ts, { factory } from 'typescript';
 import { getLogger } from 'utils/logging';
 import { dereferenceOrThrow } from 'utils/openapi';
 
-export const createContentfulComponentOrThrow = (
+export const createContentfulComponent = (
   context: Context,
   component:
     | OpenAPIV3.ReferenceObject

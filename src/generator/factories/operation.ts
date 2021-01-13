@@ -42,7 +42,6 @@ export const createOperationOrThrow = (
   }
 
   const responseTypes = createResponses(context, responses);
-  // TODO: Handle required flag for the request body.
   const requestBodyTypes = createRequestBody(context, requestBody);
   const {
     pathParameterPropertySignatures,

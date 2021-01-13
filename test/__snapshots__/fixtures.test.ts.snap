@@ -322,7 +322,7 @@ export const performSearch = async (
      */
     readonly dataset: string;
   },
-  requestBody: unknown,
+  requestBody?: unknown | undefined,
   config?: AxiosRequestConfig,
 ) =>
   axios.post<readonly Record<string, unknown>[]>(

@@ -128,8 +128,13 @@ const compileParameters = ({
   | 'requestBodyTypes'
 > & {
   readonly hasParameters: boolean;
-}) =>
-  compact([
+}) => {
+  const requestBodyTail =
+    requestBodyTypes && requestBodyTypes.length !== 0
+      ? requestBodyTypes[requestBodyTypes.length - 1]
+      : undefined;
+
+  return compact([
     hasParameters &&
       factory.createParameterDeclaration(
         undefined,
@@ -144,12 +149,16 @@ const compileParameters = ({
         undefined,
       ),
     requestBodyTypes &&
+      requestBodyTail &&
       factory.createParameterDeclaration(
         undefined,
         undefined,
         undefined,
         factory.createIdentifier(Constants.REQUEST_BODY_PARAMETER_NAME),
-        undefined,
+        ts.isIdentifier(requestBodyTail) &&
+          (requestBodyTail as ts.Identifier).text === 'undefined'
+          ? factory.createToken(ts.SyntaxKind.QuestionToken)
+          : undefined,
         factory.createUnionTypeNode(requestBodyTypes),
         undefined,
       ),
@@ -166,6 +175,7 @@ const compileParameters = ({
       undefined,
     ),
   ]);
+};
 
 const compilePathInterpolationParameter = ({
   hasPathParameters,
