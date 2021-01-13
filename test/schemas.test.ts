@@ -525,6 +525,39 @@ describe('Schemas', () => {
     `);
   });
 
+  it('compiles schemas with additional properties', () => {
+    // GIVEN an OpenAPI schema that contains a schema with additional
+    // properties
+    const document = createTestDocumentWithSchemas({
+      TestSchema: {
+        description: 'Schema under test.',
+        type: 'object',
+        additionalProperties: true,
+        properties: {
+          namedProperty: {
+            description: 'Property under test.',
+          },
+        },
+      },
+    });
+
+    // WHEN compiling
+    const { schemas } = compile(document);
+
+    // THEN the output matches the snapshot
+    expect(schemas).toMatchInlineSnapshot(`
+      "/* eslint-disable */
+      /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+      /**
+       * Schema under test.
+       */
+      export type TestSchema = {
+        readonly namedProperty?: unknown;
+      } & Record<string, unknown>;
+      "
+    `);
+  });
+
   // TODO: Extract into separate test file.
   describe('Special Cases', () => {
     it('compiles actual null types according to OpenAPI v3.1', () => {

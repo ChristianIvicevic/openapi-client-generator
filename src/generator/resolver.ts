@@ -84,15 +84,15 @@ const resolveFallbackSchema = (
   context: Context,
   schemaObject: OpenAPIV3.NonArraySchemaObject,
 ) =>
-  resolveCombinedSchemaOrThrow(context, schemaObject) ??
-  resolveDictionarySchemaOrThrow(context, schemaObject) ??
+  tryResolveCombinedSchema(context, schemaObject) ??
+  tryResolveDictionarySchema(context, schemaObject) ??
   factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword);
 
 const resolveObjectSchema = (
   context: Context,
   schemaObject: OpenAPIV3.NonArraySchemaObject,
 ) => {
-  const { required, properties } = schemaObject;
+  const { required, properties, additionalProperties } = schemaObject;
 
   if (properties === undefined) {
     return resolveFallbackSchema(context, schemaObject);
@@ -111,12 +111,23 @@ const resolveObjectSchema = (
     ),
   );
 
-  return objectProperties.length === 0
-    ? factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword)
-    : factory.createTypeLiteralNode(objectProperties);
+  const objectTypeNode =
+    objectProperties.length === 0
+      ? factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword)
+      : factory.createTypeLiteralNode(objectProperties);
+
+  return additionalProperties === true
+    ? factory.createIntersectionTypeNode([
+        objectTypeNode,
+        factory.createTypeReferenceNode(factory.createIdentifier('Record'), [
+          factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+          factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword),
+        ]),
+      ])
+    : objectTypeNode;
 };
 
-const resolveCombinedSchemaOrThrow = (
+const tryResolveCombinedSchema = (
   context: Context,
   schemaObject: OpenAPIV3.NonArraySchemaObject,
 ) => {
@@ -135,22 +146,21 @@ const resolveCombinedSchemaOrThrow = (
   return undefined;
 };
 
-const resolveDictionarySchemaOrThrow = (
+const tryResolveDictionarySchema = (
   context: Context,
   schemaObject: OpenAPIV3.NonArraySchemaObject,
 ) => {
   const { additionalProperties } = schemaObject;
 
-  // TODO: additionalProperties === true is not handled yet for excess properties.
   if (
-    additionalProperties !== undefined &&
-    typeof additionalProperties !== 'boolean'
+    additionalProperties === undefined ||
+    typeof additionalProperties === 'boolean'
   ) {
-    return factory.createTypeReferenceNode(factory.createIdentifier('Record'), [
-      factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
-      resolveSchema(context, additionalProperties),
-    ]);
+    return undefined;
   }
 
-  return undefined;
+  return factory.createTypeReferenceNode(factory.createIdentifier('Record'), [
+    factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+    resolveSchema(context, additionalProperties),
+  ]);
 };
