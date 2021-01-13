@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.4.1](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.4.0...v2.4.1) (2021-01-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency openapi-types to v7.2.3 ([6c0e0eb](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/6c0e0ebce3bd26b7b336f9ba1ad9e5c418301b45))
+
 ## [2.4.0](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.3.0...v2.4.0) (2021-01-13)
 
 
