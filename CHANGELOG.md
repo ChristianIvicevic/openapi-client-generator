@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.0](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.3.0...v2.4.0) (2021-01-13)
+
+
+### Features
+
+* add index signature intersection for schemas with additionalProperties ([8862b3a](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/8862b3a7a9e1d5ba749368e529a28e89819160dd))
+* enforce request body types to adhere to the required property in their definition ([f9b4e96](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/f9b4e969d99081af3ebf80aac027cfad2b6d0d79))
+
 ## [2.3.0](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.2.0...v2.3.0) (2021-01-09)
 
 
