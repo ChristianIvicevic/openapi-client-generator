@@ -101,7 +101,6 @@ If you really want to walk down that dark path nonetheless refer to the `src/cli
 The order of these features does not reflect any priorization.
 
 * Add `fetch` as an alternative to `axios`
-* Resolving array types that include either `items.allOf`, `items.oneOf` or `items.enum`
 * Default values of parameters and objects
 * Improved summary and description parsing to generate better JSDoc
 

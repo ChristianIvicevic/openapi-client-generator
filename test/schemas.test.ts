@@ -290,6 +290,61 @@ describe('Schemas', () => {
     `);
   });
 
+  it('compiles complex array types', () => {
+    // GIVEN an OpenAPI schema that contains complex array types
+    const document = createTestDocumentWithSchemas({
+      TestSchema: {
+        description: 'Schema under test.',
+      },
+      AllOfArraySchema: {
+        description: 'Schema under test.',
+        type: 'array',
+        items: {
+          allOf: [
+            {
+              $ref: '#/components/schemas/TestSchema',
+            },
+            {},
+          ],
+        },
+      },
+      OneOfArraySchema: {
+        description: 'Schema under test.',
+        type: 'array',
+        items: {
+          oneOf: [
+            {
+              $ref: '#/components/schemas/TestSchema',
+            },
+            {},
+          ],
+        },
+      },
+    });
+
+    // WHEN compiling
+    const { schemas } = compile(document);
+
+    // THEN the output matches the snapshot
+    expect(schemas).toMatchInlineSnapshot(`
+      "/* eslint-disable */
+      /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+      /**
+       * Schema under test.
+       */
+      export type AllOfArraySchema = readonly (TestSchema & unknown)[];
+      /**
+       * Schema under test.
+       */
+      export type OneOfArraySchema = readonly (TestSchema | unknown)[];
+      /**
+       * Schema under test.
+       */
+      export type TestSchema = unknown;
+      "
+    `);
+  });
+
   it('compiles object types', () => {
     // GIVEN an OpenAPI schema that contains schemas for object types
     const document = createTestDocumentWithSchemas({
