@@ -81,6 +81,7 @@
     "bin",
     "dist/main",
     "dist/module",
+    "!**/*.js.map",
     "!**/*.test.*",
     "!**/debug.*",
     "CHANGELOG.md",
