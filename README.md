@@ -70,7 +70,9 @@ npm i @ivicevic/openapi-client-generator --save-dev
 
 Be aware that [`axios`](https://www.npmjs.com/package/axios) is a peer dependency and has to be installed as well.
 
-## CLI usage
+## Usage
+
+### Shell
 
 The CLI command usage looks as follows where `INPUT` is the OpenAPI schema file and `OUTPUT` where the generated files are written to:
 
@@ -90,11 +92,16 @@ To display more detailed log outputs you can append the `--verbose` or `--debug`
 
 For more help run the command `openapi-client-generator --help` to show a list of all available arguments.
 
+### Programmatic
 
-## API usage
+This package is intended to be used primarily as a CLI, however its core method `compile` has been exposed to be used in custom scripts and workflows.
+You can import it as follows:
 
-This package is intended to be used as a CLI and it is discouraged to use it via its API as its public methods haven't been properly exposed.
-If you really want to walk down that dark path nonetheless refer to the `src/cli.ts` file until we establish a stable API.
+```ts
+import { compile } from '@ivicevic/openapi-client-generator';
+```
+
+Refer to the documentation at [`src/index.ts`](./src/index.ts) or usage at [`src/cli.ts`](./src/cli.ts) for further details.
 
 ## Feature roadmap
 
