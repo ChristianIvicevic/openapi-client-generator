@@ -1,10 +1,5 @@
-import { compileDocument } from 'generator';
-import { parseYaml } from 'parser';
-import { compose } from 'ramda';
+import { compile } from 'index';
 import { createTestDocument, createTestDocumentWithPaths } from 'utils/testing';
-
-// TESTEE function
-const compile = compose(compileDocument, parseYaml);
 
 describe('Error Handling', () => {
   it('throws for an operation without an operationId', () => {

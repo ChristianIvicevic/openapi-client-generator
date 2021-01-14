@@ -1,10 +1,5 @@
 import { readFileSync } from 'fs';
-import { compileDocument } from 'generator';
-import { parseYaml } from 'parser';
-import { compose } from 'ramda';
-
-// TESTEE function
-const compile = compose(compileDocument, parseYaml);
+import { compile } from 'index';
 
 describe('Fixtures', () => {
   it('compiles the link example schema', () => {

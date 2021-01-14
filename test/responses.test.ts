@@ -1,10 +1,5 @@
-import { compileDocument } from 'generator';
-import { parseYaml } from 'parser';
-import { compose } from 'ramda';
+import { compile } from 'index';
 import { createTestDocument, createTestDocumentWithPaths } from 'utils/testing';
-
-// TESTEE function
-const compile = compose(compileDocument, parseYaml);
 
 describe('Responses', () => {
   it('compiles operations with empty responses', () => {

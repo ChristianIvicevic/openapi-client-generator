@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-
 import { compileDocument } from 'generator';
 import { parseYaml } from 'parser';
 import { compose } from 'ramda';

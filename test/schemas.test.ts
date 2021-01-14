@@ -1,10 +1,5 @@
-import { compileDocument } from 'generator';
-import { parseYaml } from 'parser';
-import { compose } from 'ramda';
+import { compile } from 'index';
 import { createTestDocumentWithSchemas } from 'utils/testing';
-
-// TESTEE function
-const compile = compose(compileDocument, parseYaml);
 
 describe('Schemas', () => {
   it('compiles simple scalar types', () => {
