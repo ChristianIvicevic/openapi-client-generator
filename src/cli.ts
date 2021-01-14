@@ -1,11 +1,10 @@
 /* istanbul ignore file */
 
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { compileDocument } from 'generator';
-import { parseYaml } from 'parser';
 import { join } from 'path';
 import { getLogger } from 'utils/logging';
 import yargs from 'yargs';
+import { compile } from '.';
 
 const yargsObject = yargs
   .usage('Usage: $0 -i [INPUT] -o [OUTPUT]')
@@ -69,8 +68,7 @@ void (() => {
 
   try {
     const yamlContent = readFileSync(inputFile).toString();
-    const document = parseYaml(yamlContent);
-    const { requests, schemas } = compileDocument(document);
+    const { requests, schemas } = compile(yamlContent);
     writeFileSync(join(outputFolder, 'requests.ts'), requests);
     writeFileSync(join(outputFolder, 'schemas.ts'), schemas);
   } catch (e: unknown) {
