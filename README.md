@@ -74,13 +74,21 @@ Be aware that [`axios`](https://www.npmjs.com/package/axios) is a peer dependenc
 
 ### Shell
 
-The CLI command usage looks as follows where `INPUT` is the OpenAPI schema file and `OUTPUT` where the generated files are written to:
-
 ```
-openapi-client-generator --input [INPUT] --output [OUTPUT]
-```
+Usage: openapi-client-generator -i [INPUT] -o [OUTPUT]
 
-When executing the CLI two files will be generated, namely `requests.ts` and `schemas.ts` in the specified output folder.
+Options:
+      --help      Outputs this message                                 [boolean]
+      --version   Prints the current compiler version                  [boolean]
+  -i, --input     Input file                                 [string] [required]
+  -o, --output    Output folder                              [string] [required]
+  -r, --requests  File name to write generated request methods to
+                                               [string] [default: "requests.ts"]
+  -s, --schemas   File name to write generated schemas to
+                                                [string] [default: "schemas.ts"]
+  -v, --verbose   Run with verbose logging                             [boolean]
+  -d, --debug     Run with even more verbose logging                   [boolean]
+```
 
 In our project we run the CLI with the following command:
 
@@ -88,9 +96,7 @@ In our project we run the CLI with the following command:
 openapi-client-generator -i ./submodules/schema/v2.yaml -o ./src/api
 ```
 
-To display more detailed log outputs you can append the `--verbose` or `--debug` flags to any command to debug any issues.
-
-For more help run the command `openapi-client-generator --help` to show a list of all available arguments.
+This creates two files `src/api/requests.ts` and `src/api/schemas.ts` based on the supplied YAML file.
 
 ### Programmatic
 
