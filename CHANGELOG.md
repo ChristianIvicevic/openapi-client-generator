@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.5.1](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.0...v2.5.1) (2021-01-14)
+
+
+### Bug Fixes
+
+* promote tslib to an actual dependency to fix silent build errors ([26d4725](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/26d47258f18b7602991d88088063197e773d038f))
+
 ## [2.5.0](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.4.1...v2.5.0) (2021-01-14)
 
 
