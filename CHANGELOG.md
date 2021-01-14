@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.5.0](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.4.1...v2.5.0) (2021-01-14)
+
+
+### Features
+
+* add CLI and API compile option to customize names of generated files ([ea38835](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/ea38835f0d040553a1b49b576ca280cbe341f88f))
+* expose a properly documented compile method for programmatic api usage ([d5717d2](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/d5717d228c6ac159a857779f6583362b0fc80fb4))
+
 ### [2.4.1](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.4.0...v2.4.1) (2021-01-13)
 
 
