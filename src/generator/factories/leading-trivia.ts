@@ -4,12 +4,12 @@ import { compact } from 'utils/fp';
 
 type Options = {
   readonly referencedSchemas: readonly string[];
-  readonly schemasFile?: string;
+  readonly schemasFileName?: string;
 };
 
 export const createLeadingTrivia = ({
   referencedSchemas,
-  schemasFile = './schemas',
+  schemasFileName = 'schemas',
 }: Options) => {
   const axiosRequestConfigImport = factory.createImportDeclaration(
     undefined,
@@ -53,7 +53,7 @@ export const createLeadingTrivia = ({
         ),
       ),
     ),
-    factory.createStringLiteral(schemasFile),
+    factory.createStringLiteral(`./${schemasFileName.replace(/\.ts$/, '')}`),
   );
 
   return compact([

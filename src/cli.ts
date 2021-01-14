@@ -21,6 +21,18 @@ const yargsObject = yargs
       description: 'Output folder',
       demandOption: true,
     },
+    r: {
+      alias: 'requests',
+      type: 'string',
+      description: 'File name to write generated request methods to',
+      default: 'requests.ts',
+    },
+    s: {
+      alias: 'schemas',
+      type: 'string',
+      description: 'File name to write generated schemas to',
+      default: 'schemas.ts',
+    },
     v: {
       alias: 'verbose',
       type: 'boolean',
@@ -46,7 +58,14 @@ const yargsObject = yargs
 
 void (() => {
   const {
-    argv: { i: inputFile, o: outputFolder, v: verbose, d: debug },
+    argv: {
+      i: inputFile,
+      o: outputFolder,
+      r: requestsFileName,
+      s: schemasFileName,
+      v: verbose,
+      d: debug,
+    },
   } = yargsObject;
   process.env.OCG_LOG_LEVEL =
     // eslint-disable-next-line no-nested-ternary
@@ -66,11 +85,14 @@ void (() => {
 
   logger.info(`Parsing OpenAPIV3 document at '${inputFile}'`);
 
+  const requestsFilePath = join(outputFolder, requestsFileName);
+  const schemasFilePath = join(outputFolder, schemasFileName);
+
   try {
     const yamlContent = readFileSync(inputFile).toString();
-    const { requests, schemas } = compile(yamlContent);
-    writeFileSync(join(outputFolder, 'requests.ts'), requests);
-    writeFileSync(join(outputFolder, 'schemas.ts'), schemas);
+    const { requests, schemas } = compile(yamlContent, { schemasFileName });
+    writeFileSync(requestsFilePath, requests);
+    writeFileSync(schemasFilePath, schemas);
   } catch (e: unknown) {
     logger.error(debug === true ? e : String(e));
     process.exit(1);
@@ -79,8 +101,8 @@ void (() => {
   logger.info(
     [
       '🎉 Compilation finished!',
-      ` * Request helpers are available at '${outputFolder}/requests.ts'`,
-      ` * Schema types are available at '${outputFolder}/schemas.ts'`,
+      ` * Request helpers are available at '${requestsFilePath}'`,
+      ` * Schema types are available at '${schemasFilePath}'`,
     ].join('\n'),
   );
 })();

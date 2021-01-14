@@ -3,6 +3,7 @@ import { createLeadingTrivia } from 'generator/factories/leading-trivia';
 import type { CreateOperationOrThrowParameters } from 'generator/factories/operation';
 import { createOperationOrThrow } from 'generator/factories/operation';
 import { createSchemaDeclaration } from 'generator/factories/schema-declaration';
+import { CompileOptions } from 'generator/types';
 import type { OpenAPIV3 } from 'openapi-types';
 import ts, { factory } from 'typescript';
 import { assertIsDefined } from 'utils/assert';
@@ -10,7 +11,10 @@ import { format } from 'utils/format';
 import { compact } from 'utils/fp';
 import { getLogger } from 'utils/logging';
 
-export const compileDocument = (document: OpenAPIV3.Document) => {
+export const compileDocument = (
+  document: OpenAPIV3.Document,
+  options?: CompileOptions,
+) => {
   const logger = getLogger();
   const referencedSchemas: string[] = [];
 
@@ -73,6 +77,7 @@ export const compileDocument = (document: OpenAPIV3.Document) => {
       referencedSchemas: [
         ...new Set(referencedSchemas.sort((a, b) => a.localeCompare(b))),
       ],
+      schemasFileName: options?.schemasFileName,
     }),
     ...compiledOperations,
   ]);
