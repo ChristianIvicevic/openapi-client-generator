@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.5.2](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.1...v2.5.2) (2021-01-15)
+
+
+### Bug Fixes
+
+* resolve ambiguous object and array types without explicit type property ([e8c7bea](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/e8c7bea110ee5ebd8f80bc751c066483c20e40bf))
+
 ### [2.5.1](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.0...v2.5.1) (2021-01-14)
 
 
