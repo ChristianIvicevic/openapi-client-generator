@@ -63,15 +63,7 @@ const resolveInlineSchema = (
     case 'object':
       return resolveObjectSchema(context, schemaObject);
     case 'string':
-      return schemaObject.enum === undefined
-        ? factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
-        : factory.createUnionTypeNode(
-            schemaObject.enum.map(enumValue =>
-              factory.createLiteralTypeNode(
-                factory.createStringLiteral(String(enumValue)),
-              ),
-            ),
-          );
+      return resolveStringSchema(context, schemaObject);
     default:
       return resolveFallbackSchema(context, schemaObject);
   }
@@ -79,17 +71,11 @@ const resolveInlineSchema = (
 
 const resolveFallbackSchema = (
   context: Context,
-  schemaObject: OpenAPIV3.ArraySchemaObject | OpenAPIV3.NonArraySchemaObject,
+  schemaObject: OpenAPIV3.NonArraySchemaObject,
 ): ts.TypeNode =>
   tryResolveAmbiguousSchema(context, schemaObject) ??
-  tryResolveCombinedSchema(
-    context,
-    schemaObject as OpenAPIV3.NonArraySchemaObject,
-  ) ??
-  tryResolveDictionarySchema(
-    context,
-    schemaObject as OpenAPIV3.NonArraySchemaObject,
-  ) ??
+  tryResolveCombinedSchema(context, schemaObject) ??
+  tryResolveDictionarySchema(context, schemaObject) ??
   factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword);
 
 const resolveArraySchema = (
@@ -140,8 +126,27 @@ const resolveObjectSchema = (
     : objectTypeNode;
 };
 
+const resolveStringSchema = (
+  _context: Context,
+  schemaObject: OpenAPIV3.NonArraySchemaObject,
+) => {
+  return schemaObject.enum === undefined
+    ? factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
+    : factory.createUnionTypeNode(
+        schemaObject.enum.map(enumValue =>
+          factory.createLiteralTypeNode(
+            factory.createStringLiteral(String(enumValue)),
+          ),
+        ),
+      );
+};
+
 const tryResolveAmbiguousSchema = (
   context: Context,
+  // The type of this parameter is artificially expanded since we want to
+  // handle schema objects that are arrays without an explicit type property.
+  // This is necessary since the typing assumes arrays always include a type
+  // property in contrast to the actual OpenAPI specification.
   schemaObject: OpenAPIV3.ArraySchemaObject | OpenAPIV3.NonArraySchemaObject,
 ) => {
   if (isArraySchemaObject(schemaObject)) {
