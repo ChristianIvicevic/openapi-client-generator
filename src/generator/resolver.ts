@@ -3,7 +3,7 @@ import type { Context } from 'generator/types';
 import type { OpenAPIV3 } from 'openapi-types';
 import { partial } from 'ramda';
 import ts, { factory } from 'typescript';
-import { isReferenceObject } from 'utils/type-guards';
+import { isArraySchemaObject, isReferenceObject } from 'utils/type-guards';
 
 export const resolveSchema = (
   context: Context,
@@ -44,10 +44,7 @@ const resolveInlineSchema = (
 ) => {
   switch (schemaObject.type) {
     case 'array':
-      return factory.createTypeOperatorNode(
-        ts.SyntaxKind.ReadonlyKeyword,
-        factory.createArrayTypeNode(resolveSchema(context, schemaObject.items)),
-      );
+      return resolveArraySchema(context, schemaObject);
     case 'boolean':
       return factory.createKeywordTypeNode(ts.SyntaxKind.BooleanKeyword);
     case 'integer':
@@ -82,11 +79,27 @@ const resolveInlineSchema = (
 
 const resolveFallbackSchema = (
   context: Context,
-  schemaObject: OpenAPIV3.NonArraySchemaObject,
-) =>
-  tryResolveCombinedSchema(context, schemaObject) ??
-  tryResolveDictionarySchema(context, schemaObject) ??
+  schemaObject: OpenAPIV3.ArraySchemaObject | OpenAPIV3.NonArraySchemaObject,
+): ts.TypeNode =>
+  tryResolveAmbiguousSchema(context, schemaObject) ??
+  tryResolveCombinedSchema(
+    context,
+    schemaObject as OpenAPIV3.NonArraySchemaObject,
+  ) ??
+  tryResolveDictionarySchema(
+    context,
+    schemaObject as OpenAPIV3.NonArraySchemaObject,
+  ) ??
   factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword);
+
+const resolveArraySchema = (
+  context: Context,
+  schemaObject: OpenAPIV3.ArraySchemaObject,
+) =>
+  factory.createTypeOperatorNode(
+    ts.SyntaxKind.ReadonlyKeyword,
+    factory.createArrayTypeNode(resolveSchema(context, schemaObject.items)),
+  );
 
 const resolveObjectSchema = (
   context: Context,
@@ -125,6 +138,21 @@ const resolveObjectSchema = (
         ]),
       ])
     : objectTypeNode;
+};
+
+const tryResolveAmbiguousSchema = (
+  context: Context,
+  schemaObject: OpenAPIV3.ArraySchemaObject | OpenAPIV3.NonArraySchemaObject,
+) => {
+  if (isArraySchemaObject(schemaObject)) {
+    return resolveArraySchema(context, schemaObject);
+  }
+
+  if (schemaObject.properties !== undefined) {
+    return resolveObjectSchema(context, schemaObject);
+  }
+
+  return undefined;
 };
 
 const tryResolveCombinedSchema = (

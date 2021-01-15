@@ -185,6 +185,10 @@ describe('Schemas', () => {
           items: {},
         },
       },
+      ArraySchemaWithoutExplicitType: {
+        description: 'Schema under test.',
+        items: {},
+      },
     });
 
     // WHEN compiling
@@ -194,6 +198,10 @@ describe('Schemas', () => {
     expect(schemas).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+      /**
+       * Schema under test.
+       */
+      export type ArraySchemaWithoutExplicitType = readonly unknown[];
       /**
        * Schema under test.
        */
@@ -375,6 +383,14 @@ describe('Schemas', () => {
           },
         },
       },
+      ObjectSchemaWithoutExplicitType: {
+        description: 'Schema under test.',
+        properties: {
+          property: {
+            description: 'Property under test.',
+          },
+        },
+      },
     });
 
     // WHEN compiling
@@ -393,6 +409,12 @@ describe('Schemas', () => {
         readonly refProp?: TestSchema;
         readonly arrayProp?: readonly unknown[];
         readonly arrayRefProp?: readonly TestSchema[];
+      };
+      /**
+       * Schema under test.
+       */
+      export type ObjectSchemaWithoutExplicitType = {
+        readonly property?: unknown;
       };
       /**
        * Schema under test.
