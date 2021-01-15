@@ -3,6 +3,7 @@ import type { Context } from 'generator/types';
 import type { OpenAPIV3 } from 'openapi-types';
 import { partial } from 'ramda';
 import ts, { factory } from 'typescript';
+import { compact } from 'utils/fp';
 import { isArraySchemaObject, isReferenceObject } from 'utils/type-guards';
 
 export const resolveSchema = (
@@ -11,18 +12,16 @@ export const resolveSchema = (
     | OpenAPIV3.ReferenceObject
     | OpenAPIV3.NonArraySchemaObject
     | OpenAPIV3.ArraySchemaObject,
-): ts.TypeNode => {
-  if (isReferenceObject(schemaObject)) {
-    return resolveReferenceSchemaOrThrow(context, schemaObject.$ref);
-  }
-
-  return schemaObject.nullable
-    ? factory.createUnionTypeNode([
-        resolveInlineSchema(context, schemaObject),
-        factory.createLiteralTypeNode(factory.createNull()),
-      ])
-    : resolveInlineSchema(context, schemaObject);
-};
+): ts.TypeNode =>
+  isReferenceObject(schemaObject)
+    ? resolveReferenceSchemaOrThrow(context, schemaObject.$ref)
+    : factory.createUnionTypeNode(
+        compact([
+          resolveInlineSchema(context, schemaObject),
+          schemaObject.nullable &&
+            factory.createLiteralTypeNode(factory.createNull()),
+        ]),
+      );
 
 const resolveReferenceSchemaOrThrow = (
   { referencedSchemas }: Context,
@@ -115,15 +114,16 @@ const resolveObjectSchema = (
       ? factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword)
       : factory.createTypeLiteralNode(objectProperties);
 
-  return additionalProperties === true
-    ? factory.createIntersectionTypeNode([
-        objectTypeNode,
+  return factory.createIntersectionTypeNode(
+    compact([
+      objectTypeNode,
+      additionalProperties === true &&
         factory.createTypeReferenceNode(factory.createIdentifier('Record'), [
           factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
           factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword),
         ]),
-      ])
-    : objectTypeNode;
+    ]),
+  );
 };
 
 const resolveStringSchema = (
