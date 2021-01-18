@@ -1,8 +1,8 @@
-# `openapi-client-generator`
+# OpenAPI Client Generator
 
 ![Logo](./docs/logo.png)
 
-> **Simple Typescript code generator based on an OpenAPI V3 schema**
+> **Framework-agnostic OpenAPI client generator for Typescript**
 
 ![Tests](https://github.com/ChristianIvicevic/openapi-client-generator/workflows/Tests/badge.svg)
 [![codecov](https://codecov.io/gh/ChristianIvicevic/openapi-client-generator/branch/main/graph/badge.svg?token=JB66SCDW2Q)](https://codecov.io/gh/ChristianIvicevic/openapi-client-generator)
@@ -125,15 +125,11 @@ Since we don't fully support all features of the OpenAPI spec it is really helpf
 
 To contribute to the code clone the repository, use the Node version denoted in the `.nvmrc` file (most likely by running `nvm use`), install its dependencies using `yarn install` (we are using Yarn 2) and use the following commands as necessary:
 
-* The library and CLI are compiled using either
-  * `yarn build:main`
-  * `yarn watch:build`
-* Tests are written using Jest and can be executed via either
-  * `yarn test`
-  * `yarn test:coverage`
-* Test your code using `yarn lint` and keep PRs small and concise
+* The library and CLI are compiled using either `yarn build` or `yarn watch` for incremental compilation.
+* Tests are written using Jest and can be executed via `yarn test --coverage`.
+* Lint your code using `yarn lint` and keep PRs small and concise.
 * Commits have to follow the [conventional commits](https://www.conventionalcommits.org/) standard.
-  For that purpose you can run `yarn cm` for interactive commits using `commitizen`, otherwise `commitlint` will lint your commit messages using `husky`
+  For that purpose you can run `yarn cm` for interactive commits using `commitizen`, otherwise `commitlint` will lint your commit messages using `husky`.
 
 ## License
 
