@@ -1,7 +1,7 @@
 {
   "name": "@ivicevic/openapi-client-generator",
   "version": "2.5.2",
-  "description": "OpenAPI Client Generator allows automatic generation of Typescript API client libraries given an OpenAPI V3 Spec",
+  "description": "Framework-agnostic OpenAPI client generator for Typescript",
   "publishConfig": {
     "access": "public"
   },
@@ -14,7 +14,7 @@
   "license": "MIT",
   "author": "Christian Ivicevic <mail@christian-ivicevic.com>",
   "main": "dist/main/index.js",
-  "typings": "dist/main/index.d.ts",
+  "typings": "dist/module/index.d.ts",
   "module": "dist/module/index.js",
   "bin": "./bin/openapi-client-generator.js",
   "scripts": {
@@ -23,7 +23,7 @@
     "build": "yarn build:main && yarn build:module",
     "build:main": "ttsc -p tsconfig.main.json",
     "build:module": "ttsc -p tsconfig.module.json",
-    "watch:build": "ttsc -p tsconfig.main.json -w",
+    "watch": "ttsc -p tsconfig.main.json -w",
     "cm": "cz",
     "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
@@ -81,6 +81,7 @@
     "bin",
     "dist/main",
     "dist/module",
+    "!dist/main/**/*.d.ts",
     "!**/*.js.map",
     "!**/*.test.*",
     "!**/debug.*",
