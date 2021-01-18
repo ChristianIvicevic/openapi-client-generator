@@ -3,8 +3,8 @@ import { resolveSchema } from 'generator/resolver';
 import type { Context } from 'generator/types';
 import type { OpenAPIV3 } from 'openapi-types';
 import ts, { factory } from 'typescript';
-import { getLogger } from 'utils/logging';
 import { dereferenceOrThrow } from 'utils/openapi';
+import winston from 'winston';
 
 export const createContentfulComponent = (
   context: Context,
@@ -29,8 +29,6 @@ const createMediaType = (
   mediaType: string,
   mediaTypeObject: OpenAPIV3.MediaTypeObject,
 ) => {
-  const logger = getLogger();
-
   const { schema } = mediaTypeObject;
 
   if (
@@ -40,7 +38,7 @@ const createMediaType = (
     // TODO: This check doesn't seem correct...
     schema === undefined
   ) {
-    logger.warn(`Ignoring unsupported content type '${mediaType}'`);
+    winston.warn(`Ignoring unsupported content type '${mediaType}'`);
     return factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword);
   }
 

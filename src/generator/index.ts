@@ -9,20 +9,19 @@ import ts, { factory } from 'typescript';
 import { assertIsDefined } from 'utils/assert';
 import { format } from 'utils/format';
 import { compact } from 'utils/fp';
-import { getLogger } from 'utils/logging';
+import winston from 'winston';
 
 export const compileDocument = (
   document: OpenAPIV3.Document,
   options?: CompileOptions,
 ) => {
-  const logger = getLogger();
   const referencedSchemas: string[] = [];
 
-  logger.verbose('Compiling schemas...');
+  winston.verbose('Compiling schemas...');
   const compiledSchemas = Object.entries(document.components?.schemas ?? {})
     .sort(([a], [b]) => a.localeCompare(b))
     .flatMap(([schema, schemaObject]) => {
-      logger.debug(`Compiling schema '${schema}'`);
+      winston.debug(`Compiling schema '${schema}'`);
       return createSchemaDeclaration(
         { document, referencedSchemas },
         schema,
@@ -30,7 +29,7 @@ export const compileDocument = (
       );
     });
 
-  logger.verbose('Compiling operations...');
+  winston.verbose('Compiling operations...');
   // This block is a workaround to prefetch operation ids in order to sort the
   // generated methods alphanumerically rather than in their order inside the
   // schema file. This is intentional to produce more deterministic output
@@ -49,7 +48,7 @@ export const compileDocument = (
             const operationObject = pathItemObject[method];
 
             if (operationObject === undefined) {
-              logger.debug(
+              winston.debug(
                 `Skipping empty '${method}' operation on path '${path}'`,
               );
               return undefined;

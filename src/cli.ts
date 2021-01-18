@@ -1,10 +1,11 @@
 /* istanbul ignore file */
 
 import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { compile } from 'index';
 import { join } from 'path';
-import { getLogger } from 'utils/logging';
+import { configureLogging } from 'utils/logging';
+import winston from 'winston';
 import yargs from 'yargs';
-import { compile } from '.';
 
 const yargsObject = yargs
   .usage('Usage: $0 -i [INPUT] -o [OUTPUT]')
@@ -67,23 +68,23 @@ void (() => {
       d: debug,
     },
   } = yargsObject;
-  process.env.OCG_LOG_LEVEL =
-    // eslint-disable-next-line no-nested-ternary
-    verbose === true ? 'verbose' : debug === true ? 'debug' : 'info';
 
-  const logger = getLogger();
+  configureLogging(
+    // eslint-disable-next-line no-nested-ternary
+    verbose === true ? 'verbose' : debug === true ? 'debug' : 'info',
+  );
 
   if (!existsSync(inputFile)) {
-    logger.error(`The input file '${inputFile}' does not exist`);
+    winston.error(`The input file '${inputFile}' does not exist`);
     process.exit(1);
   }
 
   if (!existsSync(outputFolder)) {
-    logger.error(`The output directory '${outputFolder}' does not exist`);
+    winston.error(`The output directory '${outputFolder}' does not exist`);
     process.exit(1);
   }
 
-  logger.info(`Parsing OpenAPIV3 document at '${inputFile}'`);
+  winston.info(`Parsing OpenAPIV3 document at '${inputFile}'`);
 
   const requestsFilePath = join(outputFolder, requestsFileName);
   const schemasFilePath = join(outputFolder, schemasFileName);
@@ -94,15 +95,11 @@ void (() => {
     writeFileSync(requestsFilePath, requests);
     writeFileSync(schemasFilePath, schemas);
   } catch (e: unknown) {
-    logger.error(debug === true ? e : String(e));
+    winston.error(debug === true ? e : String(e));
     process.exit(1);
   }
 
-  logger.info(
-    [
-      '🎉 Compilation finished!',
-      ` * Request helpers are available at '${requestsFilePath}'`,
-      ` * Schema types are available at '${schemasFilePath}'`,
-    ].join('\n'),
-  );
+  winston.info('🎉 OpenAPI client generation finished!');
+  winston.info(`Request helpers are available at '${requestsFilePath}'`);
+  winston.info(`Schema types are available at '${schemasFilePath}'`);
 })();

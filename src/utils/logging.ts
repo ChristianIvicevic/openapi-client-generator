@@ -1,11 +1,11 @@
 /* istanbul ignore file */
 
-import { createLogger, format, transports } from 'winston';
+import winston, { format, transports } from 'winston';
 import { consoleFormat } from 'winston-console-format';
 
-export const getLogger = () =>
-  createLogger({
-    level: process.env.OCG_LOG_LEVEL ?? 'info',
+export const configureLogging = (level = 'info') =>
+  winston.configure({
+    level,
     format: format.combine(
       format.timestamp(),
       format.ms(),
@@ -13,7 +13,7 @@ export const getLogger = () =>
       format.splat(),
       format.json(),
     ),
-    defaultMeta: { service: 'ts-transform-openapi' },
+    defaultMeta: { service: 'openapi-client-generator' },
     transports: [
       new transports.Console({
         silent: process.env.NODE_ENV === 'test',

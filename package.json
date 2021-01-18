@@ -19,7 +19,6 @@
   "bin": "./bin/openapi-client-generator.js",
   "scripts": {
     "test": "jest --watchAll",
-    "test:coverage": "jest --coverage",
     "lint": "eslint {src,test}/**/*.ts",
     "build": "yarn build:main && yarn build:module",
     "build:main": "ttsc -p tsconfig.main.json",
