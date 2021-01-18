@@ -3,7 +3,7 @@ import { createLeadingTrivia } from 'generator/factories/leading-trivia';
 import type { CreateOperationOrThrowParameters } from 'generator/factories/operation';
 import { createOperationOrThrow } from 'generator/factories/operation';
 import { createSchemaDeclaration } from 'generator/factories/schema-declaration';
-import { CompileOptions } from 'generator/types';
+import { CompilerOptions } from 'generator/types';
 import type { OpenAPIV3 } from 'openapi-types';
 import ts, { factory } from 'typescript';
 import { assertIsDefined } from 'utils/assert';
@@ -13,7 +13,7 @@ import winston from 'winston';
 
 export const compileDocument = (
   document: OpenAPIV3.Document,
-  options?: CompileOptions,
+  options?: CompilerOptions,
 ) => {
   const referencedSchemas: string[] = [];
 

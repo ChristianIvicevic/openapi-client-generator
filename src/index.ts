@@ -1,5 +1,5 @@
 import { compileDocument } from 'generator';
-import type { CompileOptions } from 'generator/types';
+import type { CompilerOptions } from 'generator/types';
 import { parseYaml } from 'parser';
 
 /**
@@ -14,5 +14,5 @@ import { parseYaml } from 'parser';
  * @param yamlSchema OpenAPI YAML schema content as string.
  * @param options Optional compiler options.
  */
-export const compile = (yamlSchema: string, options?: CompileOptions) =>
+export const compile = (yamlSchema: string, options?: CompilerOptions) =>
   compileDocument(parseYaml(yamlSchema), options);

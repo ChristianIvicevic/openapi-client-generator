@@ -1,6 +1,6 @@
 import type { OpenAPIV3 } from 'openapi-types';
 
-export type CompileOptions = {
+export type CompilerOptions = {
   readonly schemasFileName?: string;
 };
 
