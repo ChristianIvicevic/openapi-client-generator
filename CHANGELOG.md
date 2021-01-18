@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.5.3](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.2...v2.5.3) (2021-01-18)
+
+
+### Performance Improvements
+
+* remove duplicate declaration files from package to reduce overall size ([b1da679](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/b1da6790a01a2543c5bec451ccfa8a4ebf2e8410))
+
 ### [2.5.2](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.1...v2.5.2) (2021-01-15)
 
 

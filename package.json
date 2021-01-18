@@ -1,6 +1,6 @@
 {
   "name": "@ivicevic/openapi-client-generator",
-  "version": "2.5.2",
+  "version": "2.5.3",
   "description": "Framework-agnostic OpenAPI client generator for Typescript",
   "publishConfig": {
     "access": "public"
