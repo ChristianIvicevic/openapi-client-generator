@@ -18,7 +18,7 @@
   "module": "dist/module/index.js",
   "bin": "./bin/openapi-client-generator.js",
   "scripts": {
-    "test": "jest --watchAll",
+    "test": "jest",
     "lint": "eslint {src,test}/**/*.ts",
     "build": "yarn build:main && yarn build:module",
     "build:main": "ttsc -p tsconfig.main.json",
