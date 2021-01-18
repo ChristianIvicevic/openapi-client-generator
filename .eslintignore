@@ -1,4 +1,4 @@
 **/*.js
 bin
-build
+dist
 node_modules
