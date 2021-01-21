@@ -634,7 +634,7 @@ __metadata:
     husky: next
     jest: 26.6.3
     openapi-types: 7.2.3
-    pinst: 2.1.1
+    pinst: 2.1.2
     prettier: 2.2.1
     ramda: 0.27.1
     ts-jest: 26.4.4
@@ -6185,17 +6185,16 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"pinst@npm:2.1.1":
-  version: 2.1.1
-  resolution: "pinst@npm:2.1.1"
+"pinst@npm:2.1.2":
+  version: 2.1.2
+  resolution: "pinst@npm:2.1.2"
   dependencies:
     load-json-file: ^6.2.0
     lodash.mapkeys: ^4.6.0
-    meow: ^8.0.0
     write-json-file: ^4.3.0
   bin:
     pinst: bin.js
-  checksum: f33f96ec1dccb3f08ad306d8f204fc706761efabe8e76a44e36a9111cda60d6f0144753dd0ca6652607705d6ffbb31c0923115d28ba6378293e5cc9643ea7c01
+  checksum: 67a68aeae89bc407e90759100db43f156d9f02423c8dc335597e90a31df0fb306db060766821b339d6a4aae21c092ad3ddcd1cd635c45d3a40c6d28177166026
   languageName: node
   linkType: hard
 
