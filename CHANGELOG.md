@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.5.4](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.3...v2.5.4) (2021-02-17)
+
+
+### Bug Fixes
+
+* prevent importing unused transitive type references ([880e362](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/880e3625d731d8bf3683ab1657ae1645268f5a0b))
+
 ### [2.5.3](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.2...v2.5.3) (2021-01-18)
 
 
