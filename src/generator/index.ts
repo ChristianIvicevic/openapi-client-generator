@@ -7,7 +7,7 @@ import { CompilerOptions } from 'generator/types';
 import type { OpenAPIV3 } from 'openapi-types';
 import ts, { factory } from 'typescript';
 import { assertIsDefined } from 'utils/assert';
-import { format } from 'utils/format';
+import { format, organizeImports } from 'utils/format';
 import { compact } from 'utils/fp';
 import winston from 'winston';
 
@@ -15,6 +15,7 @@ export const compileDocument = (
   document: OpenAPIV3.Document,
   options?: CompilerOptions,
 ) => {
+  // TODO: Evaluate whether we can drop tracking of referenced schemas.
   const referencedSchemas: string[] = [];
 
   winston.verbose('Compiling schemas...');
@@ -83,7 +84,7 @@ export const compileDocument = (
 
   return {
     schemas: format(schemasContent),
-    requests: format(requestsContent),
+    requests: format(organizeImports(requestsContent)),
   };
 };
 
