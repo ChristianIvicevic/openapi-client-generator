@@ -662,7 +662,7 @@ __metadata:
     eslint-config-prettier: 8.1.0
     eslint-import-resolver-typescript: 2.4.0
     eslint-plugin-import: 2.22.1
-    eslint-plugin-jest: 24.1.9
+    eslint-plugin-jest: 24.2.0
     eslint-plugin-prettier: 3.3.1
     husky: next
     jest: 26.6.3
@@ -3010,14 +3010,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jest@npm:24.1.9":
-  version: 24.1.9
-  resolution: "eslint-plugin-jest@npm:24.1.9"
+"eslint-plugin-jest@npm:24.2.0":
+  version: 24.2.0
+  resolution: "eslint-plugin-jest@npm:24.2.0"
   dependencies:
     "@typescript-eslint/experimental-utils": ^4.0.1
   peerDependencies:
     eslint: ">=5"
-  checksum: f7aa6cd0d2b201e09d82929ae2ce26acfbffe98087f9c7d09f4444b03b18635a1a924e7485f7ada61c0fdd811cb8e996bc98ad134df2154f6a4018a6f205efc3
+  checksum: 2767bfc99160ee8eeb4329a2e22464ac5842b3a54ce7ff54f55c493dc3100f36233432e20499a2ad545cfd9175861c6fb79cc503083fd87e9fc2c930435a8da1
   languageName: node
   linkType: hard
 
