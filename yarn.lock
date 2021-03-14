@@ -677,7 +677,7 @@ __metadata:
     typescript: 4.1.5
     winston: 3.3.3
     winston-console-format: 1.0.8
-    yaml: 1.10.1
+    yaml: 1.10.2
     yargs: 16.2.0
   peerDependencies:
     axios: "*"
@@ -8182,10 +8182,10 @@ typescript@4.1.5:
   languageName: node
   linkType: hard
 
-"yaml@npm:1.10.1":
-  version: 1.10.1
-  resolution: "yaml@npm:1.10.1"
-  checksum: 73482690c200dbccfd2d582727dbd21f263cf7487db3a3a79ec78fefca080ce4fb7673ceb1ca5b16e5601e3a415eb67d83a5066c02a36c940771265adbe60a4c
+"yaml@npm:1.10.2":
+  version: 1.10.2
+  resolution: "yaml@npm:1.10.2"
+  checksum: 8d72062ea3dbfd8fae3d6ddd5b741c2aeb5835a31b0719bf14fac71dd84adde0829763d6fbac46387309da00af1440194c796da5efc349b0baf9de39d82ae69e
   languageName: node
   linkType: hard
 

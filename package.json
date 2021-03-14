@@ -37,7 +37,7 @@
     "tslib": "2.1.0",
     "winston": "3.3.3",
     "winston-console-format": "1.0.8",
-    "yaml": "1.10.1",
+    "yaml": "1.10.2",
     "yargs": "16.2.0"
   },
   "devDependencies": {
