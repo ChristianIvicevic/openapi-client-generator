@@ -1,5 +1,16 @@
 # Changelog
 
+### [2.5.5](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.4...v2.5.5) (2021-04-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency openapi-types to v8 ([9c783f5](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/9c783f5981d41a89484b41bb161965aed2ae6141))
+* **deps:** update dependency tslib to v2.2.0 ([1950af0](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/1950af0476497e540811b506f000fc70adbb64bc))
+* **deps:** update dependency yaml to v1.10.1 ([6320119](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/63201195c510ccb7d3452ea819fec955c3f828fb))
+* **deps:** update dependency yaml to v1.10.2 ([b511c1b](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/b511c1b35986015c9a1cda103d6cb386edae0429))
+* enable new prettier config ([880e843](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/880e843f9139ddbdb4d29babce09ff274ddd8f72))
+
 ### [2.5.4](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.3...v2.5.4) (2021-02-17)
 
 
