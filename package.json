@@ -38,7 +38,7 @@
     "winston": "3.3.3",
     "winston-console-format": "1.0.8",
     "yaml": "1.10.2",
-    "yargs": "16.2.0"
+    "yargs": "17.0.1"
   },
   "devDependencies": {
     "@commitlint/cli": "12.1.4",
