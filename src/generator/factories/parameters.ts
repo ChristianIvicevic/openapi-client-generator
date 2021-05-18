@@ -13,15 +13,13 @@ export const createAndPartitionParameters = (
     | OpenAPIV3.ParameterObject
   )[],
 ) => {
-  const [
-    pathParameters,
-    otherParameters,
-  ] = partition<OpenAPIV3.ParameterObject>(
-    parameter => parameter.in === 'path',
-    parameters.map(
-      partial(dereferenceOrThrow, [context]),
-    ) as readonly OpenAPIV3.ParameterObject[],
-  );
+  const [pathParameters, otherParameters] =
+    partition<OpenAPIV3.ParameterObject>(
+      parameter => parameter.in === 'path',
+      parameters.map(
+        partial(dereferenceOrThrow, [context]),
+      ) as readonly OpenAPIV3.ParameterObject[],
+    );
 
   // TODO: Handle header and cookie parameters.
   const createSignature = partial(createParameterSignature, [context]);

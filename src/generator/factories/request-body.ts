@@ -29,6 +29,6 @@ export const createRequestBody = (
     ? resolvedTypeNode
     : [
         ...resolvedTypeNode,
-        (factory.createIdentifier('undefined') as unknown) as ts.TypeNode,
+        factory.createIdentifier('undefined') as unknown as ts.TypeNode,
       ];
 };

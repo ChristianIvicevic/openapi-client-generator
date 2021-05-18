@@ -25,13 +25,8 @@ export const createOperationOrThrow = (
 
   assertIsDefined(path);
 
-  const {
-    operationId,
-    summary,
-    responses,
-    requestBody,
-    parameters,
-  } = operationObject;
+  const { operationId, summary, responses, requestBody, parameters } =
+    operationObject;
 
   if (operationId === undefined) {
     throw Error(`'${method}' operation object has no operation id`);
@@ -43,13 +38,11 @@ export const createOperationOrThrow = (
 
   const responseTypes = createResponses(context, responses);
   const requestBodyTypes = createRequestBody(context, requestBody);
-  const {
-    pathParameterPropertySignatures,
-    queryParameterPropertySignatures,
-  } = createAndPartitionParameters(context, [
-    ...pathParameters,
-    ...(parameters ?? []),
-  ]);
+  const { pathParameterPropertySignatures, queryParameterPropertySignatures } =
+    createAndPartitionParameters(context, [
+      ...pathParameters,
+      ...(parameters ?? []),
+    ]);
 
   return createRequestFunction({
     operationId: camelCase(operationId),

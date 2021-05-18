@@ -32,7 +32,7 @@
   "dependencies": {
     "change-case": "4.1.2",
     "openapi-types": "9.0.0",
-    "prettier": "2.2.1",
+    "prettier": "2.3.0",
     "ramda": "0.27.1",
     "tslib": "2.2.0",
     "winston": "3.3.3",
