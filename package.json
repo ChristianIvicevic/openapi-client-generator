@@ -14,7 +14,7 @@
   "license": "MIT",
   "author": "Christian Ivicevic <mail@christian-ivicevic.com>",
   "main": "dist/main/index.js",
-  "typings": "dist/module/index.d.ts",
+  "typings": "types/index.d.ts",
   "module": "dist/module/index.js",
   "bin": "./bin/openapi-client-generator.js",
   "scripts": {
@@ -81,10 +81,10 @@
     "bin",
     "dist/main",
     "dist/module",
-    "!dist/main/**/*.d.ts",
     "!**/*.js.map",
     "!**/*.test.*",
     "!**/debug.*",
+    "types",
     "CHANGELOG.md",
     "LICENSE",
     "README.md"
