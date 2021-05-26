@@ -914,7 +914,7 @@ __metadata:
     pinst: 2.1.6
     prettier: 2.3.0
     ramda: 0.27.1
-    ts-jest: 27.0.0
+    ts-jest: 27.0.1
     ts-node: 10.0.0
     tslib: 2.2.0
     ttypescript: 1.5.12
@@ -7924,9 +7924,9 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:27.0.0":
-  version: 27.0.0
-  resolution: "ts-jest@npm:27.0.0"
+"ts-jest@npm:27.0.1":
+  version: 27.0.1
+  resolution: "ts-jest@npm:27.0.1"
   dependencies:
     bs-logger: 0.x
     buffer-from: 1.x
@@ -7943,7 +7943,7 @@ resolve@^1.20.0:
     typescript: ">=3.8 <5.0"
   bin:
     ts-jest: cli.js
-  checksum: 880c7bff8894cd539d0ba7c2e8f581ee8d60c87c628ea8068a805e19d5aedccc3e00b04b5bcc9f0a5628e4b96afd5f1b31dc9354221a1390d58e54a7b1fc08cb
+  checksum: 12ae908f941298725d9f6aca39f36a374cb1146c97cb1efb7aa9c15968e4be343d476811167d86804061231ff7cd7164f036ed413da21340e1c5758712a75173
   languageName: node
   linkType: hard
 
