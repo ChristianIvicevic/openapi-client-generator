@@ -7,7 +7,7 @@ import { configureLogging } from 'utils/logging';
 import winston from 'winston';
 import yargs from 'yargs';
 
-const yargsObject = yargs
+const commandLineArguments = yargs
   .usage('Usage: $0 -i [INPUT] -o [OUTPUT]')
   .options({
     i: {
@@ -55,19 +55,18 @@ const yargsObject = yargs
       description: 'Outputs this message',
     },
   })
-  .wrap(80);
+  .wrap(80)
+  .parseSync();
 
 void (() => {
   const {
-    argv: {
-      i: inputFile,
-      o: outputFolder,
-      r: requestsFileName,
-      s: schemasFileName,
-      v: verbose,
-      d: debug,
-    },
-  } = yargsObject;
+    i: inputFile,
+    o: outputFolder,
+    r: requestsFileName,
+    s: schemasFileName,
+    v: verbose,
+    d: debug,
+  } = commandLineArguments;
 
   configureLogging(
     // eslint-disable-next-line no-nested-ternary
