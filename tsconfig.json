@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "baseUrl": ".",
-    "declaration": true,
+    "declaration": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
@@ -21,7 +21,7 @@
       }
     ],
     "pretty": true,
-    "removeComments": false,
+    "removeComments": true,
     "resolveJsonModule": true,
     "rootDirs": ["src", "test"],
     "skipLibCheck": true,
@@ -31,5 +31,5 @@
     "traceResolution": false
   },
   "exclude": ["node_modules/**"],
-  "include": ["src/**/*.ts", "test/**/*.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts", "types/**/*.ts"]
 }
