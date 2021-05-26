@@ -1,5 +1,14 @@
 # Changelog
 
+### [2.5.6](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.5...v2.5.6) (2021-05-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency openapi-types to v9 ([099c1c7](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/099c1c76550e97d7ea7a95fc515337c49864404f))
+* **deps:** update dependency prettier to v2.3.0 ([05468a3](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/05468a3eae8edfb04fe9db9d5300d4f6cd854e65))
+* **deps:** update dependency yargs to v17 ([ce96a3e](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/ce96a3e42fdf02db842fd58691452381802ea660))
+
 ### [2.5.5](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.4...v2.5.5) (2021-04-09)
 
 
