@@ -43,28 +43,28 @@ export const compileDocument = (
         const { parameters: pathParameters } = pathItemObject;
 
         return compact(
-          Constants.SUPPORTED_OPERATION_METHODS.map((method):
-            | CreateOperationOrThrowParameters
-            | undefined => {
-            const operationObject = pathItemObject[method];
+          Constants.SUPPORTED_OPERATION_METHODS.map(
+            (method): CreateOperationOrThrowParameters | undefined => {
+              const operationObject = pathItemObject[method];
 
-            if (operationObject === undefined) {
-              winston.debug(
-                `Skipping empty '${method}' operation on path '${path}'`,
-              );
-              return undefined;
-            }
+              if (operationObject === undefined) {
+                winston.debug(
+                  `Skipping empty '${method}' operation on path '${path}'`,
+                );
+                return undefined;
+              }
 
-            return {
-              operationId: operationObject.operationId ?? '<NO OPERATION ID>',
-              parameters: [
-                { document, path, referencedSchemas },
-                method,
-                pathParameters,
-                operationObject,
-              ],
-            };
-          }),
+              return {
+                operationId: operationObject.operationId ?? '<NO OPERATION ID>',
+                parameters: [
+                  { document, path, referencedSchemas },
+                  method,
+                  pathParameters,
+                  operationObject,
+                ],
+              };
+            },
+          ),
         );
       })
       .sort((a, b) => a.operationId.localeCompare(b.operationId))
