@@ -891,7 +891,7 @@ __metadata:
     "@jest/types": 27.0.2
     "@types/jest": 26.0.23
     "@types/node": 14.17.3
-    "@types/prettier": 2.2.3
+    "@types/prettier": 2.3.0
     "@types/ramda": 0.27.40
     "@types/yargs": 17.0.0
     "@typescript-eslint/eslint-plugin": 4.28.0
@@ -912,7 +912,7 @@ __metadata:
     jest: 27.0.5
     openapi-types: 9.0.3
     pinst: 2.1.6
-    prettier: 2.3.0
+    prettier: 2.3.1
     ramda: 0.27.1
     ts-jest: 27.0.3
     ts-node: 10.0.0
@@ -1392,7 +1392,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prettier@npm:2.2.3, @types/prettier@npm:^2.1.5":
+"@types/prettier@npm:2.3.0":
+  version: 2.3.0
+  resolution: "@types/prettier@npm:2.3.0"
+  checksum: 7c1ef16234220519d52b8a154723caf5c5dc9d5eaa85bfe06e367ba57472dab7f7fdac1ca7c29d9010d58f74f3b5235a9f8bad0111d9bad74018eb8141371e7e
+  languageName: node
+  linkType: hard
+
+"@types/prettier@npm:^2.1.5":
   version: 2.2.3
   resolution: "@types/prettier@npm:2.2.3"
   checksum: b7e80288f9f776caca84391a7a217b8baac6b4fce00bb9701af69299d465cb8faf17466f0af0803970c74d2c191767ca729a6d21a2f7e2ce552d1ef6cc0d653a
@@ -6938,12 +6945,12 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.3.0":
-  version: 2.3.0
-  resolution: "prettier@npm:2.3.0"
+"prettier@npm:2.3.1":
+  version: 2.3.1
+  resolution: "prettier@npm:2.3.1"
   bin:
     prettier: bin-prettier.js
-  checksum: 652640cc8b71bc5277cfb8bf6f161783ca588efcf683c3d630837b39da8d57fef35c9e00ae5855a8e3c75136c42274046c913cc2b2d2968558315f31c6a26981
+  checksum: 9b4a695b87ce5f510fc20feec01cce7371f0fa0b92ffe79d543f6be52e2004c532861629de4d7ab1c577e1f649dce3cfccd62cb2ca6526b1da8d9c63eb84bf36
   languageName: node
   linkType: hard
 

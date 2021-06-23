@@ -32,7 +32,7 @@
   "dependencies": {
     "change-case": "4.1.2",
     "openapi-types": "9.0.3",
-    "prettier": "2.3.0",
+    "prettier": "2.3.1",
     "ramda": "0.27.1",
     "tslib": "2.3.0",
     "winston": "3.3.3",
@@ -46,7 +46,7 @@
     "@jest/types": "27.0.2",
     "@types/jest": "26.0.23",
     "@types/node": "14.17.3",
-    "@types/prettier": "2.2.3",
+    "@types/prettier": "2.3.0",
     "@types/ramda": "0.27.40",
     "@types/yargs": "17.0.0",
     "@typescript-eslint/eslint-plugin": "4.28.0",
