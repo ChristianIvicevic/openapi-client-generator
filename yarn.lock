@@ -909,7 +909,7 @@ __metadata:
     "@commitlint/config-conventional": 13.1.0
     "@jest/types": 27.0.6
     "@types/jest": 26.0.24
-    "@types/node": 14.17.7
+    "@types/node": 14.17.8
     "@types/prettier": 2.3.2
     "@types/ramda": 0.27.44
     "@types/yargs": 17.0.2
@@ -1390,10 +1390,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:14.17.7":
-  version: 14.17.7
-  resolution: "@types/node@npm:14.17.7"
-  checksum: c9c3954bde4b0a8b4febdf4f21fa0ca9f42895ea684a32d1a32229cd4c6f3d49b7e5bd8553b1aa20b79c509b14614bb533082041af30b35f24fc1c73ce8ede0d
+"@types/node@npm:14.17.8":
+  version: 14.17.8
+  resolution: "@types/node@npm:14.17.8"
+  checksum: 681c0d64be3d9d394918a61202cc41735cf52b32216aaa287f7643ae8d19b504757941b962f499c8add1f60338b0cfeecf597b7fcf635d667252b2496366e670
   languageName: node
   linkType: hard
 
