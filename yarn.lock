@@ -941,7 +941,7 @@ __metadata:
     winston: 3.3.3
     winston-console-format: 1.0.8
     yaml: 1.10.2
-    yargs: 17.0.1
+    yargs: 17.1.0
   peerDependencies:
     axios: "*"
     typescript: ^4.0.0
@@ -8835,9 +8835,9 @@ typescript@4.3.5:
   languageName: node
   linkType: hard
 
-"yargs@npm:17.0.1, yargs@npm:^17.0.0":
-  version: 17.0.1
-  resolution: "yargs@npm:17.0.1"
+"yargs@npm:17.1.0":
+  version: 17.1.0
+  resolution: "yargs@npm:17.1.0"
   dependencies:
     cliui: ^7.0.2
     escalade: ^3.1.1
@@ -8846,7 +8846,7 @@ typescript@4.3.5:
     string-width: ^4.2.0
     y18n: ^5.0.5
     yargs-parser: ^20.2.2
-  checksum: a7969b48d2dea129a7d4fcc3f13e88d4f94bacbd24f720b2ce19946fa9facc42cfed89c059d953091241f4e9e9000ed9dbf86e4bb4b6ceb3a26af10ddebdd0b2
+  checksum: 3f39f16213bec069b18e744dee8d6de2a2e4396e7fa81578c83625b881ba04ace37a32a3e4090ed10392e3db83819502e818eb3bbd0f3bf4a9460fd0b5c19247
   languageName: node
   linkType: hard
 
@@ -8862,6 +8862,21 @@ typescript@4.3.5:
     y18n: ^5.0.5
     yargs-parser: ^20.2.2
   checksum: a79ce1f043021cd645de1ffebb6149541d382ba68f4a6b5eca5d2ad65af51893371bbd78e240dc3b6cf0cbb419511ba5bda715dec992e4266e6863ea49f14feb
+  languageName: node
+  linkType: hard
+
+"yargs@npm:^17.0.0":
+  version: 17.0.1
+  resolution: "yargs@npm:17.0.1"
+  dependencies:
+    cliui: ^7.0.2
+    escalade: ^3.1.1
+    get-caller-file: ^2.0.5
+    require-directory: ^2.1.1
+    string-width: ^4.2.0
+    y18n: ^5.0.5
+    yargs-parser: ^20.2.2
+  checksum: a7969b48d2dea129a7d4fcc3f13e88d4f94bacbd24f720b2ce19946fa9facc42cfed89c059d953091241f4e9e9000ed9dbf86e4bb4b6ceb3a26af10ddebdd0b2
   languageName: node
   linkType: hard
 
