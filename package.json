@@ -34,7 +34,7 @@
     "openapi-types": "9.1.0",
     "prettier": "2.3.2",
     "ramda": "0.27.1",
-    "tslib": "2.3.0",
+    "tslib": "2.3.1",
     "winston": "3.3.3",
     "winston-console-format": "1.0.8",
     "yaml": "1.10.2",
