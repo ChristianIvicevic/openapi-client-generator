@@ -1,47 +1,54 @@
 import { compile } from 'index';
 import { createTestDocument, createTestDocumentWithPaths } from 'utils/testing';
 
-describe('Response Bodies', () => {
+describe('Request Bodies', () => {
   it('compiles operations with a request body content $ref', () => {
     // GIVEN an OpenAPI schema that contains operations with a request body
     // content $ref
-    const document = createTestDocumentWithPaths({
-      '/api/test': {
-        post: {
-          operationId: 'postOperation',
-          requestBody: {
-            content: {
-              'application/json': {
-                schema: {
-                  $ref: '#/components/schemas/TestDto',
+    const document = createTestDocument({
+      paths: {
+        '/api/test': {
+          post: {
+            operationId: 'postOperation',
+            requestBody: {
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/TestDto',
+                  },
                 },
               },
             },
-          },
-          responses: {
-            204: {
-              description: 'No content.',
+            responses: {
+              204: {
+                description: 'No content.',
+              },
             },
+            summary: 'Endpoint under test.',
           },
-          summary: 'Endpoint under test.',
+          put: {
+            operationId: 'putOperation',
+            requestBody: {
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/TestDto',
+                  },
+                },
+              },
+            },
+            responses: {
+              204: {
+                description: 'No content.',
+              },
+            },
+            summary: 'Endpoint under test.',
+          },
         },
-        put: {
-          operationId: 'putOperation',
-          requestBody: {
-            content: {
-              'application/json': {
-                schema: {
-                  $ref: '#/components/schemas/TestDto',
-                },
-              },
-            },
-          },
-          responses: {
-            204: {
-              description: 'No content.',
-            },
-          },
-          summary: 'Endpoint under test.',
+      },
+      components: {
+        schemas: {
+          TestDto: {},
         },
       },
     });

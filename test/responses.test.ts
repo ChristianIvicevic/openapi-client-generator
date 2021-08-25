@@ -85,71 +85,78 @@ describe('Responses', () => {
   it('compiles operations with a response content schema $ref', () => {
     // GIVEN an OpenAPI schema that contains operations with a response content
     // schema $ref
-    const document = createTestDocumentWithPaths({
-      '/api/test': {
-        get: {
-          operationId: 'getOperation',
-          responses: {
-            204: {
-              description: 'No content.',
-              content: {
-                'application/json': {
-                  schema: {
-                    $ref: '#/components/schemas/TestDto',
+    const document = createTestDocument({
+      paths: {
+        '/api/test': {
+          get: {
+            operationId: 'getOperation',
+            responses: {
+              204: {
+                description: 'No content.',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/TestDto',
+                    },
                   },
                 },
               },
             },
+            summary: 'Endpoint under test.',
           },
-          summary: 'Endpoint under test.',
+          post: {
+            operationId: 'postOperation',
+            responses: {
+              204: {
+                description: 'No content.',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/TestDto',
+                    },
+                  },
+                },
+              },
+            },
+            summary: 'Endpoint under test.',
+          },
+          put: {
+            operationId: 'putOperation',
+            responses: {
+              204: {
+                description: 'No content.',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/TestDto',
+                    },
+                  },
+                },
+              },
+            },
+            summary: 'Endpoint under test.',
+          },
+          delete: {
+            operationId: 'deleteOperation',
+            responses: {
+              204: {
+                description: 'No content.',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/TestDto',
+                    },
+                  },
+                },
+              },
+            },
+            summary: 'Endpoint under test.',
+          },
         },
-        post: {
-          operationId: 'postOperation',
-          responses: {
-            204: {
-              description: 'No content.',
-              content: {
-                'application/json': {
-                  schema: {
-                    $ref: '#/components/schemas/TestDto',
-                  },
-                },
-              },
-            },
-          },
-          summary: 'Endpoint under test.',
-        },
-        put: {
-          operationId: 'putOperation',
-          responses: {
-            204: {
-              description: 'No content.',
-              content: {
-                'application/json': {
-                  schema: {
-                    $ref: '#/components/schemas/TestDto',
-                  },
-                },
-              },
-            },
-          },
-          summary: 'Endpoint under test.',
-        },
-        delete: {
-          operationId: 'deleteOperation',
-          responses: {
-            204: {
-              description: 'No content.',
-              content: {
-                'application/json': {
-                  schema: {
-                    $ref: '#/components/schemas/TestDto',
-                  },
-                },
-              },
-            },
-          },
-          summary: 'Endpoint under test.',
+      },
+      components: {
+        schemas: {
+          TestDto: {},
         },
       },
     });
@@ -195,83 +202,90 @@ describe('Responses', () => {
   it('compiles operations with a response $ref array', () => {
     // GIVEN an OpenAPI schema that contains operations with a response $ref
     // array
-    const document = createTestDocumentWithPaths({
-      '/api/test': {
-        get: {
-          operationId: 'getOperation',
-          responses: {
-            204: {
-              description: 'No content.',
-              content: {
-                'application/json': {
-                  schema: {
-                    type: 'array',
-                    items: {
-                      $ref: '#/components/schemas/TestDto',
+    const document = createTestDocument({
+      paths: {
+        '/api/test': {
+          get: {
+            operationId: 'getOperation',
+            responses: {
+              204: {
+                description: 'No content.',
+                content: {
+                  'application/json': {
+                    schema: {
+                      type: 'array',
+                      items: {
+                        $ref: '#/components/schemas/TestDto',
+                      },
                     },
                   },
                 },
               },
             },
+            summary: 'Endpoint under test.',
           },
-          summary: 'Endpoint under test.',
+          post: {
+            operationId: 'postOperation',
+            responses: {
+              204: {
+                description: 'No content.',
+                content: {
+                  'application/json': {
+                    schema: {
+                      type: 'array',
+                      items: {
+                        $ref: '#/components/schemas/TestDto',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            summary: 'Endpoint under test.',
+          },
+          put: {
+            operationId: 'putOperation',
+            responses: {
+              204: {
+                description: 'No content.',
+                content: {
+                  'application/json': {
+                    schema: {
+                      type: 'array',
+                      items: {
+                        $ref: '#/components/schemas/TestDto',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            summary: 'Endpoint under test.',
+          },
+          delete: {
+            operationId: 'deleteOperation',
+            responses: {
+              204: {
+                description: 'No content.',
+                content: {
+                  'application/json': {
+                    schema: {
+                      type: 'array',
+                      items: {
+                        $ref: '#/components/schemas/TestDto',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            summary: 'Endpoint under test.',
+          },
         },
-        post: {
-          operationId: 'postOperation',
-          responses: {
-            204: {
-              description: 'No content.',
-              content: {
-                'application/json': {
-                  schema: {
-                    type: 'array',
-                    items: {
-                      $ref: '#/components/schemas/TestDto',
-                    },
-                  },
-                },
-              },
-            },
-          },
-          summary: 'Endpoint under test.',
-        },
-        put: {
-          operationId: 'putOperation',
-          responses: {
-            204: {
-              description: 'No content.',
-              content: {
-                'application/json': {
-                  schema: {
-                    type: 'array',
-                    items: {
-                      $ref: '#/components/schemas/TestDto',
-                    },
-                  },
-                },
-              },
-            },
-          },
-          summary: 'Endpoint under test.',
-        },
-        delete: {
-          operationId: 'deleteOperation',
-          responses: {
-            204: {
-              description: 'No content.',
-              content: {
-                'application/json': {
-                  schema: {
-                    type: 'array',
-                    items: {
-                      $ref: '#/components/schemas/TestDto',
-                    },
-                  },
-                },
-              },
-            },
-          },
-          summary: 'Endpoint under test.',
+      },
+      components: {
+        schemas: {
+          TestDto: {},
         },
       },
     });

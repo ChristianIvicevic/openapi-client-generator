@@ -3,12 +3,12 @@ import { factory } from 'typescript';
 import { compact } from 'utils/fp';
 
 type Options = {
-  readonly referencedSchemas: readonly string[];
+  readonly schemas: readonly string[];
   readonly schemasFileName?: string;
 };
 
 export const createLeadingTrivia = ({
-  referencedSchemas,
+  schemas,
   schemasFileName = 'schemas',
 }: Options) => {
   const axiosRequestConfigImport = factory.createImportDeclaration(
@@ -45,7 +45,7 @@ export const createLeadingTrivia = ({
       true,
       undefined,
       factory.createNamedImports(
-        referencedSchemas.map(schema =>
+        schemas.map(schema =>
           factory.createImportSpecifier(
             undefined,
             factory.createIdentifier(schema),
@@ -59,6 +59,6 @@ export const createLeadingTrivia = ({
   return compact([
     axiosRequestConfigImport,
     axiosImport,
-    referencedSchemas.length !== 0 && schemasImport,
+    schemas.length !== 0 && schemasImport,
   ]);
 };

@@ -1,3 +1,4 @@
+import { pascalCase } from 'change-case';
 import { Constants } from 'generator/constants';
 import { createLeadingTrivia } from 'generator/factories/leading-trivia';
 import type { CreateOperationOrThrowParameters } from 'generator/factories/operation';
@@ -15,19 +16,12 @@ export const compileDocument = (
   document: OpenAPIV3.Document,
   options?: CompilerOptions,
 ) => {
-  // TODO: Evaluate whether we can drop tracking of referenced schemas.
-  const referencedSchemas: string[] = [];
-
   winston.verbose('Compiling schemas...');
   const compiledSchemas = Object.entries(document.components?.schemas ?? {})
     .sort(([a], [b]) => a.localeCompare(b))
     .flatMap(([schema, schemaObject]) => {
       winston.debug(`Compiling schema '${schema}'`);
-      return createSchemaDeclaration(
-        { document, referencedSchemas },
-        schema,
-        schemaObject,
-      );
+      return createSchemaDeclaration(schema, schemaObject);
     });
 
   winston.verbose('Compiling operations...');
@@ -57,7 +51,7 @@ export const compileDocument = (
               return {
                 operationId: operationObject.operationId ?? '<NO OPERATION ID>',
                 parameters: [
-                  { document, path, referencedSchemas },
+                  { document, path },
                   method,
                   pathParameters,
                   operationObject,
@@ -74,9 +68,9 @@ export const compileDocument = (
   const schemasContent = compileNodes(compiledSchemas);
   const requestsContent = compileNodes([
     ...createLeadingTrivia({
-      referencedSchemas: [
-        ...new Set(referencedSchemas.sort((a, b) => a.localeCompare(b))),
-      ],
+      schemas: Object.keys(document.components?.schemas ?? {})
+        .map(schema => pascalCase(schema))
+        .sort((a, b) => a.localeCompare(b)),
       schemasFileName: options?.schemasFileName,
     }),
     ...compiledOperations,
