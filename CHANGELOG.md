@@ -1,5 +1,20 @@
 # Changelog
 
+### [2.5.7](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.6...v2.5.7) (2021-08-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency openapi-types to v9.0.3 ([77bef31](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/77bef3177a685b192ce8a7aef233fc988abdce34))
+* **deps:** update dependency openapi-types to v9.1.0 ([23b1587](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/23b158771d1e3d096b34c3041d6567567ebab1c1))
+* **deps:** update dependency openapi-types to v9.2.0 ([d7a7f7a](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/d7a7f7af713609f0048b6d75e1a6be0040568581))
+* **deps:** update dependency prettier to v2.3.1 ([edeefb0](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/edeefb0a53591bb447a34b667e6963329b79e8ec))
+* **deps:** update dependency prettier to v2.3.2 ([aec32b2](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/aec32b267177969d6f77e71dacae9bb844076ece))
+* **deps:** update dependency tslib to v2.3.0 ([144c391](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/144c391412fd3565a7aee6038949646c89a8f007))
+* **deps:** update dependency tslib to v2.3.1 ([afdfcaa](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/afdfcaa05a518fd38fcdaf4ed6b823e1088f0613))
+* **deps:** update dependency yargs to v17.1.0 ([447cfa5](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/447cfa5cfd57f1ce4f039ece8513b379c336ff43))
+* **deps:** update dependency yargs to v17.1.1 ([274febf](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/274febf0552d0b00fa80387ef506159ee458c1d2))
+
 ### [2.5.6](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.5...v2.5.6) (2021-05-26)
 
 
