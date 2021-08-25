@@ -32,7 +32,7 @@
   "dependencies": {
     "change-case": "4.1.2",
     "eslint-config-airbnb": "18.2.1",
-    "openapi-types": "9.1.0",
+    "openapi-types": "9.2.0",
     "prettier": "2.3.2",
     "ramda": "0.27.1",
     "tslib": "2.3.1",
