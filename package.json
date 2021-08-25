@@ -45,7 +45,7 @@
     "@commitlint/cli": "13.1.0",
     "@commitlint/config-conventional": "13.1.0",
     "@jest/types": "27.0.6",
-    "@types/jest": "26.0.24",
+    "@types/jest": "27.0.1",
     "@types/node": "14.17.11",
     "@types/prettier": "2.3.2",
     "@types/ramda": "0.27.44",
