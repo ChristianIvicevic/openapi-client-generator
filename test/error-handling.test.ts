@@ -29,6 +29,8 @@ describe('Error Handling', () => {
   it('throws for an operation without any responses', () => {
     // GIVEN an OpenAPI schema that contains an endpoint with no responses
     const document = createTestDocumentWithPaths({
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore This is intentionally not adhering to the schema.
       '/api/test': {
         get: {
           operationId: 'getOperation',
