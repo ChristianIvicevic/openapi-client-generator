@@ -1,6 +1,5 @@
 import { pascalCase } from 'change-case';
 import { resolveSchema } from 'generator/resolver';
-import type { Context } from 'generator/types';
 import type { OpenAPIV3 } from 'openapi-types';
 import ts, { factory } from 'typescript';
 import { compact } from 'utils/fp';
@@ -8,7 +7,6 @@ import { dereferenceName } from 'utils/openapi';
 import { isReferenceObject } from 'utils/type-guards';
 
 export const createSchemaDeclaration = (
-  context: Context,
   schemaName: string,
   schemaObject:
     | OpenAPIV3.ReferenceObject
@@ -41,7 +39,7 @@ export const createSchemaDeclaration = (
       [factory.createModifier(ts.SyntaxKind.ExportKeyword)],
       factory.createIdentifier(pascalCase(schemaName)),
       undefined,
-      resolveSchema(context, schemaObject),
+      resolveSchema(schemaObject),
     ),
   ]);
 };

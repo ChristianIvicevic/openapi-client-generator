@@ -1,36 +1,32 @@
-import { pascalCase } from 'change-case';
-import type { Context } from 'generator/types';
 import type { OpenAPIV3 } from 'openapi-types';
-import { partial } from 'ramda';
 import ts, { factory } from 'typescript';
 import { compact } from 'utils/fp';
+import { dereferenceName } from 'utils/openapi';
 import { isArraySchemaObject, isReferenceObject } from 'utils/type-guards';
 
 export const resolveSchema = (
-  context: Context,
   schemaObject:
     | OpenAPIV3.ReferenceObject
     | OpenAPIV3.NonArraySchemaObject
     | OpenAPIV3.ArraySchemaObject,
 ): ts.TypeNode =>
   isReferenceObject(schemaObject)
-    ? resolveReferenceSchemaOrThrow(context, schemaObject.$ref)
+    ? resolveReferenceSchemaOrThrow(schemaObject.$ref)
     : factory.createUnionTypeNode(
         compact([
-          resolveInlineSchema(context, schemaObject),
+          resolveInlineSchema(schemaObject),
           schemaObject.nullable &&
             factory.createLiteralTypeNode(factory.createNull()),
         ]),
       );
 
 const resolveReferenceSchemaOrThrow = (
-  { referencedSchemas }: Context,
   $ref: OpenAPIV3.ReferenceObject['$ref'],
 ) => {
   if ($ref.startsWith('#/components/schemas')) {
-    const schema = pascalCase($ref.replace('#/components/schemas/', ''));
-    referencedSchemas.push(schema);
-    return factory.createTypeReferenceNode(factory.createIdentifier(schema));
+    return factory.createTypeReferenceNode(
+      factory.createIdentifier(dereferenceName($ref)),
+    );
   }
   throw Error(
     `The reference '${$ref}' does not match the pattern '#/components/schemas/*'`,
@@ -38,12 +34,11 @@ const resolveReferenceSchemaOrThrow = (
 };
 
 const resolveInlineSchema = (
-  context: Context,
   schemaObject: OpenAPIV3.NonArraySchemaObject | OpenAPIV3.ArraySchemaObject,
 ) => {
   switch (schemaObject.type) {
     case 'array':
-      return resolveArraySchema(context, schemaObject);
+      return resolveArraySchema(schemaObject);
     case 'boolean':
       return factory.createKeywordTypeNode(ts.SyntaxKind.BooleanKeyword);
     case 'integer':
@@ -60,40 +55,33 @@ const resolveInlineSchema = (
       return factory.createLiteralTypeNode(factory.createNull());
     /* eslint-enable @typescript-eslint/ban-ts-comment */
     case 'object':
-      return resolveObjectSchema(context, schemaObject);
+      return resolveObjectSchema(schemaObject);
     case 'string':
-      return resolveStringSchema(context, schemaObject);
+      return resolveStringSchema(schemaObject);
     default:
-      return resolveFallbackSchema(context, schemaObject);
+      return resolveFallbackSchema(schemaObject);
   }
 };
 
 const resolveFallbackSchema = (
-  context: Context,
   schemaObject: OpenAPIV3.NonArraySchemaObject,
 ): ts.TypeNode =>
-  tryResolveAmbiguousSchema(context, schemaObject) ??
-  tryResolveCombinedSchema(context, schemaObject) ??
-  tryResolveDictionarySchema(context, schemaObject) ??
+  tryResolveAmbiguousSchema(schemaObject) ??
+  tryResolveCombinedSchema(schemaObject) ??
+  tryResolveDictionarySchema(schemaObject) ??
   factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword);
 
-const resolveArraySchema = (
-  context: Context,
-  schemaObject: OpenAPIV3.ArraySchemaObject,
-) =>
+const resolveArraySchema = (schemaObject: OpenAPIV3.ArraySchemaObject) =>
   factory.createTypeOperatorNode(
     ts.SyntaxKind.ReadonlyKeyword,
-    factory.createArrayTypeNode(resolveSchema(context, schemaObject.items)),
+    factory.createArrayTypeNode(resolveSchema(schemaObject.items)),
   );
 
-const resolveObjectSchema = (
-  context: Context,
-  schemaObject: OpenAPIV3.NonArraySchemaObject,
-) => {
+const resolveObjectSchema = (schemaObject: OpenAPIV3.NonArraySchemaObject) => {
   const { required, properties, additionalProperties } = schemaObject;
 
   if (properties === undefined) {
-    return resolveFallbackSchema(context, schemaObject);
+    return resolveFallbackSchema(schemaObject);
   }
 
   const isRequired = (property: string) => (required ?? []).includes(property);
@@ -105,7 +93,7 @@ const resolveObjectSchema = (
       isRequired(name)
         ? undefined
         : factory.createToken(ts.SyntaxKind.QuestionToken),
-      resolveSchema(context, prop),
+      resolveSchema(prop),
     ),
   );
 
@@ -126,10 +114,7 @@ const resolveObjectSchema = (
   );
 };
 
-const resolveStringSchema = (
-  _context: Context,
-  schemaObject: OpenAPIV3.NonArraySchemaObject,
-) => {
+const resolveStringSchema = (schemaObject: OpenAPIV3.NonArraySchemaObject) => {
   return schemaObject.enum === undefined
     ? factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
     : factory.createUnionTypeNode(
@@ -142,7 +127,6 @@ const resolveStringSchema = (
 };
 
 const tryResolveAmbiguousSchema = (
-  context: Context,
   // The type of this parameter is artificially expanded since we want to
   // handle schema objects that are arrays without an explicit type property.
   // This is necessary since the typing assumes arrays always include a type
@@ -150,37 +134,33 @@ const tryResolveAmbiguousSchema = (
   schemaObject: OpenAPIV3.ArraySchemaObject | OpenAPIV3.NonArraySchemaObject,
 ) => {
   if (isArraySchemaObject(schemaObject)) {
-    return resolveArraySchema(context, schemaObject);
+    return resolveArraySchema(schemaObject);
   }
 
   if (schemaObject.properties !== undefined) {
-    return resolveObjectSchema(context, schemaObject);
+    return resolveObjectSchema(schemaObject);
   }
 
   return undefined;
 };
 
 const tryResolveCombinedSchema = (
-  context: Context,
   schemaObject: OpenAPIV3.NonArraySchemaObject,
 ) => {
   if (schemaObject.allOf) {
     return factory.createIntersectionTypeNode(
-      schemaObject.allOf.map(partial(resolveSchema, [context])),
+      schemaObject.allOf.map(resolveSchema),
     );
   }
 
   if (schemaObject.oneOf) {
-    return factory.createUnionTypeNode(
-      schemaObject.oneOf.map(partial(resolveSchema, [context])),
-    );
+    return factory.createUnionTypeNode(schemaObject.oneOf.map(resolveSchema));
   }
 
   return undefined;
 };
 
 const tryResolveDictionarySchema = (
-  context: Context,
   schemaObject: OpenAPIV3.NonArraySchemaObject,
 ) => {
   const { additionalProperties } = schemaObject;
@@ -194,6 +174,6 @@ const tryResolveDictionarySchema = (
 
   return factory.createTypeReferenceNode(factory.createIdentifier('Record'), [
     factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
-    resolveSchema(context, additionalProperties),
+    resolveSchema(additionalProperties),
   ]);
 };

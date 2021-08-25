@@ -1,12 +1,14 @@
-import { pascalCase } from 'change-case';
+import { camelCase, pascalCase } from 'change-case';
 import type { Context } from 'generator/types';
 import type { OpenAPIV3 } from 'openapi-types';
 import { isReferenceObject } from 'utils/type-guards';
 
 export const dereferenceName = ($ref: OpenAPIV3.ReferenceObject['$ref']) => {
-  /* istanbul ignore else */
   if ($ref.startsWith('#/components/schemas')) {
     return pascalCase($ref.replace('#/components/schemas/', ''));
+  }
+  if ($ref.startsWith('#/components/parameters')) {
+    return camelCase($ref.replace('#/components/parameters/', ''));
   }
   /* istanbul ignore next */
   throw Error(`The reference '${$ref}' does not match any component pattern`);

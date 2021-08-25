@@ -22,11 +22,12 @@ export const createAndPartitionParameters = (
     );
 
   // TODO: Handle header and cookie parameters.
-  const createSignature = partial(createParameterSignature, [context]);
-  const pathParameterPropertySignatures = pathParameters.map(createSignature);
+  const pathParameterPropertySignatures = pathParameters.map(
+    createParameterSignature,
+  );
   const queryParameterPropertySignatures = otherParameters
     .filter(parameter => parameter.in === 'query')
-    .map(createSignature);
+    .map(createParameterSignature);
 
   return {
     pathParameterPropertySignatures,
@@ -34,17 +35,19 @@ export const createAndPartitionParameters = (
   };
 };
 
-const createParameterSignature = (
-  context: Context,
-  { name, required, schema, description }: OpenAPIV3.ParameterObject,
-) => {
+const createParameterSignature = ({
+  name,
+  required,
+  schema,
+  description,
+}: OpenAPIV3.ParameterObject) => {
   const propertySignature = factory.createPropertySignature(
     [factory.createModifier(ts.SyntaxKind.ReadonlyKeyword)],
     factory.createIdentifier(camelCase(name)),
     required ? undefined : factory.createToken(ts.SyntaxKind.QuestionToken),
     schema === undefined
       ? factory.createKeywordTypeNode(ts.SyntaxKind.NeverKeyword)
-      : resolveSchema(context, schema),
+      : resolveSchema(schema),
   );
 
   if (description !== undefined) {

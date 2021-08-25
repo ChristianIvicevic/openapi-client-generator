@@ -20,12 +20,11 @@ export const createContentfulComponent = (
   return content === undefined
     ? [factory.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword)]
     : Object.entries(content).map(([mediaType, mediaTypeObject]) =>
-        createMediaType(context, mediaType, mediaTypeObject),
+        createMediaType(mediaType, mediaTypeObject),
       );
 };
 
 const createMediaType = (
-  context: Context,
   mediaType: string,
   mediaTypeObject: OpenAPIV3.MediaTypeObject,
 ) => {
@@ -42,5 +41,5 @@ const createMediaType = (
     return factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword);
   }
 
-  return resolveSchema(context, schema);
+  return resolveSchema(schema);
 };

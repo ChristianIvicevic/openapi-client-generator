@@ -1,26 +1,33 @@
 import { compile } from 'index';
-import { createTestDocumentWithPaths } from 'utils/testing';
+import { createTestDocument } from 'utils/testing';
 
 describe('Compiler Options', () => {
   it('compiles with a custom schema file name', () => {
     // GIVEN an OpenAPI schema
-    const document = createTestDocumentWithPaths({
-      '/api/test': {
-        get: {
-          operationId: 'getOperation',
-          responses: {
-            200: {
-              description: 'OK',
-              content: {
-                'application/json': {
-                  schema: {
-                    $ref: '#/components/schemas/TestSchema',
+    const document = createTestDocument({
+      paths: {
+        '/api/test': {
+          get: {
+            operationId: 'getOperation',
+            responses: {
+              200: {
+                description: 'OK',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/TestSchema',
+                    },
                   },
                 },
               },
             },
+            summary: 'Endpoint under test.',
           },
-          summary: 'Endpoint under test.',
+        },
+      },
+      components: {
+        schemas: {
+          TestSchema: {},
         },
       },
     });
