@@ -932,7 +932,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 4.30.0
     "@typescript-eslint/parser": 4.30.0
     "@zerollup/ts-transform-paths": 1.7.18
-    axios: 0.21.2
+    axios: 0.21.3
     change-case: 4.1.2
     commitizen: 4.2.4
     cz-conventional-changelog: 3.3.0
@@ -2044,12 +2044,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:0.21.2":
-  version: 0.21.2
-  resolution: "axios@npm:0.21.2"
+"axios@npm:0.21.3":
+  version: 0.21.3
+  resolution: "axios@npm:0.21.3"
   dependencies:
     follow-redirects: ^1.14.0
-  checksum: dc0341a1f23470f13fffd2f04ed7ad064f2d1190d8204df5f25eb58a71e075d3e49b86dcea10e59e7dd09510997976a695b1b6ea803525aecec8e31bfca5947f
+  checksum: 3d231925b322899b00a4cf231ab470635bbb979e7f76985e929ab33da334e252955305932ad034fc80d9a6c73112bf64286bb4b5e7faecb04586dd2755093957
   languageName: node
   linkType: hard
 
