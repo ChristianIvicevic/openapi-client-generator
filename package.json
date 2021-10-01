@@ -53,7 +53,7 @@
     "@typescript-eslint/eslint-plugin": "4.32.0",
     "@typescript-eslint/parser": "4.32.0",
     "@zerollup/ts-transform-paths": "1.7.18",
-    "axios": "0.21.4",
+    "axios": "0.22.0",
     "commitizen": "4.2.4",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "7.32.0",
