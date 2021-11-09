@@ -57,7 +57,7 @@
     "commitizen": "4.2.4",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "8.2.0",
-    "eslint-config-airbnb-typescript": "14.0.2",
+    "eslint-config-airbnb-typescript": "15.0.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-import-resolver-typescript": "2.5.0",
     "eslint-plugin-import": "2.25.2",
