@@ -962,7 +962,7 @@ __metadata:
     eslint-plugin-prettier: 4.0.0
     husky: next
     jest: 27.3.1
-    openapi-types: 9.3.0
+    openapi-types: 9.3.1
     pinst: 2.1.6
     prettier: 2.4.1
     ramda: 0.27.1
@@ -6697,10 +6697,10 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"openapi-types@npm:9.3.0":
-  version: 9.3.0
-  resolution: "openapi-types@npm:9.3.0"
-  checksum: 071b002403df1f86deec10658c636a95d8f02c1469b58f5b5db02b24d4da3ce4343b6c3b30a466982205149211051d66717b497650ee097f33a19ae02fd85de0
+"openapi-types@npm:9.3.1":
+  version: 9.3.1
+  resolution: "openapi-types@npm:9.3.1"
+  checksum: 44b7132b159666877b1659dcfb48ea34d45222dd96a14626d57830401dfad801d2cba5dc9e88471faa4f1c2f7670d814601d91e156d6a05ecccc60c65660ebbc
   languageName: node
   linkType: hard
 
