@@ -943,7 +943,7 @@ __metadata:
     "@types/jest": 27.0.3
     "@types/node": 14.17.34
     "@types/prettier": 2.4.2
-    "@types/ramda": 0.27.50
+    "@types/ramda": 0.27.52
     "@types/yargs": 17.0.7
     "@typescript-eslint/eslint-plugin": 5.4.0
     "@typescript-eslint/parser": 5.4.0
@@ -1458,12 +1458,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ramda@npm:0.27.50":
-  version: 0.27.50
-  resolution: "@types/ramda@npm:0.27.50"
+"@types/ramda@npm:0.27.52":
+  version: 0.27.52
+  resolution: "@types/ramda@npm:0.27.52"
   dependencies:
     ts-toolbelt: ^6.15.1
-  checksum: bae394d8bdf4ff8a019b7cdd1b9edc25375dc919a9e4ac2f6d3f7558c37e0101d0aaa149d14d7169c4fa6358772fbabc68201b66fd428a13675b2b5c62456a72
+  checksum: 67e2df83b8ca5c4c85797cad215e89c18274a1222a9daad3ea5563ccd3cb81a2749898cc2387f3eef16ecaf35936a1fcbc72b25a9205d232763960fa3c900bbe
   languageName: node
   linkType: hard
 
