@@ -1,9 +1,14 @@
+import { pipe } from 'fp-ts/lib/function';
+import * as RA from 'fp-ts/ReadonlyArray';
 import { format as prettier } from 'prettier';
-import { reverse } from 'ramda';
 import ts from 'typescript';
 
-export const format = (content: string) =>
-  prettier(content, {
+/**
+ * Formats the specified code using prettier.
+ * @param code Code to format.
+ */
+export const formatUsingPrettier = (code: string) =>
+  prettier(code, {
     ...{
       arrowParens: 'avoid',
       singleQuote: true,
@@ -13,13 +18,17 @@ export const format = (content: string) =>
     parser: 'typescript',
   });
 
-export const organizeImports = (content: string) => {
+/**
+ * Organizes and removes unused imports from the specified code.
+ * @param code Code to organize.
+ */
+export const organizeImports = (code: string) => {
   const languageServiceHost = new InMemoryLanguageServiceHost();
   const languageService = ts.createLanguageService(
     languageServiceHost,
     ts.createDocumentRegistry(),
   );
-  languageServiceHost.addFile('output.ts', content);
+  languageServiceHost.addFile('output.ts', code);
   const fileTextChanges = languageService.organizeImports(
     {
       type: 'file',
@@ -29,21 +38,25 @@ export const organizeImports = (content: string) => {
     undefined,
   );
 
-  if (fileTextChanges.length === 0) {
-    return content;
-  }
-  return applyTextChanges(content, fileTextChanges[0].textChanges);
+  return fileTextChanges.length === 0
+    ? code
+    : applyTextChanges(code, fileTextChanges[0].textChanges);
 };
 
 const applyTextChanges = (content: string, changes: readonly ts.TextChange[]) =>
-  reverse(changes).reduce(
-    (newContent, { span, newText }) =>
-      `${newContent.slice(0, span.start)}${newText}${newContent.slice(
-        span.start + span.length,
-      )}`,
-    content,
+  pipe(
+    changes,
+    RA.reverse,
+    RA.reduce(content, (newContent, { span, newText }) =>
+      [
+        newContent.slice(0, span.start),
+        newText,
+        newContent.slice(span.start + span.length),
+      ].join(''),
+    ),
   );
 
+/* istanbul ignore next */
 class InMemoryLanguageServiceHost implements ts.LanguageServiceHost {
   private files: Record<string, { file: ts.IScriptSnapshot; ver: number }> = {};
 

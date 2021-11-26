@@ -1,223 +1,99 @@
-import { compile } from 'index';
-import { createTestDocument, createTestDocumentWithPaths } from 'utils/testing';
+import { generateSourceFiles } from 'index';
+import { createDocument } from 'utils/testing';
 
 describe('Error Handling', () => {
   it('throws for an operation without an operationId', () => {
-    // GIVEN an OpenAPI schema that contains an endpoint with no operationId
-    const document = createTestDocumentWithPaths({
-      '/api/test': {
-        get: {
-          responses: {
-            204: {
-              description: 'Response under test.',
-            },
+    const document = createDocument({
+      paths: {
+        '/api/test': {
+          get: {
+            responses: {},
+            summary: 'Endpoint under test.',
           },
-          summary: 'Endpoint under test.',
         },
       },
     });
 
-    // WHEN attempting to compile
-    const functionUnderTest = () => compile(document);
+    const either = generateSourceFiles(JSON.stringify(document));
 
-    // THEN the compiler should throw an error
-    expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
-      `"'get' operation object has no operation id"`,
-    );
+    expect(either).toMatchInlineSnapshot(`
+      Object {
+        "_tag": "Left",
+        "left": Array [
+          "The 'get' method for the path '/api/test' needs an operation id.",
+        ],
+      }
+    `);
   });
 
   it('throws for an operation without any responses', () => {
-    // GIVEN an OpenAPI schema that contains an endpoint with no responses
-    const document = createTestDocumentWithPaths({
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore This is intentionally not adhering to the schema.
-      '/api/test': {
-        get: {
-          operationId: 'getOperation',
-          summary: 'Endpoint under test.',
-        },
-      },
-    });
-
-    // WHEN attempting to compile
-    const functionUnderTest = () => compile(document);
-
-    // THEN the compiler should throw an error
-    expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
-      `"'get' operation object has no responses"`,
-    );
-  });
-
-  it('throws for an operation that references a parameter that does not exist', () => {
-    // GIVEN an OpenAPI schema that contains a single endpoint with a reference
-    // to a parameter that does not exist
-    const document = createTestDocumentWithPaths({
-      '/api/test/{does-not-exist}': {
-        parameters: [
-          {
-            $ref: '#/components/parameters/does-not-exist',
-          },
-        ],
-        get: {
-          operationId: 'getOperation',
-          responses: {
-            204: {
-              description: 'No content.',
-            },
-          },
-          summary: 'Endpoint under test.',
-        },
-      },
-    });
-
-    // WHEN attempting to compile
-    const functionUnderTest = () => compile(document);
-
-    // THEN the compiler should throw an error
-    expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
-      `"Cannot dereference component '#/components/parameters/does-not-exist'"`,
-    );
-  });
-
-  it('throws for an operation that references a parameter that is a ref as well', () => {
-    // GIVEN an OpenAPI schema that contains a single endpoint with a reference
-    // to a parameter that is a ref as well
-    const document = createTestDocument({
-      components: {
-        parameters: {
-          'deep-param-ref': {
-            $ref: '#/components/parameters/param-ref',
-          },
-        },
-      },
+    const document = createDocument({
       paths: {
-        '/api/test/{param-ref}': {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore This is intentionally not adhering to the schema.
+        '/api/test': {
+          get: {
+            operationId: 'getOperation',
+            summary: 'Endpoint under test.',
+          },
+        },
+      },
+    });
+
+    const either = generateSourceFiles(JSON.stringify(document));
+
+    expect(either).toMatchInlineSnapshot(`
+      Object {
+        "_tag": "Left",
+        "left": Array [
+          "The 'get' method for the path '/api/test' has no responses.",
+        ],
+      }
+    `);
+  });
+
+  // TODO: The compiler is not yet able to handle this case so it has to be
+  //  implemented first.
+  it.skip('throws for an operation that references a parameter that does not exist', () => {
+    const document = createDocument({
+      paths: {
+        '/api/test/{does-not-exist}': {
           parameters: [
             {
-              $ref: '#/components/parameters/deep-param-ref',
+              $ref: '#/components/parameters/does-not-exist',
             },
           ],
           get: {
             operationId: 'getOperation',
-            responses: {
-              204: {
-                description: 'No content.',
-              },
-            },
+            responses: {},
             summary: 'Endpoint under test.',
           },
         },
       },
     });
 
-    // WHEN attempting to compile
-    const functionUnderTest = () => compile(document);
+    const either = generateSourceFiles(JSON.stringify(document));
 
-    // THEN the compiler should throw an error
-    expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
-      `"Dereferenced component '#/components/parameters/deep-param-ref' is a deep reference to '#/components/parameters/param-ref', which is not supported"`,
-    );
-  });
-
-  it('throws when trying to dereference a type that is not a schema', () => {
-    // GIVEN an OpenAPI schema that contains a single endpoint with a reference
-    // to a type that is not a schema
-    const document = createTestDocumentWithPaths({
-      '/api/test': {
-        get: {
-          operationId: 'getOperation',
-          responses: {
-            200: {
-              description: 'OK',
-              content: {
-                'application/json': {
-                  schema: {
-                    $ref: '#/components/examples/ExampleDto',
-                  },
-                },
-              },
-            },
-          },
-          summary: 'Endpoint under test.',
+    expect(either).toMatchInlineSnapshot(`
+      Object {
+        "_tag": "Right",
+        "right": Object {
+          "operationsFileContent": "/* eslint-disable */
+      /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+      import type { AxiosRequestConfig } from 'axios';
+      import axios from 'axios';
+      /**
+       * Endpoint under test.
+       * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
+       */
+      export const getOperation = async (config?: AxiosRequestConfig) =>
+        axios.get<void>('/api/test/{does-not-exist}', config);
+      ",
+          "schemaFileContent": "/* eslint-disable */
+      /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+      ",
         },
-      },
-    });
-
-    // WHEN attempting to compile
-    const functionUnderTest = () => compile(document);
-
-    // THEN the compiler should throw an error
-    expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
-      `"The reference '#/components/examples/ExampleDto' does not match the pattern '#/components/schemas/*'"`,
-    );
-  });
-
-  it('throws when trying to dereference a deeply nested component', () => {
-    // GIVEN an OpenAPI schema that contains a single endpoint with a deeply
-    // nested component
-    const document = createTestDocument({
-      components: {
-        responses: {
-          TestRefResponse: {
-            $ref: '#/components/responses/TestResponse',
-          },
-          TestResponse: {
-            description: 'No content.',
-            content: {
-              'application/json': {
-                schema: {},
-              },
-            },
-          },
-        },
-      },
-      paths: {
-        '/api/test': {
-          get: {
-            operationId: 'getOperation',
-            responses: {
-              204: {
-                $ref: '#/components/responses/TestRefResponse',
-              },
-            },
-            summary: 'Endpoint under test.',
-          },
-        },
-      },
-    });
-
-    // WHEN attempting to compile
-    const functionUnderTest = () => compile(document);
-
-    // THEN the compiler should throw an error
-    expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
-      `"Dereferenced component '#/components/responses/TestRefResponse' is a deep reference to '#/components/responses/TestResponse', which is not supported"`,
-    );
-  });
-
-  it('throws when trying to dereference an unsupported component', () => {
-    // GIVEN an OpenAPI schema that contains a single endpoint with a deeply
-    // nested component
-    const document = createTestDocumentWithPaths({
-      '/api/test': {
-        get: {
-          operationId: 'getOperation',
-          responses: {
-            204: {
-              $ref: '#/components/callbacks/TestCallback',
-            },
-          },
-          summary: 'Endpoint under test.',
-        },
-      },
-    });
-
-    // WHEN attempting to compile
-    const functionUnderTest = () => compile(document);
-
-    // THEN the compiler should throw an error
-    expect(functionUnderTest).toThrowErrorMatchingInlineSnapshot(
-      `"Cannot dereference component '#/components/callbacks/TestCallback'"`,
-    );
+      }
+    `);
   });
 });

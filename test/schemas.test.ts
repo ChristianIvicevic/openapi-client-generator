@@ -1,71 +1,69 @@
-import { compile } from 'index';
-import { createTestDocumentWithSchemas } from 'utils/testing';
+import { generateSourceFilesOrThrow } from 'index';
+import { createDocument } from 'utils/testing';
 
 describe('Schemas', () => {
   it('compiles simple scalar types', () => {
-    // GIVEN an OpenAPI schema that contains schemas for simple scalar types
-    const document = createTestDocumentWithSchemas({
-      BooleanSchema: {
-        type: 'boolean',
-        description: 'Schema under test.',
-      },
-      NullableBooleanSchema: {
-        type: 'boolean',
-        nullable: true,
-        description: 'Schema under test.',
-      },
-      IntegerSchema: {
-        type: 'integer',
-        description: 'Schema under test.',
-      },
-      NullableIntegerSchema: {
-        type: 'integer',
-        nullable: true,
-        description: 'Schema under test.',
-      },
-      NumberSchema: {
-        type: 'number',
-        description: 'Schema under test.',
-      },
-      NullableNumberSchema: {
-        type: 'number',
-        nullable: true,
-        description: 'Schema under test.',
-      },
-      StringSchema: {
-        type: 'string',
-        description: 'Schema under test.',
-      },
-      NullableStringSchema: {
-        type: 'string',
-        nullable: true,
-        description: 'Schema under test.',
-      },
-      StringEnumSchema: {
-        type: 'string',
-        enum: ['value1', 'value2'],
-        description: 'Schema under test.',
-      },
-      NullableStringEnumSchema: {
-        type: 'string',
-        nullable: true,
-        enum: ['value1', 'value2'],
-        description: 'Schema under test.',
-      },
-      UnknownSchema: {
-        description: 'Schema under test.',
-      },
-      NullableUnknownSchema: {
-        description: 'Schema under test.',
-        nullable: true,
+    const document = createDocument({
+      schemas: {
+        BooleanSchema: {
+          type: 'boolean',
+          description: 'Schema under test.',
+        },
+        NullableBooleanSchema: {
+          oneOf: [{ type: 'boolean' }, { type: 'null' }],
+          description: 'Schema under test.',
+        },
+        IntegerSchema: {
+          type: 'integer',
+          description: 'Schema under test.',
+        },
+        NullableIntegerSchema: {
+          oneOf: [{ type: 'integer' }, { type: 'null' }],
+          description: 'Schema under test.',
+        },
+        NumberSchema: {
+          type: 'number',
+          description: 'Schema under test.',
+        },
+        NullableNumberSchema: {
+          oneOf: [{ type: 'number' }, { type: 'null' }],
+          description: 'Schema under test.',
+        },
+        StringSchema: {
+          type: 'string',
+          description: 'Schema under test.',
+        },
+        NullableStringSchema: {
+          oneOf: [{ type: 'string' }, { type: 'null' }],
+          description: 'Schema under test.',
+        },
+        StringEnumSchema: {
+          type: 'string',
+          enum: ['value1', 'value2'],
+          description: 'Schema under test.',
+        },
+        NullableStringEnumSchema: {
+          oneOf: [
+            { type: 'string', enum: ['value1', 'value2'] },
+            { type: 'null' },
+          ],
+          description: 'Schema under test.',
+        },
+        UnknownSchema: {
+          description: 'Schema under test.',
+        },
+        NullableUnknownSchema: {
+          description: 'Schema under test.',
+          oneOf: [{}, { type: 'null' }],
+        },
       },
     });
 
-    // WHEN compiling
-    const { schemas } = compile(document);
+    const { schemaFileContent } = generateSourceFilesOrThrow(
+      JSON.stringify(document),
+    );
 
-    // THEN the output matches the snapshot
-    expect(schemas).toMatchInlineSnapshot(`
+    expect(schemaFileContent).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
       /**
@@ -121,81 +119,88 @@ describe('Schemas', () => {
   });
 
   it('compiles scalar array types', () => {
-    // GIVEN an OpenAPI schema that contains schemas for scalar array types
-    const document = createTestDocumentWithSchemas({
-      UnknownArraySchema: {
-        description: 'Schema under test.',
-        type: 'array',
-        items: {},
-      },
-      UnknownNullableArraySchema: {
-        description: 'Schema under test.',
-        type: 'array',
-        nullable: true,
-        items: {},
-      },
-      NullableUnknownArraySchema: {
-        description: 'Schema under test.',
-        type: 'array',
-        items: {
-          nullable: true,
-        },
-      },
-      NullableUnknownNullableArraySchema: {
-        description: 'Schema under test.',
-        type: 'array',
-        nullable: true,
-        items: {
-          nullable: true,
-        },
-      },
-      NestedUnknownArraySchema: {
-        description: 'Schema under test.',
-        type: 'array',
-        items: {
+    const document = createDocument({
+      schemas: {
+        UnknownArraySchema: {
+          description: 'Schema under test.',
           type: 'array',
           items: {},
         },
-      },
-      NullableNestedUnknownArraySchema: {
-        description: 'Schema under test.',
-        type: 'array',
-        nullable: true,
-        items: {
+        UnknownNullableArraySchema: {
+          description: 'Schema under test.',
+          oneOf: [{ type: 'array', items: {} }, { type: 'null' }],
+        },
+        NullableUnknownArraySchema: {
+          description: 'Schema under test.',
           type: 'array',
+          items: {
+            oneOf: [{}, { type: 'null' }],
+          },
+        },
+        NullableUnknownNullableArraySchema: {
+          description: 'Schema under test.',
+          oneOf: [
+            {
+              type: 'array',
+              items: {
+                oneOf: [{}, { type: 'null' }],
+              },
+            },
+            { type: 'null' },
+          ],
+        },
+        NestedUnknownArraySchema: {
+          description: 'Schema under test.',
+          type: 'array',
+          items: {
+            type: 'array',
+            items: {},
+          },
+        },
+        NullableNestedUnknownArraySchema: {
+          description: 'Schema under test.',
+          oneOf: [
+            {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: {},
+              },
+            },
+            { type: 'null' },
+          ],
+        },
+        NestedUnknownNullableArraySchema: {
+          description: 'Schema under test.',
+          type: 'array',
+          items: {
+            oneOf: [{ type: 'array', items: {} }, { type: 'null' }],
+          },
+        },
+        NullableNestedUnknownNullableArraySchema: {
+          description: 'Schema under test.',
+          oneOf: [
+            {
+              type: 'array',
+              items: {
+                oneOf: [{ type: 'array', items: {} }, { type: 'null' }],
+              },
+            },
+            { type: 'null' },
+          ],
+        },
+        ArraySchemaWithoutExplicitType: {
+          description: 'Schema under test.',
           items: {},
         },
-      },
-      NestedUnknownNullableArraySchema: {
-        description: 'Schema under test.',
-        type: 'array',
-        items: {
-          type: 'array',
-          nullable: true,
-          items: {},
-        },
-      },
-      NullableNestedUnknownNullableArraySchema: {
-        description: 'Schema under test.',
-        type: 'array',
-        nullable: true,
-        items: {
-          type: 'array',
-          nullable: true,
-          items: {},
-        },
-      },
-      ArraySchemaWithoutExplicitType: {
-        description: 'Schema under test.',
-        items: {},
       },
     });
 
-    // WHEN compiling
-    const { schemas } = compile(document);
+    const { schemaFileContent } = generateSourceFilesOrThrow(
+      JSON.stringify(document),
+    );
 
-    // THEN the output matches the snapshot
-    expect(schemas).toMatchInlineSnapshot(`
+    expect(schemaFileContent).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
       /**
@@ -248,33 +253,38 @@ describe('Schemas', () => {
   });
 
   it('compiles $ref array types', () => {
-    // GIVEN an OpenAPI schema that contains schemas for $ref array types
-    const document = createTestDocumentWithSchemas({
-      TestSchema: {
-        description: 'Schema under test.',
-      },
-      ArraySchema: {
-        description: 'Schema under test.',
-        type: 'array',
-        items: {
-          $ref: '#/components/schemas/TestSchema',
+    const document = createDocument({
+      schemas: {
+        TestSchema: {
+          description: 'Schema under test.',
         },
-      },
-      NullableArraySchema: {
-        description: 'Schema under test.',
-        type: 'array',
-        nullable: true,
-        items: {
-          $ref: '#/components/schemas/TestSchema',
+        ArraySchema: {
+          description: 'Schema under test.',
+          type: 'array',
+          items: {
+            $ref: '#/components/schemas/TestSchema',
+          },
+        },
+        NullableArraySchema: {
+          description: 'Schema under test.',
+          oneOf: [
+            {
+              type: 'array',
+              items: {
+                $ref: '#/components/schemas/TestSchema',
+              },
+            },
+            { type: 'null' },
+          ],
         },
       },
     });
 
-    // WHEN compiling
-    const { schemas } = compile(document);
+    const { schemaFileContent } = generateSourceFilesOrThrow(
+      JSON.stringify(document),
+    );
 
-    // THEN the output matches the snapshot
-    expect(schemas).toMatchInlineSnapshot(`
+    expect(schemaFileContent).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
       /**
@@ -294,42 +304,43 @@ describe('Schemas', () => {
   });
 
   it('compiles complex array types', () => {
-    // GIVEN an OpenAPI schema that contains complex array types
-    const document = createTestDocumentWithSchemas({
-      TestSchema: {
-        description: 'Schema under test.',
-      },
-      AllOfArraySchema: {
-        description: 'Schema under test.',
-        type: 'array',
-        items: {
-          allOf: [
-            {
-              $ref: '#/components/schemas/TestSchema',
-            },
-            {},
-          ],
+    const document = createDocument({
+      schemas: {
+        TestSchema: {
+          description: 'Schema under test.',
         },
-      },
-      OneOfArraySchema: {
-        description: 'Schema under test.',
-        type: 'array',
-        items: {
-          oneOf: [
-            {
-              $ref: '#/components/schemas/TestSchema',
-            },
-            {},
-          ],
+        AllOfArraySchema: {
+          description: 'Schema under test.',
+          type: 'array',
+          items: {
+            allOf: [
+              {
+                $ref: '#/components/schemas/TestSchema',
+              },
+              {},
+            ],
+          },
+        },
+        OneOfArraySchema: {
+          description: 'Schema under test.',
+          type: 'array',
+          items: {
+            oneOf: [
+              {
+                $ref: '#/components/schemas/TestSchema',
+              },
+              {},
+            ],
+          },
         },
       },
     });
 
-    // WHEN compiling
-    const { schemas } = compile(document);
+    const { schemaFileContent } = generateSourceFilesOrThrow(
+      JSON.stringify(document),
+    );
 
-    // THEN the output matches the snapshot
-    expect(schemas).toMatchInlineSnapshot(`
+    expect(schemaFileContent).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
       /**
@@ -349,66 +360,67 @@ describe('Schemas', () => {
   });
 
   it('compiles object types', () => {
-    // GIVEN an OpenAPI schema that contains schemas for object types
-    const document = createTestDocumentWithSchemas({
-      TestSchema: {
-        description: 'Schema under test.',
-      },
-      ObjectSchema: {
-        description: 'Schema under test.',
-        type: 'object',
-        required: ['requiredProp'],
-        properties: {
-          requiredProp: {
-            description: 'Property under test.',
-          },
-          optionalProp: {
-            description: 'Property under test.',
-          },
-          refProp: {
-            description: 'Property under test.',
-            $ref: '#/components/schemas/TestSchema',
-          },
-          arrayProp: {
-            description: 'Property under test.',
-            type: 'array',
-            items: {},
-          },
-          arrayRefProp: {
-            description: 'Property under test.',
-            type: 'array',
-            items: {
+    const document = createDocument({
+      schemas: {
+        TestSchema: {
+          description: 'Schema under test.',
+        },
+        ObjectSchema: {
+          description: 'Schema under test.',
+          type: 'object',
+          required: ['requiredProp'],
+          properties: {
+            requiredProp: {
+              description: 'Property under test.',
+            },
+            optionalProp: {
+              description: 'Property under test.',
+            },
+            refProp: {
+              description: 'Property under test.',
               $ref: '#/components/schemas/TestSchema',
+            },
+            arrayProp: {
+              description: 'Property under test.',
+              type: 'array',
+              items: {},
+            },
+            arrayRefProp: {
+              description: 'Property under test.',
+              type: 'array',
+              items: {
+                $ref: '#/components/schemas/TestSchema',
+              },
             },
           },
         },
-      },
-      ObjectSchemaWithoutExplicitType: {
-        description: 'Schema under test.',
-        properties: {
-          property: {
-            description: 'Property under test.',
+        ObjectSchemaWithoutExplicitType: {
+          description: 'Schema under test.',
+          properties: {
+            property: {
+              description: 'Property under test.',
+            },
           },
         },
       },
     });
 
-    // WHEN compiling
-    const { schemas } = compile(document);
+    const { schemaFileContent } = generateSourceFilesOrThrow(
+      JSON.stringify(document),
+    );
 
-    // THEN the output matches the snapshot
-    expect(schemas).toMatchInlineSnapshot(`
+    expect(schemaFileContent).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
       /**
        * Schema under test.
        */
       export type ObjectSchema = {
-        readonly requiredProp: unknown;
-        readonly optionalProp?: unknown;
-        readonly refProp?: TestSchema;
         readonly arrayProp?: readonly unknown[];
         readonly arrayRefProp?: readonly TestSchema[];
+        readonly optionalProp?: unknown;
+        readonly refProp?: TestSchema;
+        readonly requiredProp: unknown;
       };
       /**
        * Schema under test.
@@ -425,50 +437,51 @@ describe('Schemas', () => {
   });
 
   it('compiles combined types', () => {
-    // GIVEN an OpenAPI schema that contains schemas for combined types
-    const document = createTestDocumentWithSchemas({
-      TestSchema: {
-        description: 'Schema under test.',
-      },
-      AllOfSchema: {
-        description: 'Schema under test.',
-        allOf: [
-          {
-            $ref: '#/components/schemas/TestSchema',
-          },
-          {
-            type: 'object',
-            properties: {
-              prop: {
-                description: 'Property under test.',
+    const document = createDocument({
+      schemas: {
+        TestSchema: {
+          description: 'Schema under test.',
+        },
+        AllOfSchema: {
+          description: 'Schema under test.',
+          allOf: [
+            {
+              $ref: '#/components/schemas/TestSchema',
+            },
+            {
+              type: 'object',
+              properties: {
+                prop: {
+                  description: 'Property under test.',
+                },
               },
             },
-          },
-        ],
-      },
-      OneOfSchema: {
-        description: 'Schema under test.',
-        oneOf: [
-          {
-            $ref: '#/components/schemas/TestSchema',
-          },
-          {
-            type: 'object',
-            properties: {
-              prop: {
-                description: 'Property under test.',
+          ],
+        },
+        OneOfSchema: {
+          description: 'Schema under test.',
+          oneOf: [
+            {
+              $ref: '#/components/schemas/TestSchema',
+            },
+            {
+              type: 'object',
+              properties: {
+                prop: {
+                  description: 'Property under test.',
+                },
               },
             },
-          },
-        ],
+          ],
+        },
       },
     });
 
-    // WHEN compiling
-    const { schemas } = compile(document);
+    const { schemaFileContent } = generateSourceFilesOrThrow(
+      JSON.stringify(document),
+    );
 
-    // THEN the output matches the snapshot
-    expect(schemas).toMatchInlineSnapshot(`
+    expect(schemaFileContent).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
       /**
@@ -494,53 +507,54 @@ describe('Schemas', () => {
   });
 
   it('compiles dictionary types', () => {
-    // GIVEN an OpenAPI schema that contains schemas for dictionary types
-    const document = createTestDocumentWithSchemas({
-      TestSchema: {
-        description: 'Schema under test.',
-      },
-      Dictionary: {
-        description: 'Schema under test.',
-        type: 'object',
-        additionalProperties: {
+    const document = createDocument({
+      schemas: {
+        TestSchema: {
           description: 'Schema under test.',
         },
-      },
-      ArrayDictionary: {
-        description: 'Schema under test.',
-        type: 'object',
-        additionalProperties: {
+        Dictionary: {
           description: 'Schema under test.',
-          type: 'array',
-          items: {},
+          type: 'object',
+          additionalProperties: {
+            description: 'Schema under test.',
+          },
         },
-      },
-      TestSchemaDictionary: {
-        description: 'Schema under test.',
-        type: 'object',
-        additionalProperties: {
+        ArrayDictionary: {
           description: 'Schema under test.',
-          $ref: '#/components/schemas/TestSchema',
+          type: 'object',
+          additionalProperties: {
+            description: 'Schema under test.',
+            type: 'array',
+            items: {},
+          },
         },
-      },
-      TestSchemaArrayDictionary: {
-        description: 'Schema under test.',
-        type: 'object',
-        additionalProperties: {
+        TestSchemaDictionary: {
           description: 'Schema under test.',
-          type: 'array',
-          items: {
+          type: 'object',
+          additionalProperties: {
+            description: 'Schema under test.',
             $ref: '#/components/schemas/TestSchema',
+          },
+        },
+        TestSchemaArrayDictionary: {
+          description: 'Schema under test.',
+          type: 'object',
+          additionalProperties: {
+            description: 'Schema under test.',
+            type: 'array',
+            items: {
+              $ref: '#/components/schemas/TestSchema',
+            },
           },
         },
       },
     });
 
-    // WHEN compiling
-    const { schemas } = compile(document);
+    const { schemaFileContent } = generateSourceFilesOrThrow(
+      JSON.stringify(document),
+    );
 
-    // THEN the output matches the snapshot
-    expect(schemas).toMatchInlineSnapshot(`
+    expect(schemaFileContent).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
       /**
@@ -567,57 +581,27 @@ describe('Schemas', () => {
     `);
   });
 
-  it('compiles deeply nested types', () => {
-    // GIVEN an OpenAPI schema that contains deeply nested schemas
-    const document = createTestDocumentWithSchemas({
-      TestSchema: {
-        description: 'Schema under test.',
-      },
-      TestRefSchema: {
-        $ref: '#/components/schemas/TestSchema',
-      },
-    });
-
-    // WHEN compiling
-    const { schemas } = compile(document);
-
-    // THEN the output matches the snapshot
-    expect(schemas).toMatchInlineSnapshot(`
-      "/* eslint-disable */
-      /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-      /**
-       * @see {TestSchema}
-       */
-      export type TestRefSchema = TestSchema;
-      /**
-       * Schema under test.
-       */
-      export type TestSchema = unknown;
-      "
-    `);
-  });
-
   it('compiles schemas with additional properties', () => {
-    // GIVEN an OpenAPI schema that contains a schema with additional
-    // properties
-    const document = createTestDocumentWithSchemas({
-      TestSchema: {
-        description: 'Schema under test.',
-        type: 'object',
-        additionalProperties: true,
-        properties: {
-          namedProperty: {
-            description: 'Property under test.',
+    const document = createDocument({
+      schemas: {
+        TestSchema: {
+          description: 'Schema under test.',
+          type: 'object',
+          additionalProperties: true,
+          properties: {
+            namedProperty: {
+              description: 'Property under test.',
+            },
           },
         },
       },
     });
 
-    // WHEN compiling
-    const { schemas } = compile(document);
+    const { schemaFileContent } = generateSourceFilesOrThrow(
+      JSON.stringify(document),
+    );
 
-    // THEN the output matches the snapshot
-    expect(schemas).toMatchInlineSnapshot(`
+    expect(schemaFileContent).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
       /**

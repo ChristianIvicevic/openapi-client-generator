@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import { compile } from 'index';
+import { generateSourceFilesOrThrow } from 'index';
 
 describe('Fixtures', () => {
   it('compiles the link example schema', () => {
@@ -7,11 +7,12 @@ describe('Fixtures', () => {
     const document = readFileSync('test/fixtures/link-example.yaml').toString();
 
     // WHEN compiling
-    const { requests, schemas } = compile(document);
+    const { schemaFileContent, operationsFileContent } =
+      generateSourceFilesOrThrow(document);
 
     // THEN the output matches the snapshot
-    expect(requests).toMatchSnapshot();
-    expect(schemas).toMatchSnapshot();
+    expect(schemaFileContent).toMatchSnapshot();
+    expect(operationsFileContent).toMatchSnapshot();
   });
 
   it('compiles the petstore schema', () => {
@@ -19,11 +20,12 @@ describe('Fixtures', () => {
     const document = readFileSync('test/fixtures/petstore.yaml').toString();
 
     // WHEN compiling
-    const { requests, schemas } = compile(document);
+    const { schemaFileContent, operationsFileContent } =
+      generateSourceFilesOrThrow(document);
 
     // THEN the output matches the snapshot
-    expect(requests).toMatchSnapshot();
-    expect(schemas).toMatchSnapshot();
+    expect(schemaFileContent).toMatchSnapshot();
+    expect(operationsFileContent).toMatchSnapshot();
   });
 
   it('compiles the expanded petstore schema', () => {
@@ -33,22 +35,11 @@ describe('Fixtures', () => {
     ).toString();
 
     // WHEN compiling
-    const { requests, schemas } = compile(document);
+    const { schemaFileContent, operationsFileContent } =
+      generateSourceFilesOrThrow(document);
 
     // THEN the output matches the snapshot
-    expect(requests).toMatchSnapshot();
-    expect(schemas).toMatchSnapshot();
-  });
-
-  it('compiles the uspto schema', () => {
-    // GIVEN the uspto OpenAPI schema
-    const document = readFileSync('test/fixtures/uspto.yaml').toString();
-
-    // WHEN compiling
-    const { requests, schemas } = compile(document);
-
-    // THEN the output matches the snapshot
-    expect(requests).toMatchSnapshot();
-    expect(schemas).toMatchSnapshot();
+    expect(schemaFileContent).toMatchSnapshot();
+    expect(operationsFileContent).toMatchSnapshot();
   });
 });
