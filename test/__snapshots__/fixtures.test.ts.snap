@@ -3,43 +3,26 @@
 exports[`Fixtures compiles the expanded petstore schema 1`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+export type Error = {
+  readonly code: number;
+  readonly message: string;
+};
+export type NewPet = {
+  readonly name: string;
+  readonly tag?: string;
+};
+export type Pet = NewPet & {
+  readonly id: number;
+};
+"
+`;
+
+exports[`Fixtures compiles the expanded petstore schema 2`] = `
+"/* eslint-disable */
+/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 import type { AxiosRequestConfig } from 'axios';
 import axios from 'axios';
-import type { Error, NewPet, Pet } from './schemas';
-/**
- * @param requestBody The HTTP request content sent to the server.
- * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
- */
-export const addPet = async (
-  requestBody: NewPet,
-  config?: AxiosRequestConfig,
-) => axios.post<Pet | Error>('/pets', requestBody, config);
-/**
- * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
- */
-export const deletePet = async (
-  parameters: {
-    /**
-     * ID of pet to delete
-     */
-    readonly id: number;
-  },
-  config?: AxiosRequestConfig,
-) => axios.delete<void | Error>(\`/pets/\${parameters.id}\`, config);
-/**
- * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
- */
-export const findPetById = async (
-  parameters: {
-    /**
-     * ID of pet to fetch
-     */
-    readonly id: number;
-  },
-  config?: AxiosRequestConfig,
-) => axios.get<Pet | Error>(\`/pets/\${parameters.id}\`, config);
+import type { NewPet, Pet } from './schemas';
 /**
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
  * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
@@ -57,76 +40,76 @@ export const findPets = async (
   },
   config?: AxiosRequestConfig,
 ) =>
-  axios.get<readonly Pet[] | Error>('/pets', {
+  axios.get<readonly Pet[]>('/pets', {
     ...config,
     params: {
       tags: parameters.tags,
       limit: parameters.limit,
     },
   });
-"
-`;
-
-exports[`Fixtures compiles the expanded petstore schema 2`] = `
-"/* eslint-disable */
-/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-export type Error = {
-  readonly code: number;
-  readonly message: string;
-};
-export type NewPet = {
-  readonly name: string;
-  readonly tag?: string;
-};
-export type Pet = NewPet & {
-  readonly id: number;
-};
+/**
+ * @param requestBody The HTTP request content sent to the server.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
+ */
+export const addPet = async (
+  requestBody: NewPet,
+  config?: AxiosRequestConfig,
+) => axios.post<Pet>('/pets', requestBody, config);
+/**
+ * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
+ */
+export const findPetById = async (
+  parameters: {
+    /**
+     * ID of pet to fetch
+     */
+    readonly id: number;
+  },
+  config?: AxiosRequestConfig,
+) => axios.get<Pet>(\`/pets/\${parameters.id}\`, config);
+/**
+ * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
+ */
+export const deletePet = async (
+  parameters: {
+    /**
+     * ID of pet to delete
+     */
+    readonly id: number;
+  },
+  config?: AxiosRequestConfig,
+) => axios.delete<void>(\`/pets/\${parameters.id}\`, config);
 "
 `;
 
 exports[`Fixtures compiles the link example schema 1`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
+export type Pullrequest = {
+  readonly author?: User;
+  readonly id?: number;
+  readonly repository?: Repository;
+  readonly title?: string;
+};
+export type Repository = {
+  readonly owner?: User;
+  readonly slug?: string;
+};
+export type User = {
+  readonly username?: string;
+  readonly uuid?: string;
+};
+"
+`;
+
+exports[`Fixtures compiles the link example schema 2`] = `
+"/* eslint-disable */
+/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 import type { AxiosRequestConfig } from 'axios';
 import axios from 'axios';
 import type { Pullrequest, Repository, User } from './schemas';
-/**
- * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
- */
-export const getPullRequestsById = async (
-  parameters: {
-    readonly username: string;
-    readonly slug: string;
-    readonly pid: string;
-  },
-  config?: AxiosRequestConfig,
-) =>
-  axios.get<Pullrequest>(
-    \`/2.0/repositories/\${parameters.username}/\${parameters.slug}/pullrequests/\${parameters.pid}\`,
-    config,
-  );
-/**
- * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
- */
-export const getPullRequestsByRepository = async (
-  parameters: {
-    readonly username: string;
-    readonly slug: string;
-    readonly state?: 'open' | 'merged' | 'declined';
-  },
-  config?: AxiosRequestConfig,
-) =>
-  axios.get<readonly Pullrequest[]>(
-    \`/2.0/repositories/\${parameters.username}/\${parameters.slug}/pullrequests\`,
-    {
-      ...config,
-      params: {
-        state: parameters.state,
-      },
-    },
-  );
 /**
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
  * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
@@ -160,12 +143,39 @@ export const getRepository = async (
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
  * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
-export const getUserByName = async (
+export const getPullRequestsByRepository = async (
   parameters: {
     readonly username: string;
+    readonly slug: string;
+    readonly state?: 'open' | 'merged' | 'declined';
   },
   config?: AxiosRequestConfig,
-) => axios.get<User>(\`/2.0/users/\${parameters.username}\`, config);
+) =>
+  axios.get<readonly Pullrequest[]>(
+    \`/2.0/repositories/\${parameters.username}/\${parameters.slug}/pullrequests\`,
+    {
+      ...config,
+      params: {
+        state: parameters.state,
+      },
+    },
+  );
+/**
+ * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
+ */
+export const getPullRequestsById = async (
+  parameters: {
+    readonly username: string;
+    readonly slug: string;
+    readonly pid: string;
+  },
+  config?: AxiosRequestConfig,
+) =>
+  axios.get<Pullrequest>(
+    \`/2.0/repositories/\${parameters.username}/\${parameters.slug}/pullrequests/\${parameters.pid}\`,
+    config,
+  );
 /**
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
  * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
@@ -183,79 +193,20 @@ export const mergePullRequest = async (
     undefined,
     config,
   );
-"
-`;
-
-exports[`Fixtures compiles the link example schema 2`] = `
-"/* eslint-disable */
-/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-export type Pullrequest = {
-  readonly id?: number;
-  readonly title?: string;
-  readonly repository?: Repository;
-  readonly author?: User;
-};
-export type Repository = {
-  readonly slug?: string;
-  readonly owner?: User;
-};
-export type User = {
-  readonly username?: string;
-  readonly uuid?: string;
-};
+/**
+ * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
+ */
+export const getUserByName = async (
+  parameters: {
+    readonly username: string;
+  },
+  config?: AxiosRequestConfig,
+) => axios.get<User>(\`/2.0/users/\${parameters.username}\`, config);
 "
 `;
 
 exports[`Fixtures compiles the petstore schema 1`] = `
-"/* eslint-disable */
-/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-import type { AxiosRequestConfig } from 'axios';
-import axios from 'axios';
-import type { Error, Pet, Pets } from './schemas';
-/**
- * Create a pet
- * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
- */
-export const createPets = async (config?: AxiosRequestConfig) =>
-  axios.post<void | Error>('/pets', undefined, config);
-/**
- * List all pets
- * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
- */
-export const listPets = async (
-  parameters: {
-    /**
-     * How many items to return at one time (max 100)
-     */
-    readonly limit?: number;
-  },
-  config?: AxiosRequestConfig,
-) =>
-  axios.get<Pets | Error>('/pets', {
-    ...config,
-    params: {
-      limit: parameters.limit,
-    },
-  });
-/**
- * Info for a specific pet
- * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
- */
-export const showPetById = async (
-  parameters: {
-    /**
-     * The id of the pet to retrieve
-     */
-    readonly petId: string;
-  },
-  config?: AxiosRequestConfig,
-) => axios.get<Pet | Error>(\`/pets/\${parameters.petId}\`, config);
-"
-`;
-
-exports[`Fixtures compiles the petstore schema 2`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 export type Error = {
@@ -271,79 +222,51 @@ export type Pets = readonly Pet[];
 "
 `;
 
-exports[`Fixtures compiles the uspto schema 1`] = `
+exports[`Fixtures compiles the petstore schema 2`] = `
 "/* eslint-disable */
 /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
 import type { AxiosRequestConfig } from 'axios';
 import axios from 'axios';
-import type { DataSetList } from './schemas';
+import type { Pet, Pets } from './schemas';
 /**
- * List available data sets
- * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
- */
-export const listDataSets = async (config?: AxiosRequestConfig) =>
-  axios.get<DataSetList>('/', config);
-/**
- * Provides the general information about the API and the list of fields that can be used to query the dataset.
+ * List all pets
  * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
  * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
-export const listSearchableFields = async (
+export const listPets = async (
   parameters: {
     /**
-     * Name of the dataset.
+     * How many items to return at one time (max 100)
      */
-    readonly dataset: string;
-    /**
-     * Version of the dataset.
-     */
-    readonly version: string;
+    readonly limit?: number;
   },
   config?: AxiosRequestConfig,
 ) =>
-  axios.get<string>(
-    \`/\${parameters.dataset}/\${parameters.version}/fields\`,
-    config,
-  );
+  axios.get<Pets>('/pets', {
+    ...config,
+    params: {
+      limit: parameters.limit,
+    },
+  });
 /**
- * Provides search capability for the data set with the given search criteria.
- * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
- * @param requestBody The HTTP request content sent to the server.
+ * Create a pet
  * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
  */
-export const performSearch = async (
+export const createPets = async (config?: AxiosRequestConfig) =>
+  axios.post<void>('/pets', undefined, config);
+/**
+ * Info for a specific pet
+ * @param parameters The HTTP request (path, query, header and cookie) parameters sent to the server.
+ * @param config A custom \`AxiosRequestConfig\` object that is used to override the global configuration for this request. This value is optional.
+ */
+export const showPetById = async (
   parameters: {
     /**
-     * Version of the dataset.
+     * The id of the pet to retrieve
      */
-    readonly version: string;
-    /**
-     * Name of the dataset. In this case, the default value is oa_citations
-     */
-    readonly dataset: string;
+    readonly petId: string;
   },
-  requestBody?: unknown | undefined,
   config?: AxiosRequestConfig,
-) =>
-  axios.post<readonly Record<string, unknown>[]>(
-    \`/\${parameters.dataset}/\${parameters.version}/records\`,
-    requestBody,
-    config,
-  );
-"
-`;
-
-exports[`Fixtures compiles the uspto schema 2`] = `
-"/* eslint-disable */
-/* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
-export type DataSetList = {
-  readonly total?: number;
-  readonly apis?: readonly {
-    readonly apiKey?: string;
-    readonly apiVersionNumber?: string;
-    readonly apiUrl?: string;
-    readonly apiDocumentationUrl?: string;
-  }[];
-};
+) => axios.get<Pet>(\`/pets/\${parameters.petId}\`, config);
 "
 `;

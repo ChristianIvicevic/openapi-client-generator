@@ -1,24 +1,38 @@
-/* istanbul ignore file */
+import type { OpenAPIV3_1 } from 'openapi-types';
 
-import type { OpenAPIV3 } from 'openapi-types';
-import yaml from 'yaml';
+// TODO: Consolidate the different components instead of having a property for
+//  each of them.
+type CreateOptions = {
+  readonly paths?: NonNullable<OpenAPIV3_1.Document['paths']>;
+  readonly schemas?: NonNullable<OpenAPIV3_1.Document['components']>['schemas'];
+  readonly responses?: NonNullable<
+    OpenAPIV3_1.Document['components']
+  >['responses'];
+  readonly requestBodies?: NonNullable<
+    OpenAPIV3_1.Document['components']
+  >['requestBodies'];
+  readonly parameters?: NonNullable<
+    OpenAPIV3_1.Document['components']
+  >['parameters'];
+};
 
-export const createTestDocument = (document: Partial<OpenAPIV3.Document>) =>
-  yaml.stringify({
-    openapi: '3.1',
-    info: {
-      title: 'API under test',
-      version: '1.0.0-SNAPSHOT',
-    },
-    ...document,
-  } as OpenAPIV3.Document);
-
-export const createTestDocumentWithPaths = (
-  paths: OpenAPIV3.Document['paths'],
-) => createTestDocument({ paths });
-
-export const createTestDocumentWithSchemas = (
-  schemas: NonNullable<
-    NonNullable<OpenAPIV3.Document['components']>['schemas']
-  >,
-) => createTestDocument({ components: { schemas } });
+export const createDocument = ({
+  paths = {},
+  schemas = {},
+  responses = {},
+  requestBodies = {},
+  parameters = {},
+}: CreateOptions): OpenAPIV3_1.Document => ({
+  openapi: '3.1.0',
+  info: {
+    title: 'API under test',
+    version: '1.0.0-SNAPSHOT',
+  },
+  paths,
+  components: {
+    schemas,
+    responses,
+    requestBodies,
+    parameters,
+  },
+});

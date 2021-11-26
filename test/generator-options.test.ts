@@ -1,10 +1,10 @@
-import { compile } from 'index';
-import { createTestDocument } from 'utils/testing';
+import { generateSourceFilesOrThrow } from 'index';
+import type { OpenAPIV3_1 } from 'openapi-types';
+import { createDocument } from 'utils/testing';
 
-describe('Compiler Options', () => {
+describe('Generator Options', () => {
   it('compiles with a custom schema file name', () => {
-    // GIVEN an OpenAPI schema
-    const document = createTestDocument({
+    const document = createDocument({
       paths: {
         '/api/test': {
           get: {
@@ -16,7 +16,7 @@ describe('Compiler Options', () => {
                   'application/json': {
                     schema: {
                       $ref: '#/components/schemas/TestSchema',
-                    },
+                    } as OpenAPIV3_1.ReferenceObject,
                   },
                 },
               },
@@ -25,20 +25,19 @@ describe('Compiler Options', () => {
           },
         },
       },
-      components: {
-        schemas: {
-          TestSchema: {},
-        },
+      schemas: {
+        TestSchema: {},
       },
     });
 
-    // WHEN compiling with a custom schema file name
-    const { requests } = compile(document, {
-      schemasFileName: 'custom-schemas.ts',
-    });
+    const { operationsFileContent } = generateSourceFilesOrThrow(
+      JSON.stringify(document),
+      {
+        schemasFileName: 'custom-schemas.ts',
+      },
+    );
 
-    // THEN the output matches the snapshot
-    expect(requests).toMatchInlineSnapshot(`
+    expect(operationsFileContent).toMatchInlineSnapshot(`
       "/* eslint-disable */
       /* THIS FILE HAS BEEN GENERATED AUTOMATICALLY - DO NOT EDIT IT MANUALLY */
       import type { AxiosRequestConfig } from 'axios';

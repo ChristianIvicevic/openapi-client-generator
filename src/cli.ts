@@ -1,9 +1,9 @@
 /* istanbul ignore file */
 
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { compile } from 'index';
+import { configureLogging } from 'generator/logging';
+import { generateSourceFilesOrThrow } from 'index';
 import { join } from 'path';
-import { configureLogging } from 'utils/logging';
 import winston from 'winston';
 import yargs from 'yargs';
 
@@ -46,10 +46,6 @@ const commandLineArguments = yargs
       description: 'Run with even more verbose logging',
       conflicts: ['v'],
     },
-    version: {
-      type: 'boolean',
-      description: 'Prints the current compiler version',
-    },
     help: {
       type: 'boolean',
       description: 'Outputs this message',
@@ -83,22 +79,23 @@ void (() => {
     process.exit(1);
   }
 
-  winston.info(`Parsing OpenAPIV3 document at '${inputFile}'`);
+  winston.info(`Parsing OpenAPIV3.1 document at '${inputFile}'`);
 
   const requestsFilePath = join(outputFolder, requestsFileName);
   const schemasFilePath = join(outputFolder, schemasFileName);
 
   try {
-    const yamlContent = readFileSync(inputFile).toString();
-    const { requests, schemas } = compile(yamlContent, { schemasFileName });
-    writeFileSync(requestsFilePath, requests);
-    writeFileSync(schemasFilePath, schemas);
+    const schemaContent = readFileSync(inputFile).toString();
+    const { operationsFileContent, schemaFileContent } =
+      generateSourceFilesOrThrow(schemaContent, { schemasFileName });
+    writeFileSync(requestsFilePath, operationsFileContent);
+    writeFileSync(schemasFilePath, schemaFileContent);
   } catch (e: unknown) {
     winston.error(debug === true ? e : String(e));
     process.exit(1);
   }
 
   winston.info('🎉 OpenAPI client generation finished!');
-  winston.info(`Request helpers are available at '${requestsFilePath}'`);
+  winston.info(`Request function are available at '${requestsFilePath}'`);
   winston.info(`Schema types are available at '${schemasFilePath}'`);
 })();

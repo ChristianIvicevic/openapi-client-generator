@@ -1,3 +1,0 @@
-/* istanbul ignore file */
-
-void (() => {})();
