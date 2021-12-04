@@ -33,7 +33,7 @@
     "change-case": "4.1.2",
     "eslint-config-airbnb": "19.0.2",
     "openapi-types": "9.3.1",
-    "prettier": "2.5.0",
+    "prettier": "2.5.1",
     "ramda": "0.27.1",
     "tslib": "2.3.1",
     "winston": "3.3.3",
