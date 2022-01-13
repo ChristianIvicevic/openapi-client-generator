@@ -1172,7 +1172,7 @@ __metadata:
     "@types/jest": 27.4.0
     "@types/node": 14.18.5
     "@types/prettier": 2.4.3
-    "@types/ramda": 0.27.62
+    "@types/ramda": 0.27.63
     "@types/yargs": 17.0.8
     "@typescript-eslint/eslint-plugin": 5.9.1
     "@typescript-eslint/parser": 5.9.1
@@ -1194,7 +1194,7 @@ __metadata:
     openapi-types: 9.3.1
     pinst: 2.1.6
     prettier: 2.5.1
-    ramda: 0.27.1
+    ramda: 0.27.2
     ts-jest: 27.1.2
     ts-node: 10.4.0
     tslib: 2.3.1
@@ -1687,12 +1687,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ramda@npm:0.27.62":
-  version: 0.27.62
-  resolution: "@types/ramda@npm:0.27.62"
+"@types/ramda@npm:0.27.63":
+  version: 0.27.63
+  resolution: "@types/ramda@npm:0.27.63"
   dependencies:
     ts-toolbelt: ^6.15.1
-  checksum: fb42398becc45ce94fae3b27c358960172b16a92f7395eba5d66eaf63d0ad962762a9fa956b1a5e3ff3f2403f5538e12efe205377b956497a7a397d71355d51d
+  checksum: d5a1fd9b1bcdbba3dae04d2f726a1d63b82a104a6c563f8459907823ca7422b5ea903a1178a71b7c7b4c1e6058833acd042613c45efd9e801f3c205ba83a2def
   languageName: node
   linkType: hard
 
@@ -7418,10 +7418,10 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"ramda@npm:0.27.1":
-  version: 0.27.1
-  resolution: "ramda@npm:0.27.1"
-  checksum: 31a0c0ef739b2525d7615f84cbb5d3cb89ee0c795469b711f729ea1d8df0dccc3cd75d3717a1e9742d42315ce86435680b7c87743eb7618111c60c144a5b8059
+"ramda@npm:0.27.2":
+  version: 0.27.2
+  resolution: "ramda@npm:0.27.2"
+  checksum: 28d6735dd1eea1a796c56cf6111f3673c6105bbd736e521cdd7826c46a18eeff337c2dba4668f6eed990d539b9961fd6db19aa46ccc1530ba67a396c0a9f580d
   languageName: node
   linkType: hard
 
