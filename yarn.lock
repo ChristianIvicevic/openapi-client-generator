@@ -1170,7 +1170,7 @@ __metadata:
     "@commitlint/config-conventional": 14.1.0
     "@jest/types": 27.4.2
     "@types/jest": 27.4.0
-    "@types/node": 14.18.5
+    "@types/node": 16.11.19
     "@types/prettier": 2.4.3
     "@types/yargs": 17.0.8
     "@typescript-eslint/eslint-plugin": 5.9.1
@@ -1651,10 +1651,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:14.18.5":
-  version: 14.18.5
-  resolution: "@types/node@npm:14.18.5"
-  checksum: 5ad7090e4cd1d7cd9efa4915cc8b4f69503a1d2070b1998a55fce776ae03fef6c0703d6940197af2cd31b3516b41b552d9fced92d2a0837c28b8ed8b5ca0872c
+"@types/node@npm:16.11.19":
+  version: 16.11.19
+  resolution: "@types/node@npm:16.11.19"
+  checksum: a9ba0cd1e61c8ad50f3fc9c2b37b795bf0286dacb39dcc985da90328abf0c5151dffe9932d20bc9a6a52c3ce7bfc1e5a7c2dc1416480fb84f1c2d70e25caeba0
   languageName: node
   linkType: hard
 
