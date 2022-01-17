@@ -1190,7 +1190,7 @@ __metadata:
     fp-ts: 2.11.5
     husky: next
     jest: 27.4.7
-    openapi-types: 9.3.1
+    openapi-types: 10.0.0
     pinst: 2.1.6
     prettier: 2.5.1
     ts-jest: 27.1.3
@@ -7034,10 +7034,10 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"openapi-types@npm:9.3.1":
-  version: 9.3.1
-  resolution: "openapi-types@npm:9.3.1"
-  checksum: 44b7132b159666877b1659dcfb48ea34d45222dd96a14626d57830401dfad801d2cba5dc9e88471faa4f1c2f7670d814601d91e156d6a05ecccc60c65660ebbc
+"openapi-types@npm:10.0.0":
+  version: 10.0.0
+  resolution: "openapi-types@npm:10.0.0"
+  checksum: 8cc8b5bf40ea10b1f9c56fb05aada74bfe3d9e94e141464561a5c3cd0a933906e57d9bf4e059219ec8e63a97a69e0655d21c9dd3f4de1ff4f71672d10664cfc0
   languageName: node
   linkType: hard
 
