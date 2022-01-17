@@ -32,7 +32,7 @@
   "dependencies": {
     "change-case": "4.1.2",
     "fp-ts": "2.11.5",
-    "openapi-types": "9.3.1",
+    "openapi-types": "10.0.0",
     "prettier": "2.5.1",
     "tslib": "2.3.1",
     "winston": "3.4.0",
