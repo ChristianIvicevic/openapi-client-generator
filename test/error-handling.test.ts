@@ -21,6 +21,7 @@ describe('Error Handling', () => {
         "_tag": "Left",
         "left": Array [
           "The 'get' method for the path '/api/test' needs an operation id.",
+          "The 'get' method for the path '/api/test' needs an operation id.",
         ],
       }
     `);

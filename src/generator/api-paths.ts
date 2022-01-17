@@ -15,6 +15,7 @@ import {
   applicativeValidation,
   assertIsDefined,
   compileNodes,
+  formatOperationId,
   liftN,
 } from 'generator/utils';
 import type { OpenAPIV3_1 } from 'openapi-types';
@@ -127,7 +128,7 @@ const generateOperationObjectNode = (
   )(path);
 
   const propertyAssignment = factory.createPropertyAssignment(
-    factory.createIdentifier(operationObject.operationId),
+    factory.createIdentifier(formatOperationId(operationObject.operationId)),
     factory.createArrowFunction(
       undefined,
       undefined,
