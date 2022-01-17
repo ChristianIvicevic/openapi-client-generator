@@ -24,6 +24,7 @@ export declare const generateSourceFilesOrThrow: (
 ) => {
   schemaFileContent: string;
   operationsFileContent: string;
+  pathsFileContent: string;
 };
 
 /**
@@ -40,5 +41,6 @@ export declare const generateSourceFiles: (
   {
     schemaFileContent: string;
     operationsFileContent: string;
+    pathsFileContent: string;
   }
 >;

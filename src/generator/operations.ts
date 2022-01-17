@@ -173,7 +173,9 @@ const generateOperationJSDocNode = (
   );
 };
 
-const createPropertySignature = (parameter: OpenAPIV3_1.ParameterObject) => {
+export const createParameterObjectPropertySignature = (
+  parameter: OpenAPIV3_1.ParameterObject,
+) => {
   const propertySignature = factory.createPropertySignature(
     [factory.createModifier(ts.SyntaxKind.ReadonlyKeyword)],
     factory.createIdentifier(parameter.name),
@@ -212,7 +214,7 @@ const createPropertySignature = (parameter: OpenAPIV3_1.ParameterObject) => {
   return propertySignature;
 };
 
-const createPathTemplateExpression = (path: string) => {
+export const createPathTemplateExpression = (path: string) => {
   const pathParameters = [...path.matchAll(/\{(.+?)\}/g)];
   const [templateHead, ...templateSpanSegments] = pathParameters
     .reduce(
@@ -238,7 +240,7 @@ const createPathTemplateExpression = (path: string) => {
   );
 };
 
-const generateParameterSignatures = (
+export const generateParameterSignatures = (
   document: OpenAPIV3_1.Document,
   parameterSource: string,
   parameters?: (OpenAPIV3_1.ParameterObject | OpenAPIV3_1.ReferenceObject)[],
@@ -259,7 +261,7 @@ const generateParameterSignatures = (
     //  unresolvable parameters are reported as errors.
     O.sequenceArray,
     O.map(RA.filter(parameter => parameter.in === parameterSource)),
-    O.map(RA.map(createPropertySignature)),
+    O.map(RA.map(createParameterObjectPropertySignature)),
     O.filter(signatures => signatures.length !== 0),
   );
 

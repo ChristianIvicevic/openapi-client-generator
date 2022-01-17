@@ -1,6 +1,7 @@
 import * as E from 'fp-ts/Either';
 import { pipe } from 'fp-ts/function';
 import * as RA from 'fp-ts/ReadonlyArray';
+import { generateApiPaths } from 'generator/api-paths';
 import { generateOperations } from 'generator/operations';
 import type { GeneratorOptions } from 'generator/options';
 import { generateSchemas } from 'generator/schemas';
@@ -43,16 +44,18 @@ export const generateSourceFiles = (
   {
     schemaFileContent: string;
     operationsFileContent: string;
+    pathsFileContent: string;
   }
 > =>
   pipe(
-    [generateSchemas, generateOperations],
+    [generateSchemas, generateOperations, generateApiPaths],
     RA.map(generate =>
       generate(yaml.parse(openApiSchema) as OpenAPIV3_1.Document, options),
     ),
     RA.sequence(E.getApplicativeValidation(RA.getSemigroup<string>())),
-    E.map(([schemaFileContent, operationsFileContent]) => ({
+    E.map(([schemaFileContent, operationsFileContent, pathsFileContent]) => ({
       schemaFileContent,
       operationsFileContent,
+      pathsFileContent,
     })),
   );

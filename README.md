@@ -18,7 +18,7 @@ Therefore this command line tool has been created to simplify maintaining reliab
 
 ## Overview
 
-The `openapi-client-generator` will parse an OpenAPI V3.1 schema file and create concise methods for each operation and their respective schemas yielding methods that look as follows:
+The `openapi-client-generator` will parse an OpenAPI V3.1 schema file and create function for each operation and their respective schemas yielding the following output:
 
 ```typescript
 /**
@@ -81,13 +81,15 @@ Usage: openapi-client-generator -i [INPUT] -o [OUTPUT]
 
 Options:
       --help      Outputs this message                                 [boolean]
-      --version   Prints the current compiler version                  [boolean]
+      --version   Show version number                                  [boolean]
   -i, --input     Input file                                 [string] [required]
   -o, --output    Output folder                              [string] [required]
   -r, --requests  File name to write generated request methods to
                                                [string] [default: "requests.ts"]
   -s, --schemas   File name to write generated schemas to
                                                 [string] [default: "schemas.ts"]
+  -p, --paths     File name to write generated API paths to
+                                                  [string] [default: "paths.ts"]
   -v, --verbose   Run with verbose logging                             [boolean]
   -d, --debug     Run with even more verbose logging                   [boolean]
 ```
@@ -129,7 +131,6 @@ However, path and query parameters cannot be safely coerced without breaking the
 
 The order of these features does not reflect any priorization.
 
-* Generate a map of operation ids to their path if you want to open a Pandora's box and have the need to reference those directly
 * Introduce `io-ts` for runtime validation of received responses
 * Introduce automatically generated mappers for responses for when an API uses snake case but you prefer camel case in your source code
 
