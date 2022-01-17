@@ -1,5 +1,43 @@
 # Changelog
 
+## [3.0.0](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.7...v3.0.0) (2022-01-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* OpenAPI specs of version 3.0 are no longer guaranteed to be understood by the parser and it will only expect version 3.1 specifications moving forward.
+
+### Features
+
+* introduce api paths helper providing functions to reference api paths ([828d735](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/828d735099f7a66f82eb4219094dfc7e9520af81))
+
+
+### Bug Fixes
+
+* add automatic operation id coercion for api paths fixing illegal function names ([8332bec](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/8332bec7dab710ebd9778904a33f6f0066699461))
+* **deps:** update dependency eslint-config-airbnb to v19 ([7a28e18](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/7a28e18762ee7e75c8fcfbac3a452a99e140791f))
+* **deps:** update dependency eslint-config-airbnb to v19.0.1 ([e36b12c](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/e36b12c17a63d041b455dd8501eb17520242798d))
+* **deps:** update dependency eslint-config-airbnb to v19.0.2 ([038b975](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/038b975f26a8abb5edd319ae399e16865229008e))
+* **deps:** update dependency eslint-config-airbnb to v19.0.4 ([2037272](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/2037272e87f2afb8815bad4589029f8c05a61ebb))
+* **deps:** update dependency openapi-types to v10 ([a0159b1](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/a0159b14b70d673d1b6db3b17ba47fb380b6d1ac))
+* **deps:** update dependency openapi-types to v9.3.0 ([fe2fadd](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/fe2faddf3aae8f9535d54f82c58f89f6bdd04d31))
+* **deps:** update dependency openapi-types to v9.3.1 ([2c3c3a2](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/2c3c3a27c44813812b6c16a95a2b795882cf3604))
+* **deps:** update dependency prettier to v2.4.0 ([89997bb](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/89997bb9a08d54921f6dcba8adcab76be7599de7))
+* **deps:** update dependency prettier to v2.4.1 ([17b303e](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/17b303efe6b77f7acc900a80f7fa4b0d1b191da7))
+* **deps:** update dependency prettier to v2.5.0 ([6af4bce](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/6af4bcea1b1ef74b34483d371b688981449876ee))
+* **deps:** update dependency prettier to v2.5.1 ([dd46b4e](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/dd46b4e9ef8e2727d8b2b0c07fe6fdfebe312f0e))
+* **deps:** update dependency ramda to v0.27.2 ([1b2068e](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/1b2068ec4d2dee56a3cd80d1b9f8ed4a079b389b))
+* **deps:** update dependency winston to v3.4.0 ([5c09f7a](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/5c09f7a374f8a1b7ec2f557dc96c98155112d37d))
+* **deps:** update dependency yargs to v17.2.0 ([548b2b6](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/548b2b6b56099ecf3401d55e0a006f66a1fd1944))
+* **deps:** update dependency yargs to v17.2.1 ([8f275da](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/8f275daf47f8902d54e5318e34e028704c5fd990))
+* **deps:** update dependency yargs to v17.3.0 ([b49360e](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/b49360ee2ba2cf9e999a1f83cf7586528176f17e))
+* **deps:** update dependency yargs to v17.3.1 ([73ba62d](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/73ba62d8ab741403f280bb67ef9b4027a7ead1ce))
+
+
+### Code Refactoring
+
+* replace previous code generation with a more robust functional approach ([9be1c07](https://www.github.com/ChristianIvicevic/openapi-client-generator/commit/9be1c07c7a8029d84edd036fccb52f01b514a1e3))
+
 ### [2.5.7](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.6...v2.5.7) (2021-08-25)
 
 
