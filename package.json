@@ -35,7 +35,7 @@
     "openapi-types": "10.0.0",
     "prettier": "2.5.1",
     "tslib": "2.3.1",
-    "winston": "3.5.1",
+    "winston": "3.6.0",
     "winston-console-format": "1.0.8",
     "yaml": "1.10.2",
     "yargs": "17.3.1"
