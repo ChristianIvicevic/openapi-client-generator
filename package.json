@@ -47,7 +47,7 @@
     "@types/jest": "27.4.1",
     "@types/node": "16.11.26",
     "@types/prettier": "2.4.4",
-    "@types/yargs": "17.0.8",
+    "@types/yargs": "17.0.9",
     "@typescript-eslint/eslint-plugin": "5.13.0",
     "@typescript-eslint/parser": "5.13.0",
     "@zerollup/ts-transform-paths": "1.7.18",

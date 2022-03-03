@@ -1179,7 +1179,7 @@ __metadata:
     "@types/jest": 27.4.1
     "@types/node": 16.11.26
     "@types/prettier": 2.4.4
-    "@types/yargs": 17.0.8
+    "@types/yargs": 17.0.9
     "@typescript-eslint/eslint-plugin": 5.13.0
     "@typescript-eslint/parser": 5.13.0
     "@zerollup/ts-transform-paths": 1.7.18
@@ -1707,12 +1707,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/yargs@npm:17.0.8":
-  version: 17.0.8
-  resolution: "@types/yargs@npm:17.0.8"
+"@types/yargs@npm:17.0.9":
+  version: 17.0.9
+  resolution: "@types/yargs@npm:17.0.9"
   dependencies:
     "@types/yargs-parser": "*"
-  checksum: 63d06700ffbed745f00d7994eb92416649c8a3ead22f26446979d383f3af52fa9400bb185268f3a44a2348749098ffe33a8185ca676b77bc3206c63b8b73fd01
+  checksum: 333621b33785622974bd10269201d999d48729d5ffa619930fcf1f85e2d0b4785cff3f7b08c8e0ee2e8f75b2ead846bb0acc90ec4d5a652f1a95388e51f84037
   languageName: node
   linkType: hard
 
