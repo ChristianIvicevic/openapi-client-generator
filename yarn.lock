@@ -1195,7 +1195,7 @@ __metadata:
     eslint-plugin-import: 2.26.0
     eslint-plugin-jest: 26.1.5
     eslint-plugin-prettier: 4.0.0
-    fp-ts: 2.12.0
+    fp-ts: 2.12.1
     husky: next
     jest: 27.5.1
     openapi-types: 10.0.0
@@ -4273,10 +4273,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fp-ts@npm:2.12.0":
-  version: 2.12.0
-  resolution: "fp-ts@npm:2.12.0"
-  checksum: 0f078feb261529f1b709a791016ecaee1b8d64a69bf7d999c6dcfcf058b4150e8deab4ee8074a0840f5c237711a9680f06a8b46ff59ef27efddfaea6d2810c45
+"fp-ts@npm:2.12.1":
+  version: 2.12.1
+  resolution: "fp-ts@npm:2.12.1"
+  checksum: 1e20e6b468191640a5f83cd52ccbfb361d27a6afbc47230870e63094b569cd9ae8763d0b9dee50eaed568bce8dd72e32ad1d695161bda8ec73e0296a02359832
   languageName: node
   linkType: hard
 
