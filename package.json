@@ -46,7 +46,7 @@
     "@jest/types": "27.5.1",
     "@types/jest": "27.5.1",
     "@types/node": "16.11.36",
-    "@types/prettier": "2.6.1",
+    "@types/prettier": "2.6.3",
     "@types/yargs": "17.0.10",
     "@typescript-eslint/eslint-plugin": "5.26.0",
     "@typescript-eslint/parser": "5.26.0",
