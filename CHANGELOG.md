@@ -1,5 +1,81 @@
 # Changelog
 
+## 1.0.0 (2022-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* OpenAPI specs of version 3.0 are no longer guaranteed to be understood by the parser and it will only expect version 3.1 specifications moving forward.
+
+### Features
+
+* introduce api paths helper providing functions to reference api paths ([828d735](https://github.com/ChristianIvicevic/openapi-client-generator/commit/828d735099f7a66f82eb4219094dfc7e9520af81))
+
+
+### Bug Fixes
+
+* add automatic operation id coercion for api paths fixing illegal function names ([8332bec](https://github.com/ChristianIvicevic/openapi-client-generator/commit/8332bec7dab710ebd9778904a33f6f0066699461))
+* **deps:** update dependency eslint-config-airbnb to v19 ([7a28e18](https://github.com/ChristianIvicevic/openapi-client-generator/commit/7a28e18762ee7e75c8fcfbac3a452a99e140791f))
+* **deps:** update dependency eslint-config-airbnb to v19.0.1 ([e36b12c](https://github.com/ChristianIvicevic/openapi-client-generator/commit/e36b12c17a63d041b455dd8501eb17520242798d))
+* **deps:** update dependency eslint-config-airbnb to v19.0.2 ([038b975](https://github.com/ChristianIvicevic/openapi-client-generator/commit/038b975f26a8abb5edd319ae399e16865229008e))
+* **deps:** update dependency eslint-config-airbnb to v19.0.4 ([2037272](https://github.com/ChristianIvicevic/openapi-client-generator/commit/2037272e87f2afb8815bad4589029f8c05a61ebb))
+* **deps:** update dependency fp-ts to v2.11.10 ([00e7399](https://github.com/ChristianIvicevic/openapi-client-generator/commit/00e7399131b0d07ef177193eb24454e4393112ce))
+* **deps:** update dependency fp-ts to v2.11.8 ([a887202](https://github.com/ChristianIvicevic/openapi-client-generator/commit/a8872027d9e1bf3527845cea9bbaf1892a7eac1f))
+* **deps:** update dependency fp-ts to v2.11.9 ([a437bde](https://github.com/ChristianIvicevic/openapi-client-generator/commit/a437bde5e56917ba14ba1307dfc8d72a2571f681))
+* **deps:** update dependency fp-ts to v2.12.0 ([44e29fe](https://github.com/ChristianIvicevic/openapi-client-generator/commit/44e29fe6a31cbf58675814cb0291cb49f9807795))
+* **deps:** update dependency fp-ts to v2.12.1 ([5c3af51](https://github.com/ChristianIvicevic/openapi-client-generator/commit/5c3af51117b9497477c7d69902e1129d40bfea75))
+* **deps:** update dependency fp-ts to v2.12.2 ([c887802](https://github.com/ChristianIvicevic/openapi-client-generator/commit/c887802daa3603d27bb012b9e42303b3dd06fa9f))
+* **deps:** update dependency openapi-types to v10 ([a0159b1](https://github.com/ChristianIvicevic/openapi-client-generator/commit/a0159b14b70d673d1b6db3b17ba47fb380b6d1ac))
+* **deps:** update dependency openapi-types to v8 ([9c783f5](https://github.com/ChristianIvicevic/openapi-client-generator/commit/9c783f5981d41a89484b41bb161965aed2ae6141))
+* **deps:** update dependency openapi-types to v9 ([099c1c7](https://github.com/ChristianIvicevic/openapi-client-generator/commit/099c1c76550e97d7ea7a95fc515337c49864404f))
+* **deps:** update dependency openapi-types to v9.0.3 ([77bef31](https://github.com/ChristianIvicevic/openapi-client-generator/commit/77bef3177a685b192ce8a7aef233fc988abdce34))
+* **deps:** update dependency openapi-types to v9.1.0 ([23b1587](https://github.com/ChristianIvicevic/openapi-client-generator/commit/23b158771d1e3d096b34c3041d6567567ebab1c1))
+* **deps:** update dependency openapi-types to v9.2.0 ([d7a7f7a](https://github.com/ChristianIvicevic/openapi-client-generator/commit/d7a7f7af713609f0048b6d75e1a6be0040568581))
+* **deps:** update dependency openapi-types to v9.3.0 ([fe2fadd](https://github.com/ChristianIvicevic/openapi-client-generator/commit/fe2faddf3aae8f9535d54f82c58f89f6bdd04d31))
+* **deps:** update dependency openapi-types to v9.3.1 ([2c3c3a2](https://github.com/ChristianIvicevic/openapi-client-generator/commit/2c3c3a27c44813812b6c16a95a2b795882cf3604))
+* **deps:** update dependency prettier to v2.3.0 ([05468a3](https://github.com/ChristianIvicevic/openapi-client-generator/commit/05468a3eae8edfb04fe9db9d5300d4f6cd854e65))
+* **deps:** update dependency prettier to v2.3.1 ([edeefb0](https://github.com/ChristianIvicevic/openapi-client-generator/commit/edeefb0a53591bb447a34b667e6963329b79e8ec))
+* **deps:** update dependency prettier to v2.3.2 ([aec32b2](https://github.com/ChristianIvicevic/openapi-client-generator/commit/aec32b267177969d6f77e71dacae9bb844076ece))
+* **deps:** update dependency prettier to v2.4.0 ([89997bb](https://github.com/ChristianIvicevic/openapi-client-generator/commit/89997bb9a08d54921f6dcba8adcab76be7599de7))
+* **deps:** update dependency prettier to v2.4.1 ([17b303e](https://github.com/ChristianIvicevic/openapi-client-generator/commit/17b303efe6b77f7acc900a80f7fa4b0d1b191da7))
+* **deps:** update dependency prettier to v2.5.0 ([6af4bce](https://github.com/ChristianIvicevic/openapi-client-generator/commit/6af4bcea1b1ef74b34483d371b688981449876ee))
+* **deps:** update dependency prettier to v2.5.1 ([dd46b4e](https://github.com/ChristianIvicevic/openapi-client-generator/commit/dd46b4e9ef8e2727d8b2b0c07fe6fdfebe312f0e))
+* **deps:** update dependency prettier to v2.6.0 ([7eced02](https://github.com/ChristianIvicevic/openapi-client-generator/commit/7eced02c1d77a415b6016be16105681506936602))
+* **deps:** update dependency prettier to v2.6.1 ([678501d](https://github.com/ChristianIvicevic/openapi-client-generator/commit/678501dce79f0f481793916a82ca93282dd1d030))
+* **deps:** update dependency prettier to v2.6.2 ([c96df06](https://github.com/ChristianIvicevic/openapi-client-generator/commit/c96df0618b111d720f2700ea9290fb04465a73ab))
+* **deps:** update dependency prettier to v2.7.0 ([51db8d2](https://github.com/ChristianIvicevic/openapi-client-generator/commit/51db8d271987daea154deb665901fa4438b392f0))
+* **deps:** update dependency prettier to v2.7.1 ([58768a9](https://github.com/ChristianIvicevic/openapi-client-generator/commit/58768a93d9aace3994838cf48f4967acd5153618))
+* **deps:** update dependency ramda to v0.27.2 ([1b2068e](https://github.com/ChristianIvicevic/openapi-client-generator/commit/1b2068ec4d2dee56a3cd80d1b9f8ed4a079b389b))
+* **deps:** update dependency tslib to v2.2.0 ([1950af0](https://github.com/ChristianIvicevic/openapi-client-generator/commit/1950af0476497e540811b506f000fc70adbb64bc))
+* **deps:** update dependency tslib to v2.3.0 ([144c391](https://github.com/ChristianIvicevic/openapi-client-generator/commit/144c391412fd3565a7aee6038949646c89a8f007))
+* **deps:** update dependency tslib to v2.3.1 ([afdfcaa](https://github.com/ChristianIvicevic/openapi-client-generator/commit/afdfcaa05a518fd38fcdaf4ed6b823e1088f0613))
+* **deps:** update dependency tslib to v2.4.0 ([db22894](https://github.com/ChristianIvicevic/openapi-client-generator/commit/db2289441fa8f6e3d257f4036e1e1fdc14f0eabd))
+* **deps:** update dependency winston to v3.4.0 ([5c09f7a](https://github.com/ChristianIvicevic/openapi-client-generator/commit/5c09f7a374f8a1b7ec2f557dc96c98155112d37d))
+* **deps:** update dependency winston to v3.5.1 ([60fc1b9](https://github.com/ChristianIvicevic/openapi-client-generator/commit/60fc1b92d5b2edbe80d103220b5ef4db29901bff))
+* **deps:** update dependency winston to v3.6.0 ([5498d46](https://github.com/ChristianIvicevic/openapi-client-generator/commit/5498d46eb519936e08d7ce72dc2ef816ca835f3c))
+* **deps:** update dependency winston to v3.7.2 ([c754fe4](https://github.com/ChristianIvicevic/openapi-client-generator/commit/c754fe4c71f5fc4b40160299ccbfcb4f94ad1e3d))
+* **deps:** update dependency winston to v3.8.0 ([5244c44](https://github.com/ChristianIvicevic/openapi-client-generator/commit/5244c44b83b4b1cee45545c105aaa59852976c24))
+* **deps:** update dependency winston to v3.8.1 ([6f38cae](https://github.com/ChristianIvicevic/openapi-client-generator/commit/6f38caedfa07ed5dc54775b9133268d2a3b1709a))
+* **deps:** update dependency yaml to v1.10.1 ([6320119](https://github.com/ChristianIvicevic/openapi-client-generator/commit/63201195c510ccb7d3452ea819fec955c3f828fb))
+* **deps:** update dependency yaml to v1.10.2 ([b511c1b](https://github.com/ChristianIvicevic/openapi-client-generator/commit/b511c1b35986015c9a1cda103d6cb386edae0429))
+* **deps:** update dependency yargs to v17 ([ce96a3e](https://github.com/ChristianIvicevic/openapi-client-generator/commit/ce96a3e42fdf02db842fd58691452381802ea660))
+* **deps:** update dependency yargs to v17.1.0 ([447cfa5](https://github.com/ChristianIvicevic/openapi-client-generator/commit/447cfa5cfd57f1ce4f039ece8513b379c336ff43))
+* **deps:** update dependency yargs to v17.1.1 ([274febf](https://github.com/ChristianIvicevic/openapi-client-generator/commit/274febf0552d0b00fa80387ef506159ee458c1d2))
+* **deps:** update dependency yargs to v17.2.0 ([548b2b6](https://github.com/ChristianIvicevic/openapi-client-generator/commit/548b2b6b56099ecf3401d55e0a006f66a1fd1944))
+* **deps:** update dependency yargs to v17.2.1 ([8f275da](https://github.com/ChristianIvicevic/openapi-client-generator/commit/8f275daf47f8902d54e5318e34e028704c5fd990))
+* **deps:** update dependency yargs to v17.3.0 ([b49360e](https://github.com/ChristianIvicevic/openapi-client-generator/commit/b49360ee2ba2cf9e999a1f83cf7586528176f17e))
+* **deps:** update dependency yargs to v17.3.1 ([73ba62d](https://github.com/ChristianIvicevic/openapi-client-generator/commit/73ba62d8ab741403f280bb67ef9b4027a7ead1ce))
+* **deps:** update dependency yargs to v17.4.0 ([91ae07b](https://github.com/ChristianIvicevic/openapi-client-generator/commit/91ae07b89f63444273b14ecaa323995d3c07bcfd))
+* **deps:** update dependency yargs to v17.4.1 ([511eee1](https://github.com/ChristianIvicevic/openapi-client-generator/commit/511eee189ffbd9701ae9106528bb8fd03abefd68))
+* **deps:** update dependency yargs to v17.5.0 ([6946362](https://github.com/ChristianIvicevic/openapi-client-generator/commit/694636267d6cbbb3b33c989c4cf6014092f5a4e4))
+* **deps:** update dependency yargs to v17.5.1 ([c6e8069](https://github.com/ChristianIvicevic/openapi-client-generator/commit/c6e806908f03a3d3d8c7ae500b6525439d928c7c))
+* enable new prettier config ([880e843](https://github.com/ChristianIvicevic/openapi-client-generator/commit/880e843f9139ddbdb4d29babce09ff274ddd8f72))
+
+
+### Code Refactoring
+
+* replace previous code generation with a more robust functional approach ([9be1c07](https://github.com/ChristianIvicevic/openapi-client-generator/commit/9be1c07c7a8029d84edd036fccb52f01b514a1e3))
+
 ### [2.5.7](https://www.github.com/ChristianIvicevic/openapi-client-generator/compare/v2.5.6...v2.5.7) (2021-08-25)
 
 
