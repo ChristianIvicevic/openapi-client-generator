@@ -1,4 +1,8 @@
-# OpenAPI Client Generator
+# Deprecated
+
+> I have decided to stop working on this package for the time being, as such it will no longer be updated.
+
+## OpenAPI Client Generator
 
 ![Logo](./docs/logo.png)
 
